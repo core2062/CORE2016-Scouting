@@ -26,7 +26,7 @@ label.radiopic > input:checked + img{ /* (CHECKED) IMAGE STYLES */
   	</head>
 	<body>
 
-	<form>
+	<form action="add_to_database.php" method="post">
 		
 <div class="row">
   <div class="small-12 columns">
@@ -49,7 +49,7 @@ label.radiopic > input:checked + img{ /* (CHECKED) IMAGE STYLES */
 		        					<div class="row">
 										<div class="small-12 columns">
 										<label>Match Number
-											<input name="MatchNumber"> type="text" value="<?php echo $_GET["match"]; ?>" placeholder="ex-1" readonly/>
+											<input name="MatchNumber" type="text" value="<?php echo $_GET["match"]; ?>" placeholder="ex-1" readonly/>
 										</label>
 					         		</div>
 		        					<div class="row">
@@ -82,13 +82,13 @@ label.radiopic > input:checked + img{ /* (CHECKED) IMAGE STYLES */
 		        					<div class="row">
 										<div class="small-6 columns">
 											<label class="radiopic">Portcullis
-												<input type="radio" name="CategoryA" id="Portcullis" value="Portcullis">
+												<input type="radio" name="CategoryA" value="Portcullis">
 												<img src="https://diedrich.co/img/u/8e4aed12e8e405d5346be44e5a151ba0.PNG">
 											</label>
 										</div>
 										<div class="small-6 columns">
 											<label class="radiopic">Cheval de Frise
-												<input type="radio" name="CategoryA" value="ChevaldeFrise">
+												<input type="radio" name="CategoryA" value="Cheval de Frise">
 												<img src="https://diedrich.co/img/u/2805597162d50895a5b19109ead0849a.PNG">
 											</label>
 					         			</div>
@@ -150,7 +150,7 @@ label.radiopic > input:checked + img{ /* (CHECKED) IMAGE STYLES */
 		        					<div class="row">
   										<fieldset class="large-6 columns">
     										<legend>Interaction w/ Defenses?</legend>
-    										<input type="radio" name="DefenseInteractionType" value="Reached"required><label>Reached</label>
+    										<input type="radio" name="DefenseInteractionType" value="Reached"><label>Reached</label>
     										<input type="radio" name="DefenseInteractionType" value="Breached"><label>Breached</label>
     										<input type="radio" name="DefenseInteractionType" value="No Interaction"><label>No Interaction</label>
   										</fieldset>
@@ -163,7 +163,7 @@ label.radiopic > input:checked + img{ /* (CHECKED) IMAGE STYLES */
     										<input type="radio" name="DefenseInteractionAuto" value="CategoryB"><label>Category B</label>
     										<input type="radio" name="DefenseInteractionAuto" value="CategoryC"><label>Category C</label>
     										<input type="radio" name="DefenseInteractionAuto" value="CategoryD"><label>Category D</label>
-    										<input type="radio" name="DefenseInteractionAuto" value="LowBar"><label>Low Bar</label>
+    										<input type="radio" name="DefenseInteractionAuto" value="Low Bar"><label>Low Bar</label>
   										</fieldset>
   									</div> 
 
