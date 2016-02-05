@@ -7,11 +7,12 @@ if(isset($_POST['search'])){
 
 // Which team is being searched for
     $team = trim($_POST['team']);
+    $team = trim($_POST['team2']);
 
 // Creates querys for the database
 //do all calculations based on these query's then display data
-	$allQuery = "SELECT autoDefence, highGoalAutoShotsMade, lowGoalAutoShotsMade, categoryA, categoryAScore, categoryB, categoryBScore, categoryC, categoryCScore, categoryD, categoryDScore, lowBarScore, lowGoalShots, highGoalShots, comments FROM match WHERE team = $team";
-	$portcullisQuery = "SELECT categoryAScore FROM match WHERE team = $team AND categoryA ='Portcullis'";
+	//$allQuery = "SELECT autoDefence, highGoalAutoShotsMade, lowGoalAutoShotsMade, categoryA, categoryAScore, categoryB, categoryBScore, categoryC, categoryCScore, categoryD, categoryDScore, lowBarScore, lowGoalShots, highGoalShots, comments FROM match WHERE team = $team";
+	$portcullisQuery = "SELECT SUM(categoryAScore) AS PortcullisCrosses FROM match WHERE team = $team AND categoryA ='Portcullis'";
 	$chevalDeFriseQuery = "SELECT SUM(categoryAScore) AS ChevalCrosses FROM match WHERE team = $team AND categoryA ='Cheval de Frise'";
 	$moatQuery = "SELECT SUM(categoryBScore) AS MoatCrosses FROM match WHERE team = $team AND categoryB ='Moat'";
 	$rampartsQuery = "SELECT SUM(categoryBScore) AS RampartCrosses FROM match WHERE team = $team AND categoryB ='Ramparts'";
@@ -25,109 +26,102 @@ if(isset($_POST['search'])){
 	$highGoalHitsQuery = "SELECT SUM(highGoalShots) AS HighGoalHits FROM match WHERE team = $team";
 	$highGoalMissesQuery = "SELECT SUM(highGoalShots) AS HighGoalMisses FROM match WHERE team = $team";
 	$numMatchesQuery = "SELECT team FROM match WHERE team = $team";
-	
-
-// Query Calculations //
-
-// Low goal Accuracy Calculations //	
-	$lgha = mysql_fetch_assoc($lowGoalHitsQuery); 
-	$lowGoalHits = $lgha['LowGoalHits']; // Num low goal shots made
-	$lgma = mysql_fetch_assoc($lowGoalMissesQuery); 
-	$lowGoalMisses = $lgma['LowGoalMisses'];
-	$lowGoalAccuracy = (($lowGoalHits/($lowGoalHits+$lowGoalMisses))*100); //double value of hit ratio
-	$lowGoalAccuracy = round($lowGoalAccuracy, 1, PHP_ROUND_HALF_UP);
-// High Goal Accuracy Calculations //
-	$hgha = mysql_fetch_assoc($highGoalHitsQuery); 
-	$highGoalHits = $lgha['HighGoalHits']; // Num high goal shots made
-	$hgma = mysql_fetch_assoc($hightGoalMissesQuery); 
-	$highGoalMisses = $lgma['HighGoalMisses'];
-	$highGoalAccuracy = (($highGoalHits/($highGoalHits+$highGoalMisses))*100); //double value of hit ratio
-	$highGoalAccuracy = round($highGoalAccuracy, 1, PHP_ROUND_HALF_UP);
-
-	//todo
-	//num matches calculations
-	//scale tower accuracy (maybe)
-	//
-	
+	$towerScaleQuery = "SELECT scaleTower FROM match WHERE team = $team AND scaleTower = 'Yes'";
+	$towerChallengeQuery = "SELECT challengeTower FROM match WHERE team = $team AND scaleTower = 'Yes'";
+	$commentsQuery = "SELECT comments FROM match WHERE team = $team AND comments != 'N/A'";
 
 
+	// Searching Database for what we need //
 
+	$portcullisSearch = @mysqli_query($dbc, $portcullisQuery);
+	$chevalDeFriseSearch = @mysqli_query($dbc, $chevalDeFriseQuery);
+	$moatSearch = @mysqli_query($dbc, $moatQuery);
+	$rampartsSearch = @mysqli_query($dbc, $rampartsQuery);
+	$drawbridgeSearch = @mysqli_query($dbc, $drawbridgeQuery);
+	$sallyPortSearch = @mysqli_query($dbc, $sallyPortQuery);
+	$rockWallSearch = @mysqli_query($dbc, $rockWallQuery);
+	$roughTerrainSearch = @mysqli_query($dbc, $roughTerrainQuery);
+	$lowBarSearch = @mysqli_query($dbc, $lowBarQuery);
 
+	$lowGoalHitsSearch = @mysqli_query($dbc, $lowGoalHitsQuery);
+	$lowGoalMissesSearch = @mysqli_query($dbc, $lowGoalMissesQuery);
+	$highGoalHitsSearch = @mysqli_query($dbc, $highGoalHitsQuery);
+	$highGoalMissesSearch = @mysqli_query($dbc, $highGoalMissesQuery);
+	$towerScaleSearch = @mysqli_query($dbc, $towerScaleQuery);
+	$towerChallengeSearch = @mysqli_query($dbc, $towerChallengeQuery);
+
+	$numMatchesSearch = @mysqli_query($dbc, $numMatchesQuery);
+	$commentsSearch = @mysqli_query($dbc, $commentsQuery);
 
 
 
+// Search Calculations //
+	if($portcullisSearch && $chevalDeFriseSearch && $moatSearch && $rampartsSearch && 
+		$drawbridgeSearch && $sallyPortSearch && $rockWallSearch && $roughTerrainSearch &&
+		$lowBarSearch && $lowGoalHitsSearch && $lowGoalMissesSearch && $highGoalHitsSearch &&
+		$highGoalMissesSearch && $towerScaleSearch && $noTowerScaleSearch && $numMatchesSearch){
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-// Get a response from the database by sending the connection and the query
-	$allSearch = @mysqli_query($dbc, $allQuery);
-	if($allSearch){
-		echo "<b>$team</b>"
-		echo '<table align="left"
-		cellspacing="5" cellpadding="8">
-
-		<tr><td align="left"><b>Auto Movement</b></td>
-		<td align="left"><b>Auto Scoring</b></td>
-		<td align="left"><b>Category A Defence</b></td>
-		<td align="left"><b>Times Crossed Category A</b></td>
-		<td align="left"><b>Category B Defence</b></td>
-		<td align="left"><b>Times Crossed Category B</b></td>
-		<td align="left"><b>Category C Defence</b></td>
-		<td align="left"><b>Times Crossed Category C</b></td>
-		<td align="left"><b>Category D Defence</b></td></td>
-		<td align="left"><b>Times Crossed Category D</b></td>
-		<td align="left"><b>Times Crossed Low Bar</b></td>
-		<td align="left"><b>Low Goal Shots Made</b></td>
-		<td align="left"><b>High Goal Shots Made</b></td>
-		<td align="left"><b>Comments</b></tr>';
-//"left""right""left""right"
-// mysqli_fetch_array will return a row of data from the query
-// until no further data is available
-		while($row = mysqli_fetch_array($allSearch)){
-			echo '<tr>
-			<td align="left">' . $row['autoDefence'] . '</td>
-			<td align="left">' . $row['highGoalAutoShotsMade'] . '</td>
-			<td align="left">' . $row['lowGoalAutoShotsMade'] . '</td>
-			<td align="left">' . $row['categoryA'] . '</td>
-			<td align="left">' . $row['categoryAScore'] . '</td>
-			<td align="left">' . $row['categoryB'] . '</td>
-			<td align="left">' . $row['categoryBScore'] . '</td>
-			<td align="left">' . $row['categoryC'] . '</td>
-			<td align="left">' . $row['categoryCScore'] . '</td>
-			<td align="left">' . $row['categoryD'] . '</td>
-			<td align="left">' . $row['categoryDScore'] . '</td>
-			<td align="left">' . $row['lowGoalShots'] . '</td>
-			<td align="left">' . $row['highGoalShots'] . '</td>
-			<td align="left">' . $row['comments'] . '</td>
-			<td align="left">';
-			echo '</tr>';
+		//Scaling / Challengeing Calculations //
+		$numScale = mysqli_num_rows($towerScaleSearch);
+		$numberOfMatches = mysqli_num_rows($numMatchesSearch);
+		if($numScale > 0){
+			$scaleAccuracy = "$numScale / $numberOfMatches"; // Output for Challenge data
+		} else {
+			$scaleAccuracy = "N/A"
 		}
-		echo '</table>';
+		$numChallenge = mysqli_num_rows($towerChallengeSearch);
+		if($numChallenge > 0){
+			$challengeAccuracy = "$numChallenge / $numberOfMatches"; // Output for Challenge data
+		} else {
+			$challengeAccuracy = "N/A"
+		}
+
+		// Low goal Accuracy Calculations //	
+		$lgha = mysql_fetch_assoc($lowGoalHitsSearch); 
+		$lowGoalHits = $lgha['LowGoalHits']; // Num low goal shots made
+		$lgma = mysql_fetch_assoc($lowGoalMissesSearch); 
+		$lowGoalMisses = $lgma['LowGoalMisses'];
+		$totalLowGoalShots = ($lowGoalHits+$lowGoalMisses);
+		$lowGoalAccuracy = (($lowGoalHits/$totalLowGoalShots)*100); 
+		$lowGoalAccuracy = round($lowGoalAccuracy, 1, PHP_ROUND_HALF_UP); //double value of hit precentage
+		// ALSO DISPLAY "$lowGoalHits/$totalLowGoalShots"
+
+		// High Goal Accuracy Calculations //
+		$hgha = mysql_fetch_assoc($highGoalHitsSearch); 
+		$highGoalHits = $lgha['HighGoalHits']; // Num high goal shots made
+		$hgma = mysql_fetch_assoc($highGoalMissesSearch); 
+		$highGoalMisses = $lgma['HighGoalMisses'];
+		$totalHighGoalShots = ($highGoalHits+$highGoalMisses);
+		$highGoalAccuracy = (($highGoalHits/$totalHighGoalShots)*100); 
+		$highGoalAccuracy = round($highGoalAccuracy, 1, PHP_ROUND_HALF_UP); //double value of hit precentage
+		// ALSO DISPLAY "$highGoalHits/$totalhighGoalShots"
+
+		//Defence Varriable's //
+
+		$portcullis = mysql_fetch_assoc($portcullisSearch);
+		$chevalDeFrise = mysql_fetch_assoc($chevalDeFriseSearch);
+		$moat = mysql_fetch_assoc($moatSearch);
+		$ramparts = mysql_fetch_assoc($rampartsSearch);
+		$drawbridge = mysql_fetch_assoc($drawbridgeSearch);
+		$sallyPort= mysql_fetch_assoc($sallyPortSearch);
+		$rockWall = mysql_fetch_assoc($rockWallSearch);
+		$roughTerrain = mysql_fetch_assoc($roughTerrainSearch);
+		$lowBar = mysql_fetch_assoc($lowBarSearch);
+
+		//todo
+		//num matches calculations
+
+		
+
+
+
+
+
 	} else{
-		echo "Couldn't issue database query<br />";
+		echo "Couldn't issue database query";
 		echo mysqli_error($dbc);
 	}
+}
 // Close connection to the database
 mysqli_close($dbc);
 // mysqli_num_rows()
