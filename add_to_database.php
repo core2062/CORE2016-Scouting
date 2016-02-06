@@ -7,9 +7,9 @@
 
 if(isset($_POST['submit'])){
 
-    // 
+
     $alliance = trim($_POST['AllianceColor']);
-    $match = trim($_POST['MatchNumber']);
+    $matchNum = trim($_POST['MatchNumber']);
     $team = trim($_POST['TeamNumber']);
     $scout = trim($_POST['ScoutName'])
 
@@ -59,7 +59,7 @@ if(isset($_POST['submit'])){
     
     require_once('mysqli_connect.php');
     
-    $query = "INSERT INTO match (match_id, alliance, match, team, scout, autoDefence, 
+    $query = "INSERT INTO match (match_id, alliance, matchNum, team, scout, autoDefence, 
     breachDefence, highGoalAutoShotsMade, highGoalAutoMisses, lowGoalAutoShotsMade, 
     lowGoalAutoMisses, categoryA, categoryAScore, categoryB, categoryBScore, 
     categoryC, categoryCScore, categoryD, categoryDScore, lowBarScore, lowGoalShots, 
@@ -69,7 +69,7 @@ if(isset($_POST['submit'])){
     
     $stmt = mysqli_prepare($dbc, $query);
     
-    mysqli_stmt_bind_param($stmt, "dsiisiiiisssisisisiiiiiissiisss", $alliance, $match, 
+    mysqli_stmt_bind_param($stmt, "dsiisiiiisssisisisiiiiiissiisss", $alliance, $matchNum, 
         $team, $scout, $autoDefence, $breachDefence, $highGoalAutoShotsMade, 
         $highGoalAutoMisses, $lowGoalAutoShotsMade, $lowGoalAutoMisses, $categoryA, 
         $categoryAScore, $categoryB, $categoryBScore, $categoryC, $categoryCScore, 
@@ -83,7 +83,7 @@ if(isset($_POST['submit'])){
     
     if($affected_rows == 1){
         
-        echo '';
+        echo 'Match Sucessfully Submited!';
         
         mysqli_stmt_close($stmt);
         
@@ -91,7 +91,7 @@ if(isset($_POST['submit'])){
         
     } else {
         
-        echo 'Error Occurred<br />';
+        echo 'Error Occurred<br>';
         echo mysqli_error();
         
         mysqli_stmt_close($stmt);
@@ -99,10 +99,10 @@ if(isset($_POST['submit'])){
         mysqli_close($dbc);
         
     }
-    
+
 }
 
 ?>
-
+<a href="MainForm.php">Click here to submit another message!</a></p>
 </body>
 </html>
