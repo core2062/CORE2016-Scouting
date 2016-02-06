@@ -2,15 +2,17 @@
 <html class="no-js" lang="en">
 	<head>
     	<meta charset="utf-8" />
-    	<meta http-equiv="x-ua-compatible" content="ie=edge">
-    	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+
     	<title>CORE 2062 Scouting</title>
     	<link rel="stylesheet" href="https://cdn.jsdelivr.net/normalize/3.0.3/normalize.min.css" />
     	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/foundation/5.5.3/css/foundation.min.css" />
+      <link rel="stylesheet" type="text/css" href="awesomplete.css">
 		<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
 		<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/foundation/5.5.3/js/foundation.min.js"></script>
 		<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/foundation/5.5.3/js/foundation/foundation.accordion.min.js"></script>
 		<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/foundation/5.5.3/js/foundation/foundation.tab.min.js"></script>
+    <script type="text/javascript" src="awesomplete.js"></script>
 		<style type="text/css">
 label.RadiopPic > input{ /* HIDE RADIO */
   display: none;
@@ -21,6 +23,12 @@ label.RadioPic > input + img{ /* IMAGE STYLES */
 }
 label.radiopic > input:checked + img{ /* (CHECKED) IMAGE STYLES */
   border:2px solid #FF731C;
+}
+input{
+    text-align:center;
+}
+html {
+    -webkit-text-size-adjust: none
 }
 		</style>
   	</head>
@@ -33,7 +41,7 @@ label.radiopic > input:checked + img{ /* (CHECKED) IMAGE STYLES */
     <ul class="tabs show-for-medium-up" data-tab>
       <li class="tab-title active"><a href="#panel1">Match/Scout Info</a></li>
       <li class="tab-title"><a href="#panel2">Defenses</a></li>
-      <li class="tab-title"><a href="#panel3">Autoonomous Period</a></li>
+      <li class="tab-title"><a href="#panel3">Autonomous Period</a></li>
       <li class="tab-title"><a href="#panel4">Teleoperated Period</a></li>
       <li class="tab-title"><a href="#panel5">Additional Abilities</a></li>
     </ul>
@@ -65,8 +73,8 @@ label.radiopic > input:checked + img{ /* (CHECKED) IMAGE STYLES */
 										</label>
 		        					<div class="row">
 										<div class="small-12 columns">
-										<label>Scout Name <!--Add awesomplete-->
-											<input name="ScoutName" type="text" placeholder="ex-John Doe" required/>
+										<label>Scout Name
+											<input name="ScoutName" type="text" class="awesomplete" placeholder="John Doe" data-list="Brett Diedrich, Draven Schilling"  required/>
 									</label>								
 					         		</div>					         	
 		        				</h4>
@@ -167,35 +175,74 @@ label.radiopic > input:checked + img{ /* (CHECKED) IMAGE STYLES */
   										</fieldset>
   									</div> 
 
-		        					<div class="row">
-										<div class="small-12 columns">
-										<label>Low Goals
-											<input name="LowGoalAuto" type="number" value="0" required/>
-										</label>
-					         		</div>
+                  <div class="row">
+                    <div class="large-12 columns">
+                      <div class="row collapse">
+                          <label>Low Goals</label>
+                        <div class="small-4 columns">
+                          <input required type='button' class="button postfix" name='subtract' onclick='document.getElementById("LowGoalAuto").stepDown(1);' value='-'/>
+                        </div>  
+                        <div class="small-4 columns">
+                            <input required type="number" name="LowGoalAuto" id="LowGoalAuto" min="0" step="1" value ="0" required>
+                        </div>
+                        <div class="small-4 columns">
+                          <input required type='button' class="button postfix" name='add' onclick='document.getElementById("LowGoalAuto").stepUp(1);' value='+'/>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
 
-		        					<div class="row">
-										<div class="small-12 columns">
-										<label>Low Goal Misses
-											<input name="LowGoalAutoMisses" type="number" value="0" required/>
-										</label>
-					         		</div> 
 
-		        					<div class="row">
-										<div class="small-12 columns">
-										<label>High Goals
-											<input name="HighGoalAuto" type="number" value="0" required/>
-										</label>
-					         		</div>
+                  <div class="row">
+                    <div class="small-12 columns">
+                      <div class="row collapse">
+                          <label>Low Goal Misses</label>
+                        <div class="small-4 columns">
+                          <input required type='button' class="button postfix" name='subtract' onclick='document.getElementById("LowGoalAutoMisses").stepDown(1);' value='-'/>
+                        </div>  
+                        <div class="small-4 columns">
+                            <input required type="number" name="LowGoalAutoMisses" id="LowGoalAutoMisses" min="0" step="1" value ="0" required>
+                        </div>
+                        <div class="small-4 columns">
+                          <input required type='button' class="button postfix" name='add' onclick='document.getElementById("LowGoalAutoMisses").stepUp(1);' value='+'/>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
 
-		        					<div class="row">
-										<div class="small-12 columns">
-										<label>High Goal Misses
-											<input name="HighGoalAutoMisses" type="number" value="0" required/>
-										</label>
-					         		</div>
+                  <div class="row">
+                    <div class="small-12 columns">
+                      <div class="row collapse">
+                          <label>High Goals</label>
+                        <div class="small-4 columns">
+                          <input required type='button' class="button postfix" name='subtract' onclick='document.getElementById("HighGoalAuto").stepDown(1);' value='-'/>
+                        </div>  
+                        <div class="small-4 columns">
+                            <input required type="number" name="HighGoalAuto" id="HighGoalAuto" min="0" step="1" value ="0" required>
+                        </div>
+                        <div class="small-4 columns">
+                          <input required type='button' class="button postfix" name='add' onclick='document.getElementById("HighGoalAuto").stepUp(1);' value='+'/>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
 
-		        				</h4>
+                  <div class="row">
+                    <div class="small-12 columns">
+                      <div class="row collapse">
+                          <label>High Goal Misses</label>
+                        <div class="small-4 columns">
+                          <input required type='button' class="button postfix" name='subtract' onclick='document.getElementById("HighGoalAutoMisses").stepDown(1);' value='-'/>
+                        </div>  
+                        <div class="small-4 columns">
+                            <input required type="number" name="HighGoalAutoMisses" id="HighGoalAutoMisses" min="0" step="1" value ="0" required>
+                        </div>
+                        <div class="small-4 columns">
+                          <input required type='button' class="button postfix" name='add' onclick='document.getElementById("HighGoalAutoMisses").stepUp(1);' value='+'/>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
                     </div>
 	        			</div>
 
@@ -204,68 +251,158 @@ label.radiopic > input:checked + img{ /* (CHECKED) IMAGE STYLES */
 	        				<div class="content-box section-box">
 		        				<h4>
 		        					
-		        					<div class="row">
-										<div class="small-12 columns">
-										<label>Low Goals
-											<input name="LowGoalTeleop" type="number" value="0" required/>
-										</label>
-					         		</div>
+                  <div class="row">
+                    <div class="small-12 columns">
+                      <div class="row collapse">
+                          <label>Low Goals</label>
+                        <div class="small-4 columns">
+                          <input required type='button' class="button postfix" name='subtract' onclick='document.getElementById("LowGoalTeleop").stepDown(1);' value='-'/>
+                        </div>  
+                        <div class="small-4 columns">
+                            <input required type="number" name="LowGoalTeleop" id="LowGoalTeleop" min="0" step="1" value ="0" required>
+                        </div>
+                        <div class="small-4 columns">
+                          <input required type='button' class="button postfix" name='add' onclick='document.getElementById("LowGoalTeleop").stepUp(1);' value='+'/>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
 
-		        					<div class="row">
-										<div class="small-12 columns">
-										<label>Low Goal Misses
-											<input name="LowGoalTeleopMisses" type="number" value="0" required/>
-										</label>
-					         		</div> 
+                  <div class="row">
+                    <div class="small-12 columns">
+                      <div class="row collapse">
+                          <label>Low Goal Misses</label>
+                        <div class="small-4 columns">
+                          <input required type='button' class="button postfix" name='subtract' onclick='document.getElementById("LowGoalTeleopMisses").stepDown(1);' value='-'/>
+                        </div>  
+                        <div class="small-4 columns">
+                            <input required type="number" name="LowGoalTeleopMissesLowGoalTeleopMisses" id="LowGoalTeleopMisses" min="0" step="1" value ="0" required>
+                        </div>
+                        <div class="small-4 columns">
+                          <input required type='button' class="button postfix" name='add' onclick='document.getElementById("LowGoalTeleopMisses").stepUp(1);' value='+'/>
+                        </div>
+                      </div>
+                    </div>
+                  </div> 
 
-		        					<div class="row">
-										<div class="small-12 columns">
-										<label>High Goals
-											<input name="HighGoalTeleop" type="number" value="0" required/>
-										</label>
-					         		</div>
+                  <div class="row">
+                    <div class="small-12 columns">
+                      <div class="row collapse">
+                          <label>High Goals</label>
+                        <div class="small-4 columns">
+                          <input required type='button' class="button postfix" name='subtract' onclick='document.getElementById("HighGoalTeleop").stepDown(1);' value='-'/>
+                        </div>  
+                        <div class="small-4 columns">
+                            <input required type="number" name="HighGoalTeleop" id="HighGoalTeleop" min="0" step="1" value ="0" required>
+                        </div>
+                        <div class="small-4 columns">
+                          <input required type='button' class="button postfix" name='add' onclick='document.getElementById("HighGoalTeleop").stepUp(1);' value='+'/>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
 
-		        					<div class="row">
-										<div class="small-12 columns">
-										<label>High Goal Misses
-											<input name="HighGoalTeleopMisses" type="number" value="0" required/>
-										</label>
-					         		</div>
+                  <div class="row">
+                    <div class="small-12 columns">
+                      <div class="row collapse">
+                          <label>High Goal Misses</label>
+                        <div class="small-4 columns">
+                          <input required type='button' class="button postfix" name='subtract' onclick='document.getElementById("HighGoalTeleopMisses").stepDown(1);' value='-'/>
+                        </div>  
+                        <div class="small-4 columns">
+                            <input required type="number" name="HighGoalTeleopMisses" id="HighGoalTeleopMisses" min="0" step="1" value ="0" required>
+                        </div>
+                        <div class="small-4 columns">
+                          <input required type='button' class="button postfix" name='add' onclick='document.getElementById("HighGoalTeleopMisses").stepUp(1);' value='+'/>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
 
-		        					<div class="row">
-										<div class="small-12 columns">
-										<label>Category A Defense Crosses
-											<input name="CategoryACrosses" type="number" value="0" required/>
-										</label>
-					         		</div>		
+                  <div class="row">
+                    <div class="small-12 columns">
+                      <div class="row collapse">
+                          <label>Category A Defense Crosses</label>
+                        <div class="small-4 columns">
+                          <input required type='button' class="button postfix" name='subtract' onclick='document.getElementById("CategoryACrosses").stepDown(1);' value='-'/>
+                        </div>  
+                        <div class="small-4 columns">
+                            <input required type="number" name="CategoryACrosses" id="CategoryACrosses" min="0" step="1" value ="0" required>
+                        </div>
+                        <div class="small-4 columns">
+                          <input required type='button' class="button postfix" name='add' onclick='document.getElementById("CategoryACrosses").stepUp(1);' value='+'/>
+                        </div>
+                      </div>
+                    </div>
+                  </div>		
 
-		        					<div class="row">
-										<div class="small-12 columns">
-										<label>Category B Defense Crosses
-											<input name="CategoryBCrosses" type="number" value="0" required/>
-										</label>
-					         		</div>	
+                  <div class="row">
+                    <div class="small-12 columns">
+                      <div class="row collapse">
+                          <label>Category B Defense Crosses</label>
+                        <div class="small-4 columns">
+                          <input required type='button' class="button postfix" name='subtract' onclick='document.getElementById("CategoryBCrosses").stepDown(1);' value='-'/>
+                        </div>  
+                        <div class="small-4 columns">
+                            <input required type="number" name="CategoryBCrosses" id="CategoryBCrosses" min="0" step="1" value ="0" required>
+                        </div>
+                        <div class="small-4 columns">
+                          <input required type='button' class="button postfix" name='add' onclick='document.getElementById("CategoryBCrosses").stepUp(1);' value='+'/>
+                        </div>
+                      </div>
+                    </div>
+                  </div>	
 
-		        					<div class="row">
-										<div class="small-12 columns">
-										<label>Category C Defense Crosses
-											<input name="CategoryCCrosses" type="number" value="0" required/>
-										</label>
-					         		</div>	
+                  <div class="row">
+                    <div class="small-12 columns">
+                      <div class="row collapse">
+                          <label>Category C Defense Crosses</label>
+                        <div class="small-4 columns">
+                          <input required type='button' class="button postfix" name='subtract' onclick='document.getElementById("CategoryCCrosses").stepDown(1);' value='-'/>
+                        </div>  
+                        <div class="small-4 columns">
+                            <input required type="number" name="CategoryCCrosses" id="CategoryCCrosses" min="0" step="1" value ="0" required>
+                        </div>
+                        <div class="small-4 columns">
+                          <input required type='button' class="button postfix" name='add' onclick='document.getElementById("CategoryCCrosses").stepUp(1);' value='+'/>
+                        </div>
+                      </div>
+                    </div>
+                  </div>	
 
-		        					<div class="row">
-										<div class="small-12 columns">
-										<label>Category D Defense Crosses
-											<input name="CategoryDCrosses" type="number" value="0" required/>
-										</label>
-					         		</div>	
+                  <div class="row">
+                    <div class="small-12 columns">
+                      <div class="row collapse">
+                          <label>Category D Defense Crosses</label>
+                        <div class="small-4 columns">
+                          <input required type='button' class="button postfix" name='subtract' onclick='document.getElementById("CategoryDCrosses").stepDown(1);' value='-'/>
+                        </div>  
+                        <div class="small-4 columns">
+                            <input required type="number" name="CategoryDCrosses" id="CategoryDCrosses" min="0" step="1" value ="0" required>
+                        </div>
+                        <div class="small-4 columns">
+                          <input required type='button' class="button postfix" name='add' onclick='document.getElementById("CategoryDCrosses").stepUp(1);' value='+'/>
+                        </div>
+                      </div>
+                    </div>
+                  </div>	
 
-		        					<div class="row">
-										<div class="small-12 columns">
-										<label>Low Bar Defense Crosses
-											<input name="LowBarCrosses" type="number" value="0" required/>
-										</label>
-					         		</div>
+                  <div class="row">
+                    <div class="small-12 columns">
+                      <div class="row collapse">
+                          <label>Low Bar Defense Crosses</label>
+                        <div class="small-4 columns">
+                          <input required type='button' class="button postfix" name='subtract' onclick='document.getElementById("LowBarCrosses").stepDown(1);' value='-'/>
+                        </div>  
+                        <div class="small-4 columns">
+                            <input required type="number" name="LowBarCrosses" id="LowBarCrosses" min="0" step="1" value ="0" required>
+                        </div>
+                        <div class="small-4 columns">
+                          <input required type='button' class="button postfix" name='add' onclick='document.getElementById("LowBarCrosses").stepUp(1);' value='+'/>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
 
 		        					<div class="row">
   										<fieldset class="large-6 columns">
@@ -298,6 +435,7 @@ label.radiopic > input:checked + img{ /* (CHECKED) IMAGE STYLES */
   </div>
 </div>
 
+	<input class="button round SubmitButton" type="submit" value="Submit"></input required>
 	</form>
 
 
