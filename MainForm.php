@@ -31,10 +31,52 @@ html {
     -webkit-text-size-adjust: none
 }
 		</style>
+    <script type="text/javascript">
+  function DefenseALogic(){
+    switch(main.CategoryA.value){
+       case "Portcullis":
+         document.getElementById("DefenseAPicture").innerHTML = "<img src='images/Portcullis.PNG' width='200px'>";
+         break;
+       case "ChevaldeFrise":        
+          document.getElementById("DefenseAPicture").innerHTML = "<img src='images/Cheval%20de%20Frise.PNG' width='200px'>";
+          break;
+    }
+  }
+  function DefenseBLogic(){
+    switch(main.CategoryB.value){
+       case "Ramparts":
+         document.getElementById("DefenseBPicture").innerHTML = "<img src='images/Ramparts.PNG' width='200px'>";
+         break;
+       case "Moat":
+          document.getElementById("DefenseBPicture").innerHTML = "<img src='images/Moat.PNG' width='200px'>";
+          break;
+    }
+  }
+  function DefenseCLogic(){
+    switch(main.CategoryC.value){
+       case "Drawbridge":
+         document.getElementById("DefenseCPicture").innerHTML = "<img src='images/Drawbridge.PNG' width='200px'>";
+         break;
+       case "Sally Port":
+          document.getElementById("DefenseCPicture").innerHTML = "<img src='images/Sally%20port.PNG' width='200px'>";
+          break;     
+    }
+  }
+  function DefenseDLogic(){
+    switch(main.CategoryD.value){
+       case "Rock Wall":
+         document.getElementById("DefenseDPicture").innerHTML = "<img src='images/Rock%20wall.PNG' width='200px'>";
+         break;
+       case "Rough Terrain":
+          document.getElementById("DefenseDPicture").innerHTML = "<img src='images/Rough%20terrain.PNG' width='200px'>";
+          break;
+    }
+  }
+    </script>
   	</head>
 	<body>
 
-	<form action="add_to_database.php" method="post">
+	<form name="main" action="add_to_database.php" method="post">
 		
 <div class="row">
   <div class="small-12 columns">
@@ -74,7 +116,59 @@ html {
 		        					<div class="row">
 										<div class="small-12 columns">
 										<label>Scout Name
-											<input name="ScoutName" type="text" class="awesomplete" placeholder="John Doe" data-list="Brett Diedrich, Draven Schilling"  required/>
+											<input name="ScoutName" type="text" class="awesomplete" placeholder="John Doe" data-list="
+Noah Backhaus,
+Xander Blaetter,
+Katie Carroll,
+Jessica Copeland,
+Curtis Copeland,
+Bridger Crusan,
+Spencer Dickinson,
+Brett Diedrich,
+Thomas Durnil,
+Benjamin Garbedian,
+Catherine Ge,
+Shawn Ge,
+Colin Gilgenbach,
+Ryan Hintz,
+James Homann,
+Isabelle Houle,
+Ali Ibrahim,
+Vinesh Janarthanan,
+Samuel Johnson,
+Tim Kelley,
+Alex Kempen,
+Andrew Kempen,
+Brian Koch,
+Andrew Labott,
+Zach Landquist,
+Bjorn Larson,
+John Lecher,
+Quinn Lincicum,
+Caitlin Martinez,
+Virginia Clare O'Riordan,
+Matthew Petzke,
+Karla Reyes,
+Kevin Sandoval,
+Saul Sandoval,
+Draven Schilling,
+Sophy Siegel,
+Gabriel Silva,
+Wim Son,
+Joshua Spleas,
+Holly Standarski,
+Lexus Stokes,
+Mohamed Sudheer,
+Avery Tiegs,
+Spencer Tiegs,
+Randy Turinske,
+Sam Turner,
+Elliot Waller,
+Henry Waller,
+Shawn Weaver,
+Sophia Wirtz,
+David Zastrow,
+                      "  required/>
 									</label>								
 					         		</div>					         	
 		        				</h4>
@@ -90,14 +184,14 @@ html {
 		        					<div class="row">
 										<div class="small-6 columns">
 											<label class="radiopic">Portcullis
-												<input type="radio" name="CategoryA" value="Portcullis">
-												<img src="https://diedrich.co/img/u/8e4aed12e8e405d5346be44e5a151ba0.PNG">
+												<input type="radio" name="CategoryA" value="Portcullis" onchange="DefenseALogic()">
+												<img src="images/Portcullis.PNG">
 											</label>
 										</div>
 										<div class="small-6 columns">
 											<label class="radiopic">Cheval de Frise
-												<input type="radio" name="CategoryA" value="Cheval de Frise">
-												<img src="https://diedrich.co/img/u/2805597162d50895a5b19109ead0849a.PNG">
+												<input type="radio" name="CategoryA" value="ChevaldeFrise" onchange="DefenseALogic()">
+												<img src="images/Cheval%20de%20Frise.PNG">
 											</label>
 					         			</div>
 					         		</div>
@@ -105,14 +199,14 @@ html {
 		        					<div class="row">
 										<div class="small-6 columns">
 											<label class="radiopic">Ramparts
-												<input type="radio" name="CategoryB" value="Ramparts">
-												<img src="https://diedrich.co/img/u/239796b255106f3af5d489336598383b.PNG">
+												<input type="radio" name="CategoryB" value="Ramparts" onchange="DefenseBLogic()">
+												<img src="images/Ramparts.PNG">
 											</label>
 										</div>
 										<div class="small-6 columns">
 											<label class="radiopic">Moat
-												<input type="radio" name="CategoryB" value="Moat">
-												<img src="https://diedrich.co/img/u/24b9e2ff71d66c2e44c7496a273a2fde.PNG">
+												<input type="radio" name="CategoryB" value="Moat" onchange="DefenseBLogic()">
+												<img src="images/Moat.PNG">
 											</label>
 					         			</div>
 					         		</div>		
@@ -120,14 +214,14 @@ html {
 		        					<div class="row">
 										<div class="small-6 columns">
 											<label class="radiopic">Drawbridge
-												<input type="radio" name="CategoryC" value="Drawbridge">
-												<img src="https://diedrich.co/img/u/cfff5a1571030a5988bd471cb6383939.PNG">
+												<input type="radio" name="CategoryC" value="Drawbridge" onchange="DefenseCLogic()">
+												<img src="images/Drawbridge.PNG">
 											</label>
 										</div>
 										<div class="small-6 columns">
 											<label class="radiopic">Sally Port
-												<input type="radio" name="CategoryC" value="Sally Port">
-												<img src="https://diedrich.co/img/u/6d286cf950a9dc462f1e4180af13f443.PNG">
+												<input type="radio" name="CategoryC" value="Sally Port" onchange="DefenseCLogic()">
+												<img src="images/Sally%20port.PNG">
 											</label>
 					         			</div>
 					         		</div>						         				         	        				
@@ -135,14 +229,14 @@ html {
 		        					<div class="row">
 										<div class="small-6 columns">
 											<label class="radiopic">Rock Wall
-												<input type="radio" name="CategoryD" value="Rock Wall">
-												<img src="https://diedrich.co/img/u/7b2b539eb97b8cb5cf31145cb7ea0ab6.PNG">
+												<input type="radio" name="CategoryD" value="Rock Wall" onchange="DefenseDLogic()">
+												<img src="images/Rock%20wall.PNG">
 											</label>
 										</div>
 										<div class="small-6 columns">
 											<label class="radiopic">Rough Terrain
-												<input type="radio" name="CategoryD" value="Rough Terrain">
-												<img src="https://diedrich.co/img/u/9887aa384e012335bc75323aae7cfe8e.PNG">
+												<input type="radio" name="CategoryD" value="Rough Terrain" onchange="DefenseDLogic()">
+												<img src="images/Rough%20terrain.PNG">
 											</label>
 					         			</div>
 					         		</div>	
@@ -323,10 +417,12 @@ html {
                     <div class="small-12 columns">
                       <div class="row collapse">
                           <label>Category A Defense Crosses</label>
-                        <div class="small-4 columns">
+                        <div class="small-5 columns" id="DefenseAPicture">
+                        </div>
+                        <div class="small-1 columns">
                           <input required type='button' class="button postfix" name='subtract' onclick='document.getElementById("CategoryACrosses").stepDown(1);' value='-'/>
                         </div>  
-                        <div class="small-4 columns">
+                        <div class="small-2 columns">
                             <input required type="number" name="CategoryACrosses" id="CategoryACrosses" min="0" step="1" value ="0" required>
                         </div>
                         <div class="small-4 columns">
@@ -340,10 +436,12 @@ html {
                     <div class="small-12 columns">
                       <div class="row collapse">
                           <label>Category B Defense Crosses</label>
-                        <div class="small-4 columns">
+                        <div class="small-5 columns" id="DefenseBPicture">
+                        </div>
+                        <div class="small-1 columns">
                           <input required type='button' class="button postfix" name='subtract' onclick='document.getElementById("CategoryBCrosses").stepDown(1);' value='-'/>
                         </div>  
-                        <div class="small-4 columns">
+                        <div class="small-2 columns">
                             <input required type="number" name="CategoryBCrosses" id="CategoryBCrosses" min="0" step="1" value ="0" required>
                         </div>
                         <div class="small-4 columns">
@@ -357,10 +455,12 @@ html {
                     <div class="small-12 columns">
                       <div class="row collapse">
                           <label>Category C Defense Crosses</label>
-                        <div class="small-4 columns">
+                        <div class="small-5 columns" id="DefenseCPicture">
+                        </div>                      
+                        <div class="small-1 columns">
                           <input required type='button' class="button postfix" name='subtract' onclick='document.getElementById("CategoryCCrosses").stepDown(1);' value='-'/>
                         </div>  
-                        <div class="small-4 columns">
+                        <div class="small-2 columns">
                             <input required type="number" name="CategoryCCrosses" id="CategoryCCrosses" min="0" step="1" value ="0" required>
                         </div>
                         <div class="small-4 columns">
@@ -374,10 +474,12 @@ html {
                     <div class="small-12 columns">
                       <div class="row collapse">
                           <label>Category D Defense Crosses</label>
-                        <div class="small-4 columns">
+                        <div class="small-5 columns" id="DefenseDPicture">
+                        </div>                          
+                        <div class="small-1 columns">
                           <input required type='button' class="button postfix" name='subtract' onclick='document.getElementById("CategoryDCrosses").stepDown(1);' value='-'/>
                         </div>  
-                        <div class="small-4 columns">
+                        <div class="small-2 columns">
                             <input required type="number" name="CategoryDCrosses" id="CategoryDCrosses" min="0" step="1" value ="0" required>
                         </div>
                         <div class="small-4 columns">
