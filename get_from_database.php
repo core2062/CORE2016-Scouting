@@ -10,25 +10,25 @@ class teamReport {
 
 	// Creates querys for the database
 	//do all calculations based on these query's then display data
-	private $defenceAQuery = "SELECT matchNum FROM match";
+	private $defenceAQuery = "SELECT matchNum FROM 'match'";
 	//$allQuery = "SELECT autoDefence, highGoalAutoShotsMade, lowGoalAutoShotsMade, categoryA, categoryAScore, categoryB, categoryBScore, categoryC, categoryCScore, categoryD, categoryDScore, lowBarScore, lowGoalShots, highGoalShots, comments FROM match WHERE team = $team";
-	private $portcullisQuery = "SELECT SUM(categoryAScore) AS PortcullisCrosses FROM match WHERE team = {$this->team} AND categoryA ='Portcullis'";
-	private $chevalDeFriseQuery = "SELECT SUM(categoryAScore) AS ChevalCrosses FROM match WHERE team = {$this->team} AND categoryA ='Cheval de Frise'";
-	private $moatQuery = "SELECT SUM(categoryBScore) AS MoatCrosses FROM match WHERE team = {$this->team} AND categoryB ='Moat'";
-	private $rampartsQuery = "SELECT SUM(categoryBScore) AS RampartCrosses FROM match WHERE team = {$this->team} AND categoryB ='Ramparts'";
-	private $drawbridgeQuery = "SELECT SUM(categoryCScore) AS DrawbridgeCrosses FROM match WHERE team = {$this->team} AND categoryC ='Drawbridge'";
-	private $sallyPortQuery = "SELECT SUM(categoryCScore) AS SallyPortCrosses FROM match WHERE team = {$this->team} AND categoryC ='Sally Port'";
-	private $rockWallQuery = "SELECT SUM(categoryDScore) AS RockWallCrosses FROM match WHERE team = {$this->team} AND categoryD ='Rock Wall'";
-	private $roughTerrainQuery = "SELECT SUM(categoryDScore) AS RoughTerrainCrosses FROM match WHERE team = {$this->team} AND categoryD ='Rough Terrain'";
-	private $lowBarQuery = "SELECT SUM(lowBarScore) AS LowBarCrosses FROM match WHERE team = {$this->team}";
-	private $lowGoalHitsQuery = "SELECT SUM(lowGoalShots) AS LowGoalHits FROM match WHERE team = {$this->team}";
-	private $lowGoalMissesQuery = "SELECT SUM(missedLowGoalShots) AS LowGoalMisses FROM match WHERE team = {$this->team}";
-	private $highGoalHitsQuery = "SELECT SUM(highGoalShots) AS HighGoalHits FROM match WHERE team = {$this->team}";
-	private $highGoalMissesQuery = "SELECT SUM(highGoalShots) AS HighGoalMisses FROM match WHERE team = {$this->team}";
-	private $numMatchesQuery = "SELECT team FROM match WHERE team = {$this->team}";
-	private $towerScaleQuery = "SELECT scaleTower FROM match WHERE team = {$this->team} AND scaleTower = 'Yes'";
-	private $towerChallengeQuery = "SELECT challengeTower FROM match WHERE team = {$this->team} AND challengeTower = 'Yes'";
-	private $commentsQuery = "SELECT comments FROM match WHERE team = {$this->team} AND comments != 'N/A'";
+	private $portcullisQuery = "SELECT SUM(categoryAScore) AS PortcullisCrosses FROM `match` WHERE team = {$this->team} AND categoryA ='Portcullis'";
+	private $chevalDeFriseQuery = "SELECT SUM(categoryAScore) AS ChevalCrosses FROM `match` WHERE team = {$this->team} AND categoryA ='Cheval de Frise'";
+	private $moatQuery = "SELECT SUM(categoryBScore) AS MoatCrosses FROM `match` WHERE team = {$this->team} AND categoryB ='Moat'";
+	private $rampartsQuery = "SELECT SUM(categoryBScore) AS RampartCrosses FROM `match` WHERE team = {$this->team} AND categoryB ='Ramparts'";
+	private $drawbridgeQuery = "SELECT SUM(categoryCScore) AS DrawbridgeCrosses FROM `match` WHERE team = {$this->team} AND categoryC ='Drawbridge'";
+	private $sallyPortQuery = "SELECT SUM(categoryCScore) AS SallyPortCrosses FROM `match` WHERE team = {$this->team} AND categoryC ='Sally Port'";
+	private $rockWallQuery = "SELECT SUM(categoryDScore) AS RockWallCrosses FROM `match` WHERE team = {$this->team} AND categoryD ='Rock Wall'";
+	private $roughTerrainQuery = "SELECT SUM(categoryDScore) AS RoughTerrainCrosses FROM `match` WHERE team = {$this->team} AND categoryD ='Rough Terrain'";
+	private $lowBarQuery = "SELECT SUM(lowBarScore) AS LowBarCrosses FROM `match` WHERE team = {$this->team}";
+	private $lowGoalHitsQuery = "SELECT SUM(lowGoalShots) AS LowGoalHits FROM `match` WHERE team = {$this->team}";
+	private $lowGoalMissesQuery = "SELECT SUM(missedLowGoalShots) AS LowGoalMisses FROM `match` WHERE team = {$this->team}";
+	private $highGoalHitsQuery = "SELECT SUM(highGoalShots) AS HighGoalHits FROM `match` WHERE team = {$this->team}";
+	private $highGoalMissesQuery = "SELECT SUM(highGoalShots) AS HighGoalMisses FROM `match` WHERE team = {$this->team}";
+	private $numMatchesQuery = "SELECT team FROM `match` WHERE team = {$this->team}";
+	private $towerScaleQuery = "SELECT scaleTower FROM `match` WHERE team = {$this->team} AND scaleTower = 'Yes'";
+	private $towerChallengeQuery = "SELECT challengeTower FROM `match` WHERE team = {$this->team} AND challengeTower = 'Yes'";
+	private $commentsQuery = "SELECT comments FROM `match` WHERE team = {$this->team} AND comments != 'N/A'";
 
 
 	// Searching Database for what we need //

@@ -17,10 +17,10 @@ DELETE : Delete existing rows (Remove privilege if not required)
 */
 
 // Defined as constants so that they can't be changed
-DEFINE ('DB_USER', 'core2062 scouting');
-DEFINE ('DB_PASSWORD', 'Core2062');
+DEFINE ('DB_USER', 'wvvhvriu_core');
+DEFINE ('DB_PASSWORD', 'CORE2062Robotics2016');
 DEFINE ('DB_HOST', 'localhost');
-DEFINE ('DB_NAME', 'CORE_Scouting');
+DEFINE ('DB_NAME', 'wvvhvriu_Scoutagy2016Test');
 
 // $dbc will contain a resource link to the database
 // @ keeps the error from showing in the browser
