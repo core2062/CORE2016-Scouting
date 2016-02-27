@@ -33,6 +33,12 @@ class teamReport {
 	private $autoReachedQuery = "SELECT autoDefence FROM `match` WHERE team = {$this->team} AND autoDefence ='Reached'";
 	private $autoBreachedLowBarQuery = "SELECT breachDefence FROM `match` WHERE team = {$this->team} AND autoDefence ='Low Bar'";
 	private $autoBreachedOtherQuery = "SELECT breachDefence FROM `match` WHERE team = {$this->team} AND autoDefence ='Other'";
+	private $highGoalAutoShotsMadeQuery = "SELECT SUM(highGoalAutoShotsMade) AS HGAutoMade FROM `match` WHERE team = {$this->team}";
+	private $highGoalAutoMissesQuery = "SELECT highGoalAutoMisses AS HGAutoMisses FROM `match` WHERE team = {$this->team}";
+	private $lowGoalAutoShotsMadeQuery = "SELECT SUM(lowGoalAutoShotsMade) AS LGAutoMade FROM `match` WHERE team = {$this->team}";
+	private $lowGoalAutoMissesQuery = "SELECT lowGoalAutoMisses AS LGAutoMisses FROM `match` WHERE team = {$this->team}";
+	private $maxHighGoalAutoShotQuery = "SELECT MAX(highGoalAutoShotsMade) AS HGAutoMax FROM `match` WHERE team = {$this->team}";
+	private $maxLowGoalAutoShotQuery = "SELECT MAX(lowGoalAutoShotsMade) AS LGAutoMax FROM `match` WHERE team = {$this->team}";
 
 	// Searching Database for what we need //
 
@@ -60,6 +66,12 @@ class teamReport {
 	private $autoReachedSearch = @mysqli_query($dbc, $this->autoReachedQuery);
 	private $autoBreachedLowBarSearch = @mysqli_query($dbc, $this->autoBreachedLowBarQuery);
 	private $autoBreachedOtherSearch = @mysqli_query($dbc, $this->autoBreachedOtherQuery);
+	private $highGoalAutoShotsMadeSearch = @mysqli_query($dbc, $this->highGoalAutoShotsMadeQuery);
+	private $highGoalAutoMissesSearch = @mysqli_query($dbc, $this->highGoalAutoMissesQuery);
+	private $lowGoalAutoShotsMadeSearch = @mysqli_query($dbc, $this->lowGoalAutoShotsMadeQuery);
+	private $lowGoalAutoMissesSearch = @mysqli_query($dbc, $this->lowGoalAutoMissesQuery);
+	private $maxHighGoalAutoShotSearch = @mysqli_query($dbc, $this->maxHighGoalAutoShotQuery);
+	private $maxLowGoalAutoShotSearch = @mysqli_query($dbc, $this->maxLowGoalAutoShotQuery);
 
 	//Error Checking
 
@@ -70,7 +82,9 @@ class teamReport {
 		$this->lowBarSearch && $this->lowGoalHitsSearch && $this->lowGoalMissesSearch && $this->highGoalHitsSearch &&
 		$this->highGoalMissesSearch && $this->towerScaleSearch && $this->noTowerScaleSearch && $this->numMatchesSearch &&
 		$this->commentsSearch && $this->autoNoInteractionSearch && $this->autoBreachedSearch && $this->autoReachedSearch &&
-		$this->autoBreachedLowBarSearch && $this->autoBreachedOtherSearch){
+		$this->autoBreachedLowBarSearch && $this->autoBreachedOtherSearch && $this->highGoalAutoShotsMadeSearch &&
+		$this->highGoalAutoMissesSearch && $this->lowGoalAutoShotsMadeSearch && $this->lowGoalAutoMissesSearch &&
+		$this->maxLowGoalAutoShotSearch && $this->maxHighGoalAutoShotSearch){
 
 		//Varriables
 		private $numberOfMatches = mysqli_num_rows($this->numMatchesSearch);
@@ -83,40 +97,53 @@ class teamReport {
 
 
 		//Auto Calculations
+		public $autoHighGoals = "0";
+		public $autoLowGoals = "0";
+		private $MHGAS = mysql_fetch_assoc($this->maxHighGoalAutoShotSearch);
+		private $MLGAS = mysql_fetch_assoc($this->maxLowGoalAutoShotSearch);
+		private $autoHighGoalsMade = mysql_fetch_assoc($this->highGoalAutoShotsMadeSearch);
+		private $totalAutoHighGoalShots = mysql_fetch_assoc($this->highGoalAutoShotsMadeSearch) + mysql_fetch_assoc($this->highGoalAutoMissesSearch);
+		private $autoLowGoalsMade = mysql_fetch_assoc($this->lowGoalAutoShotsMadeSearch);
+		private $totalAutoLowGoalShots = mysql_fetch_assoc($this->lowGoalAutoShotsMadeSearch) + mysql_fetch_assoc($this->lowGoalAutoMissesSearch);
+
+		if($this->MHGAS['HGAutoMax'] > 1){
+			$this->autoHighGoals = "{$this->autoHighGoalsMade}/{$this->totalAutoHighGoalShots}(Can Make {$this->MHGAS} Shots in Auto)";
+		} else {
+			$this->autoHighGoals = "{$this->autoHighGoalsMade}/{$this->totalAutoHighGoalShots}";
+		}
+		if($this->MLGAS['LGAutoMax'] > 1){
+			$this->autoLowGoals = "{$this->autoLowGoalsMade}/{$this->totalAutoLowGoalShots}(Can Make {$this->MHGAS} Shots in Auto)";
+		} else {
+			$this->autoLowGoals = "{$this->autoLowGoalsMade}/{$this->totalAutoLowGoalShots}";
+		}
+
 		public $highestAutoMovement = 'N/A';
 		if(mysqli_num_rows($this->autoBreachedSearch) >= 1){
-			$this->highestAutoMovement = 'Breached';
+			$this->highestAutoMovement = 'Breach';
 		} elseif(mysqli_num_rows($this->autoReachedSearch) >= 1) {
-			$this->highestAutoMovement = 'Reached';
+			$this->highestAutoMovement = 'Reach';
 		} else {
 			$this->highestAutoMovement = 'No Interaction';
 		}
 
 		public $autoBreachLowBar = 'N/A';
-		public $autoBreachOther = 'N/A';
 		if(mysqli_num_rows($this->autoBreachedSearch) >= 1){
-			if(mysqli_num_rows($this->autoBreachedLowBarSearch) >= 1){
-				$this->autoBreachLowBar = "{$this->autoLowBar}/{$this->numberOfMatches}";
-			}
-			if(mysqli_num_rows($this->autoBreachedOtherSearch) >= 1){
-				$this->autoBreachOther = "{$this->autoOther}/{$this->numberOfMatches}";
+			if(mysqli_num_rows($this->autoBreachedLowBarSearch) >= 1 || mysqli_num_rows($this->autoBreachedOtherSearch) >= 1){
+				$this->autoBreachLowBar = "{$this->autoLowBar} : {$this->autoOther}";
 			}
 		}
 
 
 		//Scaling / Challengeing Calculations //
-		
+		public $scaleAccuracy = "N/A";
+		public $challengeAccuracy = "N/A";
 		if($this->numScale > 0){
-			public $scaleAccuracy = "{$this->numScale}/{$this->numberOfMatches}"; // Output for Challenge data
-		} else {
-			public $scaleAccuracy = "N/A";
+			$this->scaleAccuracy = "{$this->numScale}/{$this->numberOfMatches}"; // Output for Challenge data
 		}
 		if($this->numChallenge > 0){
-			public $challengeAccuracy = "{$this->numChallenge}/{$this->numberOfMatches}"; // Output for Challenge data
-		} else {
-			public $challengeAccuracy = "N/A";
+			$this->challengeAccuracy = "{$this->numChallenge}/{$this->numberOfMatches}"; // Output for Challenge data
 		}
-
+		
 		// Low goal Accuracy Calculations //	
 
 		private $lgha = mysql_fetch_assoc($this->lowGoalHitsSearch);
@@ -164,8 +191,6 @@ class teamReport {
 		public $roughTerrain = "{$this->roughTerrainVar['RoughTerrainCrosses']}/{$this->numberOfMatches}";
 		public $lowBar = "{$this->lowBarVar['LowBarCrosses']}/{$this->numberOfMatches}";
 
-		//todo
-		//num matches calculations
 	} else{
 		echo "Couldn't issue database query";
 		echo mysqli_error($dbc);
@@ -177,6 +202,6 @@ mysqli_close($dbc);
 //mysqli_fetch_lengths() Returns an array if integer that represents the size of each field (column)
 // mysqli_fetch_array will return a row of data from the query until no further data is available
 
-//add alliance color
+//todo:
 
 ?>

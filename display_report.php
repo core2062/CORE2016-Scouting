@@ -196,6 +196,24 @@ if(isset($_POST['search'])){
 			<td align="left"><b><?php echo $blueTeam2Object->autoBreachLowBar ?></b></td>
 			<td align="left"><b><?php echo $blueTeam3Object->autoBreachLowBar ?></b></td>
 		</tr>
+		<tr>
+			<td align="left"><b>Low Goals Made in Auto</b></td>
+			<td align="left"><b><?php echo $redTeam1Object->autoLowGoals ?></b></td>
+			<td align="left"><b><?php echo $redTeam2Object->autoLowGoals ?></b></td>
+			<td align="left"><b><?php echo $redTeam3Object->autoLowGoals ?></b></td>
+			<td align="left"><b><?php echo $blueTeam1Object->autoLowGoals ?></b></td>
+			<td align="left"><b><?php echo $blueTeam2Object->autoLowGoals ?></b></td>
+			<td align="left"><b><?php echo $blueTeam3Object->autoLowGoals ?></b></td>
+		</tr>
+		<tr>
+			<td align="left"><b>High Goals Made in Auto</b></td>
+			<td align="left"><b><?php echo $redTeam1Object->autoHighGoals ?></b></td>
+			<td align="left"><b><?php echo $redTeam2Object->autoHighGoals ?></b></td>
+			<td align="left"><b><?php echo $redTeam3Object->autoHighGoals ?></b></td>
+			<td align="left"><b><?php echo $blueTeam1Object->autoHighGoals ?></b></td>
+			<td align="left"><b><?php echo $blueTeam2Object->autoHighGoals ?></b></td>
+			<td align="left"><b><?php echo $blueTeam3Object->autoHighGoals ?></b></td>
+		</tr>
 
 	</table>;
 }
