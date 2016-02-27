@@ -16,9 +16,11 @@ if(isset($_POST['submit'])){
     $autoDefence = trim($_POST['DefenseInteractionType']); // Reached, Breached, No Interaction
 
     if(empty($_POST['DefenseInteractionAuto'])){ //CategoryA-D Low Bar
-        $breachDefence = 'N/A';
-    } else {
+        $breachDefence = 'N/A'; // Also the name for if alliance interacts with defence in auto, which defence?
+    } elseif(trim(($_POST['DefenseInteractionAuto']) == 'Low Bar'){
         $breachDefence = trim(($_POST['DefenseInteractionAuto']);
+    } else {
+        $breachDefence = 'Other';
     }
     //$autoShoot = trim($_POST['autoShoot']);
     $highGoalAutoShotsMade = trim($_POST['HighGoalAuto']);
@@ -65,11 +67,11 @@ if(isset($_POST['submit'])){
     categoryC, categoryCScore, categoryD, categoryDScore, lowBarScore, lowGoalShots, 
     missedLowGoalShots, highGoalShots, missedHighGoalShots, challengeTower, scaleTower, 
     fouls, techFouls, redCard, yellowCard, comments) VALUES (NULL, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, 
-    ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+    ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
     
     $stmt = mysqli_prepare($dbc, $query);
     
-    mysqli_stmt_bind_param($stmt, "dsiisiiiisssisisisiiiiiissiisss", $alliance, $matchNum, 
+    mysqli_stmt_bind_param($stmt, "isiisssiiiisisisisiiiiiissiisss", $alliance, $matchNum, 
         $team, $scout, $autoDefence, $breachDefence, $highGoalAutoShotsMade, 
         $highGoalAutoMisses, $lowGoalAutoShotsMade, $lowGoalAutoMisses, $categoryA, 
         $categoryAScore, $categoryB, $categoryBScore, $categoryC, $categoryCScore, 

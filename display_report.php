@@ -26,6 +26,15 @@ if(isset($_POST['search'])){
 	?>
 	<table align="left" cellspacing="5" cellpadding="8">
 		<tr>
+			<td align="left"><b>Allicance</b></td>
+			<td align="left"><b>RED</b></td>
+			<td align="left"><b>RED</b></td>
+			<td align="left"><b>RED</b></td>
+			<td align="left"><b>BLUE</b></td>
+			<td align="left"><b>BLUE</b></td>
+			<td align="left"><b>BLUE</b></td>
+		</tr>
+		<tr>
 			<td align="left"><b>Team</b></td>
 			<td align="left"><b><?php echo $redTeam1Object->team ?></b></td>
 			<td align="left"><b><?php echo $redTeam2Object->team ?></b></td>
