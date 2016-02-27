@@ -13,6 +13,7 @@
 		<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/foundation/5.5.3/js/foundation/foundation.accordion.min.js"></script>
 		<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/foundation/5.5.3/js/foundation/foundation.tab.min.js"></script>
     <script type="text/javascript" src="awesomplete.js"></script>
+    <script type="text/javascript" src="dynamicoptionlist.js"></script> 
 		<style type="text/css">
 label.RadiopPic > input{ /* HIDE RADIO */
   display: none;
@@ -74,7 +75,7 @@ html {
   }
     </script>
   	</head>
-	<body>
+	<body onLoad="initDynamicOptionLists()">
 
 	<form name="main" action="add_to_database.php" method="post">
 		
@@ -184,13 +185,13 @@ David Zastrow,
 		        					<div class="row">
 										<div class="small-6 columns">
 											<label class="radiopic">Portcullis
-												<input type="radio" name="CategoryA" value="Portcullis" onchange="DefenseALogic()">
+												<input type="radio" name="CategoryA" value="Portcullis" onchange="DefenseALogic()" required>
 												<img src="images/Portcullis.PNG">
 											</label>
 										</div>
 										<div class="small-6 columns">
 											<label class="radiopic">Cheval de Frise
-												<input type="radio" name="CategoryA" value="ChevaldeFrise" onchange="DefenseALogic()">
+												<input type="radio" name="CategoryA" value="ChevaldeFrise" onchange="DefenseALogic()" required>
 												<img src="images/Cheval%20de%20Frise.PNG">
 											</label>
 					         			</div>
@@ -199,13 +200,13 @@ David Zastrow,
 		        					<div class="row">
 										<div class="small-6 columns">
 											<label class="radiopic">Ramparts
-												<input type="radio" name="CategoryB" value="Ramparts" onchange="DefenseBLogic()">
+												<input type="radio" name="CategoryB" value="Ramparts" onchange="DefenseBLogic()" required>
 												<img src="images/Ramparts.PNG">
 											</label>
 										</div>
 										<div class="small-6 columns">
 											<label class="radiopic">Moat
-												<input type="radio" name="CategoryB" value="Moat" onchange="DefenseBLogic()">
+												<input type="radio" name="CategoryB" value="Moat" onchange="DefenseBLogic()" required>
 												<img src="images/Moat.PNG">
 											</label>
 					         			</div>
@@ -214,13 +215,13 @@ David Zastrow,
 		        					<div class="row">
 										<div class="small-6 columns">
 											<label class="radiopic">Drawbridge
-												<input type="radio" name="CategoryC" value="Drawbridge" onchange="DefenseCLogic()">
+												<input type="radio" name="CategoryC" value="Drawbridge" onchange="DefenseCLogic()" required>
 												<img src="images/Drawbridge.PNG">
 											</label>
 										</div>
 										<div class="small-6 columns">
 											<label class="radiopic">Sally Port
-												<input type="radio" name="CategoryC" value="Sally Port" onchange="DefenseCLogic()">
+												<input type="radio" name="CategoryC" value="Sally Port" onchange="DefenseCLogic()" required>
 												<img src="images/Sally%20port.PNG">
 											</label>
 					         			</div>
@@ -229,13 +230,13 @@ David Zastrow,
 		        					<div class="row">
 										<div class="small-6 columns">
 											<label class="radiopic">Rock Wall
-												<input type="radio" name="CategoryD" value="Rock Wall" onchange="DefenseDLogic()">
+												<input type="radio" name="CategoryD" value="Rock Wall" onchange="DefenseDLogic()" required>
 												<img src="images/Rock%20wall.PNG">
 											</label>
 										</div>
 										<div class="small-6 columns">
 											<label class="radiopic">Rough Terrain
-												<input type="radio" name="CategoryD" value="Rough Terrain" onchange="DefenseDLogic()">
+												<input type="radio" name="CategoryD" value="Rough Terrain" onchange="DefenseDLogic()" required>
 												<img src="images/Rough%20terrain.PNG">
 											</label>
 					         			</div>
@@ -252,19 +253,16 @@ David Zastrow,
 		        					<div class="row">
   										<fieldset class="large-6 columns">
     										<legend>Interaction w/ Defenses?</legend>
-    										<input type="radio" name="DefenseInteractionType" value="Reached"><label>Reached</label>
-    										<input type="radio" name="DefenseInteractionType" value="Breached"><label>Breached</label>
-    										<input type="radio" name="DefenseInteractionType" value="No Interaction"><label>No Interaction</label>
+    										<input type="radio" name="DefenseInteractionType" value="Reached" required><label>Reached</label>
+    										<input type="radio" name="DefenseInteractionType" value="Breached" required><label>Breached</label>
+    										<input type="radio" name="DefenseInteractionType" value="No Interaction" required><label>No Interaction</label>
   										</fieldset>
   									</div>
 
 		        					<div class="row">
   										<fieldset class="large-6 columns">
     										<legend>Interaction w/ Defenses?</legend>
-    										<input type="radio" name="DefenseInteractionAuto" value="CategoryA"required><label>Category A</label>
-    										<input type="radio" name="DefenseInteractionAuto" value="CategoryB"><label>Category B</label>
-    										<input type="radio" name="DefenseInteractionAuto" value="CategoryC"><label>Category C</label>
-    										<input type="radio" name="DefenseInteractionAuto" value="CategoryD"><label>Category D</label>
+    										<input type="radio" name="DefenseInteractionAuto" value="Other" ><label>Other</label>
     										<input type="radio" name="DefenseInteractionAuto" value="Low Bar"><label>Low Bar</label>
   										</fieldset>
   									</div> 
@@ -387,7 +385,7 @@ David Zastrow,
                           <input required type='button' class="button postfix" name='subtract' onclick='document.getElementById("HighGoalTeleop").stepDown(1);' value='-'/>
                         </div>  
                         <div class="small-4 columns">
-                            <input required type="number" name="HighGoalTeleop" id="HighGoalTeleop" min="0" step="1" value ="0" required>
+                            <input type="number" name="HighGoalTeleop" id="HighGoalTeleop" min="0" step="1" value ="0" required>
                         </div>
                         <div class="small-4 columns">
                           <input required type='button' class="button postfix" name='add' onclick='document.getElementById("HighGoalTeleop").stepUp(1);' value='+'/>
@@ -509,16 +507,16 @@ David Zastrow,
 		        					<div class="row">
   										<fieldset class="large-6 columns">
     										<legend>Challenged tower?</legend>
-    										<input type="radio" name="ChallengedTower" value="Yes"><label>Yes</label>
-    										<input type="radio" name="ChallengedTower" value="No"><label>No</label>
+    										<input type="radio" name="ChallengedTower" value="Yes" required><label>Yes</label>
+    										<input type="radio" name="ChallengedTower" value="No" required><label>No</label>
   										</fieldset>
   									</div>
 
 		        					<div class="row">
   										<fieldset class="large-6 columns">
     										<legend>Scaled Tower?</legend>
-    										<input type="radio" name="ScaledTower" value="Yes"><label>Yes</label>
-    										<input type="radio" name="ScaledTower" value="No"><label>No</label>
+    										<input type="radio" name="ScaledTower" value="Yes" required><label>Yes</label>
+    										<input type="radio" name="ScaledTower" value="No" required><label>No</label>
   										</fieldset>
   									</div>  														         								         							         						         							         					         		
 
@@ -537,7 +535,7 @@ David Zastrow,
   </div>
 </div>
 
-	<input class="button round SubmitButton" type="submit" value="Submit"></input required>
+	<input class="button round SubmitButton" type="submit" value="Submit"></input>
 	</form>
 
 
