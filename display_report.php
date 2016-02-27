@@ -178,5 +178,24 @@ if(isset($_POST['search'])){
 			<td align="left"><b><?php echo $blueTeam2Object->highGoalAccuracyPercent ?></b></td>
 			<td align="left"><b><?php echo $blueTeam3Object->highGoalAccuracyPercent ?></b></td>
 		</tr>
+		<tr>
+			<td align="left"><b>Highest Auto Movement</b></td>
+			<td align="left"><b><?php echo $redTeam1Object->highestAutoMovement ?></b></td>
+			<td align="left"><b><?php echo $redTeam2Object->highestAutoMovement ?></b></td>
+			<td align="left"><b><?php echo $redTeam3Object->highestAutoMovement ?></b></td>
+			<td align="left"><b><?php echo $blueTeam1Object->highestAutoMovement ?></b></td>
+			<td align="left"><b><?php echo $blueTeam2Object->highestAutoMovement ?></b></td>
+			<td align="left"><b><?php echo $blueTeam3Object->highestAutoMovement ?></b></td>
+		</tr>
+		<tr>
+			<td align="left"><b>Auto Low Bar : Other Breach</b></td>
+			<td align="left"><b><?php echo $redTeam1Object->autoBreachLowBar ?></b></td>
+			<td align="left"><b><?php echo $redTeam2Object->autoBreachLowBar ?></b></td>
+			<td align="left"><b><?php echo $redTeam3Object->autoBreachLowBar ?></b></td>
+			<td align="left"><b><?php echo $blueTeam1Object->autoBreachLowBar ?></b></td>
+			<td align="left"><b><?php echo $blueTeam2Object->autoBreachLowBar ?></b></td>
+			<td align="left"><b><?php echo $blueTeam3Object->autoBreachLowBar ?></b></td>
+		</tr>
+
 	</table>;
 }
