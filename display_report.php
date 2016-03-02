@@ -215,5 +215,4 @@ if(isset($_POST['search'])){
 			<td align="left"><b><?php echo $blueTeam3Object->autoHighGoals ?></b></td>
 		</tr>
 
-	</table>;
-}
+	</table>

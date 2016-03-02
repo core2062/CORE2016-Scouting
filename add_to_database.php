@@ -1,8 +1,3 @@
-<html>
-<head>
-<title>Add Student</title>
-</head>
-<body>
 <?php
 
 if(isset($_POST['submit'])){
@@ -11,14 +6,14 @@ if(isset($_POST['submit'])){
     $alliance = trim($_POST['AllianceColor']);
     $matchNum = trim($_POST['MatchNumber']);
     $team = trim($_POST['TeamNumber']);
-    $scout = trim($_POST['ScoutName'])
+    $scout = trim($_POST['ScoutName']);
 
     $autoDefence = trim($_POST['DefenseInteractionType']); // Reached, Breached, No Interaction
 
     if(empty($_POST['DefenseInteractionAuto'])){ //CategoryA-D Low Bar
         $breachDefence = 'N/A'; // Also the name for if alliance interacts with defence in auto, which defence?
-    } elseif(trim(($_POST['DefenseInteractionAuto']) == 'Low Bar'){
-        $breachDefence = trim(($_POST['DefenseInteractionAuto']);
+    } elseif(trim($_POST['DefenseInteractionAuto']) == 'Low Bar'){
+        $breachDefence = trim($_POST['DefenseInteractionAuto']);
     } else {
         $breachDefence = 'Other';
     }
@@ -103,8 +98,7 @@ if(isset($_POST['submit'])){
     }
 
 }
-
+ini_set('display_errors', 1);
+error_reporting(E_ALL | E_STRICT);
 ?>
-<a href="MainForm.php">Click here to submit another message!</a></p>
-</body>
-</html>
+<p><a href="MainForm.php">Click here to submit another message!</a></p>
