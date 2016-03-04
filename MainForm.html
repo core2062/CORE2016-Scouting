@@ -100,19 +100,19 @@ html {
 		        					<div class="row">
 										<div class="small-12 columns">
 										<label>Match Number
-											<input name="MatchNumber" type="text" value="<?php echo $_GET["match"]; ?>" placeholder="ex-1" readonly/>
+											<input name="MatchNumber" type="text" placeholder="ex-1"/>
 										</label>
 					         		</div>
 		        					<div class="row">
 										<div class="small-12 columns">
 										<label>Team Number
-											<input name="TeamNumber" type="text" value="<?php echo $_GET["team"]; ?>" placeholder="ex-2062" readonly/>
+											<input name="TeamNumber" type="text" placeholder="ex-2062"/>
 										</label>
 					         		</div>					      
 		        					<div class="row">
 										<div class="small-12 columns">
 										<label>Alliance Color
-											<input name="AllianceColor" type="text" value="<?php echo $_GET["alliance"]; ?>" placeholder="ex-Red/Blue" readonly/>
+											<input name="AllianceColor" type="text" placeholder="ex-Red/Blue"/>
 										</label>
 		        					<div class="row">
 										<div class="small-12 columns">
@@ -368,7 +368,7 @@ David Zastrow,
                           <input required type='button' class="button postfix" name='subtract' onclick='document.getElementById("LowGoalTeleopMisses").stepDown(1);' value='-'/>
                         </div>  
                         <div class="small-4 columns">
-                            <input required type="number" name="LowGoalTeleopMissesLowGoalTeleopMisses" id="LowGoalTeleopMisses" min="0" step="1" value ="0" required>
+                            <input required type="number" name="LowGoalTeleopMisses" id="LowGoalTeleopMisses" min="0" step="1" value ="0" required>
                         </div>
                         <div class="small-4 columns">
                           <input required type='button' class="button postfix" name='add' onclick='document.getElementById("LowGoalTeleopMisses").stepUp(1);' value='+'/>

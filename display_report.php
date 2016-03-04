@@ -21,10 +21,8 @@ if(isset($_POST['search'])){
 	$blueTeam2Object = new teamReport($blueTeam2);
 	$blueTeam3Object = new teamReport($blueTeam3);
 
-
-	echo "<b>$team</b>"
 	?>
-	<table align="left" cellspacing="5" cellpadding="8">
+	<table>
 		<tr>
 			<td align="left"><b>Allicance</b></td>
 			<td align="left"><b>RED</b></td>

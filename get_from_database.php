@@ -1,4 +1,5 @@
 <?php
+require_once('../mysqli_connect.php');
 
 class teamReport {
 	public $team;
@@ -6,11 +7,11 @@ class teamReport {
     	$this->team = $team;
 	}
 	// Get a connection for the database
-	require_once('../mysqli_connect.php');
+
 
 	// Creates querys for the database
 	//do all calculations based on these query's then display data
-	//$allQuery = "SELECT autoDefence, highGoalAutoShotsMade, lowGoalAutoShotsMade, categoryA, categoryAScore, categoryB, categoryBScore, categoryC, categoryCScore, categoryD, categoryDScore, lowBarScore, lowGoalShots, highGoalShots, comments FROM match WHERE team = $team";
+	
 	private $portcullisQuery = "SELECT SUM(categoryAScore) AS PortcullisCrosses FROM `match` WHERE team = {$this->team} AND categoryA ='Portcullis'";
 	private $chevalDeFriseQuery = "SELECT SUM(categoryAScore) AS ChevalCrosses FROM `match` WHERE team = {$this->team} AND categoryA ='Cheval de Frise'";
 	private $moatQuery = "SELECT SUM(categoryBScore) AS MoatCrosses FROM `match` WHERE team = {$this->team} AND categoryB ='Moat'";
@@ -74,8 +75,7 @@ class teamReport {
 	private $maxLowGoalAutoShotSearch = @mysqli_query($dbc, $this->maxLowGoalAutoShotQuery);
 
 	//Error Checking
-
-
+	
 	// Search Calculations //
 	if($this->portcullisSearch && $this->chevalDeFriseSearch && $this->moatSearch && $this->rampartsSearch && 
 		$this->drawbridgeSearch && $this->sallyPortSearch && $this->rockWallSearch && $this->roughTerrainSearch &&
