@@ -20,7 +20,12 @@ if(isset($_POST['search'])){
 	$blueTeam1Object = new teamReport($blueTeam1);
 	$blueTeam2Object = new teamReport($blueTeam2);
 	$blueTeam3Object = new teamReport($blueTeam3);
-
+	$redTeam1Object->search_test();
+	$redTeam2Object->search_test();
+	$redTeam3Object->search_test();
+	$blueTeam1Object->search_test();
+	$blueTeam2Object->search_test();
+	$blueTeam3Object->search_test();
 	?>
 	<table>
 		<tr>
@@ -43,174 +48,174 @@ if(isset($_POST['search'])){
 		</tr>
 		<tr>
 			<td align="left"><b>Portcullis Crosses</b></td>
-			<td align="left"><b><?php echo $redTeam1Object->portcullis ?></b></td>
-			<td align="left"><b><?php echo $redTeam2Object->portcullis ?></b></td>
-			<td align="left"><b><?php echo $redTeam3Object->portcullis ?></b></td>
-			<td align="left"><b><?php echo $blueTeam1Object->portcullis ?></b></td>
-			<td align="left"><b><?php echo $blueTeam2Object->portcullis ?></b></td>
-			<td align="left"><b><?php echo $blueTeam3Object->portcullis ?></b></td>
+			<td align="left"><b><?php echo $redTeam1Object->portcullis_crosses() ?></b></td>
+			<td align="left"><b><?php echo $redTeam2Object->portcullis_crosses() ?></b></td>
+			<td align="left"><b><?php echo $redTeam3Object->portcullis_crosses() ?></b></td>
+			<td align="left"><b><?php echo $blueTeam1Object->portcullis_crosses() ?></b></td>
+			<td align="left"><b><?php echo $blueTeam2Object->portcullis_crosses() ?></b></td>
+			<td align="left"><b><?php echo $blueTeam3Object->portcullis_crosses() ?></b></td>
 		</tr>
 		<tr>
 			<td align="left"><b>Cheval de Frise</b></td>
-			<td align="left"><b><?php echo $redTeam1Object->chevalDeFrise ?></b></td>
-			<td align="left"><b><?php echo $redTeam2Object->chevalDeFrise ?></b></td>
-			<td align="left"><b><?php echo $redTeam3Object->chevalDeFrise ?></b></td>
-			<td align="left"><b><?php echo $blueTeam1Object->chevalDeFrise ?></b></td>
-			<td align="left"><b><?php echo $blueTeam2Object->chevalDeFrise ?></b></td>
-			<td align="left"><b><?php echo $blueTeam3Object->chevalDeFrise ?></b></td>
+			<td align="left"><b><?php echo $redTeam1Object->chevalDeFrise_crosses() ?></b></td>
+			<td align="left"><b><?php echo $redTeam2Object->chevalDeFrise_crosses() ?></b></td>
+			<td align="left"><b><?php echo $redTeam3Object->chevalDeFrise_crosses() ?></b></td>
+			<td align="left"><b><?php echo $blueTeam1Object->chevalDeFrise_crosses() ?></b></td>
+			<td align="left"><b><?php echo $blueTeam2Object->chevalDeFrise_crosses() ?></b></td>
+			<td align="left"><b><?php echo $blueTeam3Object->chevalDeFrise_crosses() ?></b></td>
 		</tr>
 		<tr>
 			<td align="left"><b>Moat Crosses</b></td>
-			<td align="left"><b><?php echo $redTeam1Object->moat ?></b></td>
-			<td align="left"><b><?php echo $redTeam2Object->moat ?></b></td>
-			<td align="left"><b><?php echo $redTeam3Object->moat ?></b></td>
-			<td align="left"><b><?php echo $blueTeam1Object->moat ?></b></td>
-			<td align="left"><b><?php echo $blueTeam2Object->moat ?></b></td>
-			<td align="left"><b><?php echo $blueTeam3Object->moat ?></b></td>
+			<td align="left"><b><?php echo $redTeam1Object->moat_crosses() ?></b></td>
+			<td align="left"><b><?php echo $redTeam2Object->moat_crosses() ?></b></td>
+			<td align="left"><b><?php echo $redTeam3Object->moat_crosses() ?></b></td>
+			<td align="left"><b><?php echo $blueTeam1Object->moat_crosses() ?></b></td>
+			<td align="left"><b><?php echo $blueTeam2Object->moat_crosses() ?></b></td>
+			<td align="left"><b><?php echo $blueTeam3Object->moat_crosses() ?></b></td>
 		</tr>
 		<tr>
 			<td align="left"><b>Rampart Crosses</b></td>
-			<td align="left"><b><?php echo $redTeam1Object->ramparts ?></b></td>
-			<td align="left"><b><?php echo $redTeam2Object->ramparts ?></b></td>
-			<td align="left"><b><?php echo $redTeam3Object->ramparts ?></b></td>
-			<td align="left"><b><?php echo $blueTeam1Object->ramparts ?></b></td>
-			<td align="left"><b><?php echo $blueTeam2Object->ramparts ?></b></td>
-			<td align="left"><b><?php echo $blueTeam3Object->ramparts ?></b></td>
+			<td align="left"><b><?php echo $redTeam1Object->ramparts_crosses() ?></b></td>
+			<td align="left"><b><?php echo $redTeam2Object->ramparts_crosses() ?></b></td>
+			<td align="left"><b><?php echo $redTeam3Object->ramparts_crosses() ?></b></td>
+			<td align="left"><b><?php echo $blueTeam1Object->ramparts_crosses() ?></b></td>
+			<td align="left"><b><?php echo $blueTeam2Object->ramparts_crosses() ?></b></td>
+			<td align="left"><b><?php echo $blueTeam3Object->ramparts_crosses() ?></b></td>
 		</tr>
 		<tr>
 			<td align="left"><b>Drawbridge Crosses</b></td>
-			<td align="left"><b><?php echo $redTeam1Object->drawbridge ?></b></td>
-			<td align="left"><b><?php echo $redTeam2Object->drawbridge ?></b></td>
-			<td align="left"><b><?php echo $redTeam3Object->drawbridge ?></b></td>
-			<td align="left"><b><?php echo $blueTeam1Object->drawbridge ?></b></td>
-			<td align="left"><b><?php echo $blueTeam2Object->drawbridge ?></b></td>
-			<td align="left"><b><?php echo $blueTeam3Object->drawbridge ?></b></td>
+			<td align="left"><b><?php echo $redTeam1Object->drawbridge_crosses() ?></b></td>
+			<td align="left"><b><?php echo $redTeam2Object->drawbridge_crosses() ?></b></td>
+			<td align="left"><b><?php echo $redTeam3Object->drawbridge_crosses() ?></b></td>
+			<td align="left"><b><?php echo $blueTeam1Object->drawbridge_crosses() ?></b></td>
+			<td align="left"><b><?php echo $blueTeam2Object->drawbridge_crosses() ?></b></td>
+			<td align="left"><b><?php echo $blueTeam3Object->drawbridge_crosses() ?></b></td>
 		</tr>
 		<tr>
 			<td align="left"><b>Sally Port Crosses</b></td>
-			<td align="left"><b><?php echo $redTeam1Object->sallyPort ?></b></td>
-			<td align="left"><b><?php echo $redTeam2Object->sallyPort ?></b></td>
-			<td align="left"><b><?php echo $redTeam3Object->sallyPort ?></b></td>
-			<td align="left"><b><?php echo $blueTeam1Object->sallyPort ?></b></td>
-			<td align="left"><b><?php echo $blueTeam2Object->sallyPort ?></b></td>
-			<td align="left"><b><?php echo $blueTeam3Object->sallyPort ?></b></td>
+			<td align="left"><b><?php echo $redTeam1Object->sallyPort_crosses() ?></b></td>
+			<td align="left"><b><?php echo $redTeam2Object->sallyPort_crosses() ?></b></td>
+			<td align="left"><b><?php echo $redTeam3Object->sallyPort_crosses() ?></b></td>
+			<td align="left"><b><?php echo $blueTeam1Object->sallyPort_crosses() ?></b></td>
+			<td align="left"><b><?php echo $blueTeam2Object->sallyPort_crosses() ?></b></td>
+			<td align="left"><b><?php echo $blueTeam3Object->sallyPort_crosses() ?></b></td>
 		</tr>
 		<tr>
 			<td align="left"><b>Rock Wall Crosses</b></td>
-			<td align="left"><b><?php echo $redTeam1Object->rockWall ?></b></td>
-			<td align="left"><b><?php echo $redTeam2Object->rockWall ?></b></td>
-			<td align="left"><b><?php echo $redTeam3Object->rockWall ?></b></td>
-			<td align="left"><b><?php echo $blueTeam1Object->rockWall ?></b></td>
-			<td align="left"><b><?php echo $blueTeam2Object->rockWall ?></b></td>
-			<td align="left"><b><?php echo $blueTeam3Object->rockWall ?></b></td>
+			<td align="left"><b><?php echo $redTeam1Object->rockWall_crosses() ?></b></td>
+			<td align="left"><b><?php echo $redTeam2Object->rockWall_crosses() ?></b></td>
+			<td align="left"><b><?php echo $redTeam3Object->rockWall_crosses() ?></b></td>
+			<td align="left"><b><?php echo $blueTeam1Object->rockWall_crosses() ?></b></td>
+			<td align="left"><b><?php echo $blueTeam2Object->rockWall_crosses() ?></b></td>
+			<td align="left"><b><?php echo $blueTeam3Object->rockWall_crosses() ?></b></td>
 		</tr>
 		<tr>
 			<td align="left"><b>Rough Terrain Crosses</b></td>
-			<td align="left"><b><?php echo $redTeam1Object->roughTerrain ?></b></td>
-			<td align="left"><b><?php echo $redTeam2Object->roughTerrain ?></b></td>
-			<td align="left"><b><?php echo $redTeam3Object->roughTerrain ?></b></td>
-			<td align="left"><b><?php echo $blueTeam1Object->roughTerrain ?></b></td>
-			<td align="left"><b><?php echo $blueTeam2Object->roughTerrain ?></b></td>
-			<td align="left"><b><?php echo $blueTeam3Object->roughTerrain ?></b></td>
+			<td align="left"><b><?php echo $redTeam1Object->roughTerrain_crosses() ?></b></td>
+			<td align="left"><b><?php echo $redTeam2Object->roughTerrain_crosses() ?></b></td>
+			<td align="left"><b><?php echo $redTeam3Object->roughTerrain_crosses() ?></b></td>
+			<td align="left"><b><?php echo $blueTeam1Object->roughTerrain_crosses() ?></b></td>
+			<td align="left"><b><?php echo $blueTeam2Object->roughTerrain_crosses() ?></b></td>
+			<td align="left"><b><?php echo $blueTeam3Object->roughTerrain_crosses() ?></b></td>
 		</tr>
 		<tr>
 			<td align="left"><b>Low Bar Crosses</b></td>
-			<td align="left"><b><?php echo $redTeam1Object->lowBar ?></b></td>
-			<td align="left"><b><?php echo $redTeam2Object->lowBar ?></b></td>
-			<td align="left"><b><?php echo $redTeam3Object->lowBar ?></b></td>
-			<td align="left"><b><?php echo $blueTeam1Object->lowBar ?></b></td>
-			<td align="left"><b><?php echo $blueTeam2Object->lowBar ?></b></td>
-			<td align="left"><b><?php echo $blueTeam3Object->lowBar ?></b></td>
+			<td align="left"><b><?php echo $redTeam1Object->lowBar_crosses() ?></b></td>
+			<td align="left"><b><?php echo $redTeam2Object->lowBar_crosses() ?></b></td>
+			<td align="left"><b><?php echo $redTeam3Object->lowBar_crosses() ?></b></td>
+			<td align="left"><b><?php echo $blueTeam1Object->lowBar_crosses() ?></b></td>
+			<td align="left"><b><?php echo $blueTeam2Object->lowBar_crosses() ?></b></td>
+			<td align="left"><b><?php echo $blueTeam3Object->lowBar_crosses() ?></b></td>
 		</tr>
 		<tr>
-			<td align="left"><b>High Goal Shots Made</b></td>
-			<td align="left"><b><?php echo $redTeam1Object->highGoalAccuracyFraction ?></b></td>
-			<td align="left"><b><?php echo $redTeam2Object->highGoalAccuracyFraction ?></b></td>
-			<td align="left"><b><?php echo $redTeam3Object->highGoalAccuracyFraction ?></b></td>
-			<td align="left"><b><?php echo $blueTeam1Object->highGoalAccuracyFraction ?></b></td>
-			<td align="left"><b><?php echo $blueTeam2Object->highGoalAccuracyFraction ?></b></td>
-			<td align="left"><b><?php echo $blueTeam3Object->highGoalAccuracyFraction ?></b></td>
+			<td align="left"><b>Average High Goal Shots Made</b></td>
+			<td align="left"><b><?php echo $redTeam1Object->avg_high_goal_shots_per_match() ?></b></td>
+			<td align="left"><b><?php echo $redTeam2Object->avg_high_goal_shots_per_match() ?></b></td>
+			<td align="left"><b><?php echo $redTeam3Object->avg_high_goal_shots_per_match() ?></b></td>
+			<td align="left"><b><?php echo $blueTeam1Object->avg_high_goal_shots_per_match() ?></b></td>
+			<td align="left"><b><?php echo $blueTeam2Object->avg_high_goal_shots_per_match() ?></b></td>
+			<td align="left"><b><?php echo $blueTeam3Object->avg_high_goal_shots_per_match() ?></b></td>
 		</tr>
 		<tr>
 			<td align="left"><b>High Goal Accuracy</b></td>
-			<td align="left"><b><?php echo $redTeam1Object->highGoalAccuracyPercent ?></b></td>
-			<td align="left"><b><?php echo $redTeam2Object->highGoalAccuracyPercent ?></b></td>
-			<td align="left"><b><?php echo $redTeam3Object->highGoalAccuracyPercent ?></b></td>
-			<td align="left"><b><?php echo $blueTeam1Object->highGoalAccuracyPercent ?></b></td>
-			<td align="left"><b><?php echo $blueTeam2Object->highGoalAccuracyPercent ?></b></td>
-			<td align="left"><b><?php echo $blueTeam3Object->highGoalAccuracyPercent ?></b></td>
+			<td align="left"><b><?php echo $redTeam1Object->high_goal_accuracy() ?></b></td>
+			<td align="left"><b><?php echo $redTeam2Object->high_goal_accuracy() ?></b></td>
+			<td align="left"><b><?php echo $redTeam3Object->high_goal_accuracy() ?></b></td>
+			<td align="left"><b><?php echo $blueTeam1Object->high_goal_accuracy() ?></b></td>
+			<td align="left"><b><?php echo $blueTeam2Object->high_goal_accuracy() ?></b></td>
+			<td align="left"><b><?php echo $blueTeam3Object->high_goal_accuracy() ?></b></td>
 		</tr>
 		<tr>
-			<td align="left"><b>Low Goal Shots Made</b></td>
-			<td align="left"><b><?php echo $redTeam1Object->lowGoalAccuracyPercent ?></b></td>
-			<td align="left"><b><?php echo $redTeam2Object->lowGoalAccuracyPercent ?></b></td>
-			<td align="left"><b><?php echo $redTeam3Object->lowGoalAccuracyPercent ?></b></td>
-			<td align="left"><b><?php echo $blueTeam1Object->lowGoalAccuracyPercent ?></b></td>
-			<td align="left"><b><?php echo $blueTeam2Object->lowGoalAccuracyPercent ?></b></td>
-			<td align="left"><b><?php echo $blueTeam3Object->lowGoalAccuracyPercent ?></b></td>
+			<td align="left"><b>Average Low Goal Shots Made</b></td>
+			<td align="left"><b><?php echo $redTeam1Object->avg_low_goal_shots_per_match() ?></b></td>
+			<td align="left"><b><?php echo $redTeam2Object->avg_low_goal_shots_per_match() ?></b></td>
+			<td align="left"><b><?php echo $redTeam3Object->avg_low_goal_shots_per_match() ?></b></td>
+			<td align="left"><b><?php echo $blueTeam1Object->avg_low_goal_shots_per_match() ?></b></td>
+			<td align="left"><b><?php echo $blueTeam2Object->avg_low_goal_shots_per_match() ?></b></td>
+			<td align="left"><b><?php echo $blueTeam3Object->avg_low_goal_shots_per_match() ?></b></td>
 		</tr>
 		<tr>
 			<td align="left"><b>Low Goal Accuracy</b></td>
-			<td align="left"><b><?php echo $redTeam1Object->lowGoalAccuracyPercent ?></b></td>
-			<td align="left"><b><?php echo $redTeam2Object->lowGoalAccuracyPercent ?></b></td>
-			<td align="left"><b><?php echo $redTeam3Object->lowGoalAccuracyPercent ?></b></td>
-			<td align="left"><b><?php echo $blueTeam1Object->lowGoalAccuracyPercent ?></b></td>
-			<td align="left"><b><?php echo $blueTeam2Object->lowGoalAccuracyPercent ?></b></td>
-			<td align="left"><b><?php echo $blueTeam3Object->lowGoalAccuracyPercent ?></b></td>
+			<td align="left"><b><?php echo $redTeam1Object->low_goal_accuracy() ?></b></td>
+			<td align="left"><b><?php echo $redTeam2Object->low_goal_accuracy() ?></b></td>
+			<td align="left"><b><?php echo $redTeam3Object->low_goal_accuracy() ?></b></td>
+			<td align="left"><b><?php echo $blueTeam1Object->low_goal_accuracy() ?></b></td>
+			<td align="left"><b><?php echo $blueTeam2Object->low_goal_accuracy() ?></b></td>
+			<td align="left"><b><?php echo $blueTeam3Object->low_goal_accuracy() ?></b></td>
 		</tr>
 		<tr>
 			<td align="left"><b>Challenging</b></td>
-			<td align="left"><b><?php echo $redTeam1Object->highGoalAccuracyPercent ?></b></td>
-			<td align="left"><b><?php echo $redTeam2Object->highGoalAccuracyPercent ?></b></td>
-			<td align="left"><b><?php echo $redTeam3Object->highGoalAccuracyPercent ?></b></td>
-			<td align="left"><b><?php echo $blueTeam1Object->highGoalAccuracyPercent ?></b></td>
-			<td align="left"><b><?php echo $blueTeam2Object->highGoalAccuracyPercent ?></b></td>
-			<td align="left"><b><?php echo $blueTeam3Object->highGoalAccuracyPercent ?></b></td>
+			<td align="left"><b><?php echo $redTeam1Object->times_challenged() ?></b></td>
+			<td align="left"><b><?php echo $redTeam2Object->times_challenged() ?></b></td>
+			<td align="left"><b><?php echo $redTeam3Object->times_challenged() ?></b></td>
+			<td align="left"><b><?php echo $blueTeam1Object->times_challenged() ?></b></td>
+			<td align="left"><b><?php echo $blueTeam2Object->times_challenged() ?></b></td>
+			<td align="left"><b><?php echo $blueTeam3Object->times_challenged() ?></b></td>
 		</tr>
 		<tr>
 			<td align="left"><b>Scaling</b></td>
-			<td align="left"><b><?php echo $redTeam1Object->highGoalAccuracyPercent ?></b></td>
-			<td align="left"><b><?php echo $redTeam2Object->highGoalAccuracyPercent ?></b></td>
-			<td align="left"><b><?php echo $redTeam3Object->highGoalAccuracyPercent ?></b></td>
-			<td align="left"><b><?php echo $blueTeam1Object->highGoalAccuracyPercent ?></b></td>
-			<td align="left"><b><?php echo $blueTeam2Object->highGoalAccuracyPercent ?></b></td>
-			<td align="left"><b><?php echo $blueTeam3Object->highGoalAccuracyPercent ?></b></td>
+			<td align="left"><b><?php echo $redTeam1Object->times_scaled() ?></b></td>
+			<td align="left"><b><?php echo $redTeam2Object->times_scaled() ?></b></td>
+			<td align="left"><b><?php echo $redTeam3Object->times_scaled() ?></b></td>
+			<td align="left"><b><?php echo $blueTeam1Object->times_scaled() ?></b></td>
+			<td align="left"><b><?php echo $blueTeam2Object->times_scaled() ?></b></td>
+			<td align="left"><b><?php echo $blueTeam3Object->times_scaled() ?></b></td>
 		</tr>
 		<tr>
 			<td align="left"><b>Highest Auto Movement</b></td>
-			<td align="left"><b><?php echo $redTeam1Object->highestAutoMovement ?></b></td>
-			<td align="left"><b><?php echo $redTeam2Object->highestAutoMovement ?></b></td>
-			<td align="left"><b><?php echo $redTeam3Object->highestAutoMovement ?></b></td>
-			<td align="left"><b><?php echo $blueTeam1Object->highestAutoMovement ?></b></td>
-			<td align="left"><b><?php echo $blueTeam2Object->highestAutoMovement ?></b></td>
-			<td align="left"><b><?php echo $blueTeam3Object->highestAutoMovement ?></b></td>
+			<td align="left"><b><?php echo $redTeam1Object->highest_auto_movement() ?></b></td>
+			<td align="left"><b><?php echo $redTeam2Object->highest_auto_movement() ?></b></td>
+			<td align="left"><b><?php echo $redTeam3Object->highest_auto_movement() ?></b></td>
+			<td align="left"><b><?php echo $blueTeam1Object->highest_auto_movement() ?></b></td>
+			<td align="left"><b><?php echo $blueTeam2Object->highest_auto_movement() ?></b></td>
+			<td align="left"><b><?php echo $blueTeam3Object->highest_auto_movement() ?></b></td>
 		</tr>
 		<tr>
 			<td align="left"><b>Auto Low Bar : Other Breach</b></td>
-			<td align="left"><b><?php echo $redTeam1Object->autoBreachLowBar ?></b></td>
-			<td align="left"><b><?php echo $redTeam2Object->autoBreachLowBar ?></b></td>
-			<td align="left"><b><?php echo $redTeam3Object->autoBreachLowBar ?></b></td>
-			<td align="left"><b><?php echo $blueTeam1Object->autoBreachLowBar ?></b></td>
-			<td align="left"><b><?php echo $blueTeam2Object->autoBreachLowBar ?></b></td>
-			<td align="left"><b><?php echo $blueTeam3Object->autoBreachLowBar ?></b></td>
+			<td align="left"><b><?php echo $redTeam1Object->auto_times_breached() ?></b></td>
+			<td align="left"><b><?php echo $redTeam2Object->auto_times_breached() ?></b></td>
+			<td align="left"><b><?php echo $redTeam3Object->auto_times_breached() ?></b></td>
+			<td align="left"><b><?php echo $blueTeam1Object->auto_times_breached() ?></b></td>
+			<td align="left"><b><?php echo $blueTeam2Object->auto_times_breached() ?></b></td>
+			<td align="left"><b><?php echo $blueTeam3Object->auto_times_breached() ?></b></td>
 		</tr>
 		<tr>
 			<td align="left"><b>Low Goals Made in Auto</b></td>
-			<td align="left"><b><?php echo $redTeam1Object->autoLowGoals ?></b></td>
-			<td align="left"><b><?php echo $redTeam2Object->autoLowGoals ?></b></td>
-			<td align="left"><b><?php echo $redTeam3Object->autoLowGoals ?></b></td>
-			<td align="left"><b><?php echo $blueTeam1Object->autoLowGoals ?></b></td>
-			<td align="left"><b><?php echo $blueTeam2Object->autoLowGoals ?></b></td>
-			<td align="left"><b><?php echo $blueTeam3Object->autoLowGoals ?></b></td>
+			<td align="left"><b><?php echo $redTeam1Object->auto_low_goals() ?></b></td>
+			<td align="left"><b><?php echo $redTeam2Object->auto_low_goals() ?></b></td>
+			<td align="left"><b><?php echo $redTeam3Object->auto_low_goals() ?></b></td>
+			<td align="left"><b><?php echo $blueTeam1Object->auto_low_goals() ?></b></td>
+			<td align="left"><b><?php echo $blueTeam2Object->auto_low_goals() ?></b></td>
+			<td align="left"><b><?php echo $blueTeam3Object->auto_low_goals() ?></b></td>
 		</tr>
 		<tr>
 			<td align="left"><b>High Goals Made in Auto</b></td>
-			<td align="left"><b><?php echo $redTeam1Object->autoHighGoals ?></b></td>
-			<td align="left"><b><?php echo $redTeam2Object->autoHighGoals ?></b></td>
-			<td align="left"><b><?php echo $redTeam3Object->autoHighGoals ?></b></td>
-			<td align="left"><b><?php echo $blueTeam1Object->autoHighGoals ?></b></td>
-			<td align="left"><b><?php echo $blueTeam2Object->autoHighGoals ?></b></td>
-			<td align="left"><b><?php echo $blueTeam3Object->autoHighGoals ?></b></td>
+			<td align="left"><b><?php echo $redTeam1Object->auto_high_goals() ?></b></td>
+			<td align="left"><b><?php echo $redTeam2Object->auto_high_goals() ?></b></td>
+			<td align="left"><b><?php echo $redTeam3Object->auto_high_goals() ?></b></td>
+			<td align="left"><b><?php echo $blueTeam1Object->auto_high_goals() ?></b></td>
+			<td align="left"><b><?php echo $blueTeam2Object->auto_high_goals() ?></b></td>
+			<td align="left"><b><?php echo $blueTeam3Object->auto_high_goals() ?></b></td>
 		</tr>
 
 	</table>
