@@ -5,79 +5,97 @@ class teamReport {
 	public $team;
     function __construct($team) {
     	$this->team = $team;
+
+
+    	// Creates querys for the database
+	
+		$portcullisQuery = "SELECT SUM(categoryAScore) AS PortcullisCrosses FROM `match` WHERE team = {$this->team} AND categoryA ='Portcullis'";
+		$chevalDeFriseQuery = "SELECT SUM(categoryAScore) AS ChevalCrosses FROM `match` WHERE team = {$this->team} AND categoryA ='Cheval de Frise'";
+		$moatQuery = "SELECT SUM(categoryBScore) AS MoatCrosses FROM `match` WHERE team = {$this->team} AND categoryB ='Moat'";
+		$rampartsQuery = "SELECT SUM(categoryBScore) AS RampartCrosses FROM `match` WHERE team = {$this->team} AND categoryB ='Ramparts'";
+		$drawbridgeQuery = "SELECT SUM(categoryCScore) AS DrawbridgeCrosses FROM `match` WHERE team = {$this->team} AND categoryC ='Drawbridge'";
+		$sallyPortQuery = "SELECT SUM(categoryCScore) AS SallyPortCrosses FROM `match` WHERE team = {$this->team} AND categoryC ='Sally Port'";
+		$rockWallQuery = "SELECT SUM(categoryDScore) AS RockWallCrosses FROM `match` WHERE team = {$this->team} AND categoryD ='Rock Wall'";
+		$roughTerrainQuery = "SELECT SUM(categoryDScore) AS RoughTerrainCrosses FROM `match` WHERE team = {$this->team} AND categoryD ='Rough Terrain'";
+		$lowBarQuery = "SELECT SUM(lowBarScore) AS LowBarCrosses FROM `match` WHERE team = {$this->team}";
+		$lowGoalHitsQuery = "SELECT SUM(lowGoalShots) AS LowGoalHits FROM `match` WHERE team = {$this->team}";
+		$lowGoalMissesQuery = "SELECT SUM(missedLowGoalShots) AS LowGoalMisses FROM `match` WHERE team = {$this->team}";
+		$highGoalHitsQuery = "SELECT SUM(highGoalShots) AS HighGoalHits FROM `match` WHERE team = {$this->team}";
+		$highGoalMissesQuery = "SELECT SUM(highGoalShots) AS HighGoalMisses FROM `match` WHERE team = {$this->team}";
+		$numMatchesQuery = "SELECT team FROM `match` WHERE team = {$this->team}";
+		$towerScaleQuery = "SELECT scaleTower FROM `match` WHERE team = {$this->team} AND scaleTower = 'Yes'";
+		$towerChallengeQuery = "SELECT challengeTower FROM `match` WHERE team = {$this->team} AND challengeTower = 'Yes'";
+		$commentsQuery = "SELECT comments FROM `match` WHERE team = {$this->team} AND comments != 'N/A'";
+
+		$autoBreachedQuery = "SELECT autoDefence FROM `match` WHERE team = {$this->team} AND autoDefence ='Breached'";
+		$autoReachedQuery = "SELECT autoDefence FROM `match` WHERE team = {$this->team} AND autoDefence ='Reached'";
+		$autoBreachedLowBarQuery = "SELECT breachDefence FROM `match` WHERE team = {$this->team} AND autoDefence ='Low Bar'";
+		$autoBreachedOtherQuery = "SELECT breachDefence FROM `match` WHERE team = {$this->team} AND autoDefence ='Other'";
+		$highGoalAutoShotsMadeQuery = "SELECT SUM(highGoalAutoShotsMade) AS HGAutoMade FROM `match` WHERE team = {$this->team}";
+		$highGoalAutoMissesQuery = "SELECT highGoalAutoMisses AS HGAutoMisses FROM `match` WHERE team = {$this->team}";
+		$lowGoalAutoShotsMadeQuery = "SELECT SUM(lowGoalAutoShotsMade) AS LGAutoMade FROM `match` WHERE team = {$this->team}";
+		$lowGoalAutoMissesQuery = "SELECT lowGoalAutoMisses AS LGAutoMisses FROM `match` WHERE team = {$this->team}";
+		$maxHighGoalAutoShotQuery = "SELECT MAX(highGoalAutoShotsMade) AS HGAutoMax FROM `match` WHERE team = {$this->team}";
+		$maxLowGoalAutoShotQuery = "SELECT MAX(lowGoalAutoShotsMade) AS LGAutoMax FROM `match` WHERE team = {$this->team}";
+
+		// Searching Database for what we need //
+
+		$portcullisSearch = @mysqli_query($dbc, $this->portcullisQuery);
+		$chevalDeFriseSearch = @mysqli_query($dbc, $this->chevalDeFriseQuery);
+		$moatSearch = @mysqli_query($dbc, $this->moatQuery);
+		$rampartsSearch = @mysqli_query($dbc, $this->rampartsQuery);
+		$drawbridgeSearch = @mysqli_query($dbc, $this->drawbridgeQuery);
+		$sallyPortSearch = @mysqli_query($dbc, $this->sallyPortQuery);
+		$rockWallSearch = @mysqli_query($dbc, $this->rockWallQuery);
+		$roughTerrainSearch = @mysqli_query($this->dbc, $roughTerrainQuery);
+		$lowBarSearch = @mysqli_query($dbc, $this->lowBarQuery);
+
+		$lowGoalHitsSearch = @mysqli_query($dbc, $this->lowGoalHitsQuery);
+		$lowGoalMissesSearch = @mysqli_query($dbc, $this->lowGoalMissesQuery);
+		$highGoalHitsSearch = @mysqli_query($dbc, $this->highGoalHitsQuery);
+		$highGoalMissesSearch = @mysqli_query($dbc, $this->highGoalMissesQuery);
+		$towerScaleSearch = @mysqli_query($dbc, $this->towerScaleQuery);
+		$towerChallengeSearch = @mysqli_query($dbc, $this->towerChallengeQuery);
+
+		$numMatchesSearch = @mysqli_query($dbc, $this->numMatchesQuery);
+		$commentsSearch = @mysqli_query($dbc, $this->commentsQuery);
+
+		$autoBreachedSearch = @mysqli_query($dbc, $this->autoBreachedQuery);
+		$autoReachedSearch = @mysqli_query($dbc, $this->autoReachedQuery);
+		$autoBreachedLowBarSearch = @mysqli_query($dbc, $this->autoBreachedLowBarQuery);
+		$autoBreachedOtherSearch = @mysqli_query($dbc, $this->autoBreachedOtherQuery);
+		$highGoalAutoShotsMadeSearch = @mysqli_query($dbc, $this->highGoalAutoShotsMadeQuery);
+		$highGoalAutoMissesSearch = @mysqli_query($dbc, $this->highGoalAutoMissesQuery);
+		$lowGoalAutoShotsMadeSearch = @mysqli_query($dbc, $this->lowGoalAutoShotsMadeQuery);
+		$lowGoalAutoMissesSearch = @mysqli_query($dbc, $this->lowGoalAutoMissesQuery);
+		$maxHighGoalAutoShotSearch = @mysqli_query($dbc, $this->maxHighGoalAutoShotQuery);
+		$maxLowGoalAutoShotSearch = @mysqli_query($dbc, $this->maxLowGoalAutoShotQuery);
 	}
-	// Get a connection for the database
+
+		// Varriables //
+
+	private $numberOfMatches = mysqli_num_rows($this->numMatchesSearch);
+
+	private $portcullisVar = mysqli_fetch_assoc($this->portcullisSearch);
+	private $chevalDeFriseVar = mysqli_fetch_assoc($this->chevalDeFriseSearch);
+	private $moatVar = mysqli_fetch_assoc($this->moatSearch);
+	private $rampartsVar = mysqli_fetch_assoc($this->rampartsSearch);
+	private $drawbridgeVar = mysqli_fetch_assoc($this->drawbridgeSearch);
+	private $sallyPortVar = mysqli_fetch_assoc($this->sallyPortSearch);
+	private $rockWallVar = mysqli_fetch_assoc($this->rockWallSearch);
+	private $roughTerrainVar = mysqli_fetch_assoc($this->roughTerrainSearch);
+	private $lowBarVar = mysqli_fetch_assoc($this->lowBarSearch);
+
+	 
 
 
-	// Creates querys for the database
-	//do all calculations based on these query's then display data
-	
-	private $portcullisQuery = "SELECT SUM(categoryAScore) AS PortcullisCrosses FROM `match` WHERE team = {$this->team} AND categoryA ='Portcullis'";
-	private $chevalDeFriseQuery = "SELECT SUM(categoryAScore) AS ChevalCrosses FROM `match` WHERE team = {$this->team} AND categoryA ='Cheval de Frise'";
-	private $moatQuery = "SELECT SUM(categoryBScore) AS MoatCrosses FROM `match` WHERE team = {$this->team} AND categoryB ='Moat'";
-	private $rampartsQuery = "SELECT SUM(categoryBScore) AS RampartCrosses FROM `match` WHERE team = {$this->team} AND categoryB ='Ramparts'";
-	private $drawbridgeQuery = "SELECT SUM(categoryCScore) AS DrawbridgeCrosses FROM `match` WHERE team = {$this->team} AND categoryC ='Drawbridge'";
-	private $sallyPortQuery = "SELECT SUM(categoryCScore) AS SallyPortCrosses FROM `match` WHERE team = {$this->team} AND categoryC ='Sally Port'";
-	private $rockWallQuery = "SELECT SUM(categoryDScore) AS RockWallCrosses FROM `match` WHERE team = {$this->team} AND categoryD ='Rock Wall'";
-	private $roughTerrainQuery = "SELECT SUM(categoryDScore) AS RoughTerrainCrosses FROM `match` WHERE team = {$this->team} AND categoryD ='Rough Terrain'";
-	private $lowBarQuery = "SELECT SUM(lowBarScore) AS LowBarCrosses FROM `match` WHERE team = {$this->team}";
-	private $lowGoalHitsQuery = "SELECT SUM(lowGoalShots) AS LowGoalHits FROM `match` WHERE team = {$this->team}";
-	private $lowGoalMissesQuery = "SELECT SUM(missedLowGoalShots) AS LowGoalMisses FROM `match` WHERE team = {$this->team}";
-	private $highGoalHitsQuery = "SELECT SUM(highGoalShots) AS HighGoalHits FROM `match` WHERE team = {$this->team}";
-	private $highGoalMissesQuery = "SELECT SUM(highGoalShots) AS HighGoalMisses FROM `match` WHERE team = {$this->team}";
-	private $numMatchesQuery = "SELECT team FROM `match` WHERE team = {$this->team}";
-	private $towerScaleQuery = "SELECT scaleTower FROM `match` WHERE team = {$this->team} AND scaleTower = 'Yes'";
-	private $towerChallengeQuery = "SELECT challengeTower FROM `match` WHERE team = {$this->team} AND challengeTower = 'Yes'";
-	private $commentsQuery = "SELECT comments FROM `match` WHERE team = {$this->team} AND comments != 'N/A'";
 
-	private $autoBreachedQuery = "SELECT autoDefence FROM `match` WHERE team = {$this->team} AND autoDefence ='Breached'";
-	private $autoReachedQuery = "SELECT autoDefence FROM `match` WHERE team = {$this->team} AND autoDefence ='Reached'";
-	private $autoBreachedLowBarQuery = "SELECT breachDefence FROM `match` WHERE team = {$this->team} AND autoDefence ='Low Bar'";
-	private $autoBreachedOtherQuery = "SELECT breachDefence FROM `match` WHERE team = {$this->team} AND autoDefence ='Other'";
-	private $highGoalAutoShotsMadeQuery = "SELECT SUM(highGoalAutoShotsMade) AS HGAutoMade FROM `match` WHERE team = {$this->team}";
-	private $highGoalAutoMissesQuery = "SELECT highGoalAutoMisses AS HGAutoMisses FROM `match` WHERE team = {$this->team}";
-	private $lowGoalAutoShotsMadeQuery = "SELECT SUM(lowGoalAutoShotsMade) AS LGAutoMade FROM `match` WHERE team = {$this->team}";
-	private $lowGoalAutoMissesQuery = "SELECT lowGoalAutoMisses AS LGAutoMisses FROM `match` WHERE team = {$this->team}";
-	private $maxHighGoalAutoShotQuery = "SELECT MAX(highGoalAutoShotsMade) AS HGAutoMax FROM `match` WHERE team = {$this->team}";
-	private $maxLowGoalAutoShotQuery = "SELECT MAX(lowGoalAutoShotsMade) AS LGAutoMax FROM `match` WHERE team = {$this->team}";
 
-	// Searching Database for what we need //
 
-	public $portcullisSearch = @mysqli_query($dbc, $this->portcullisQuery);
-	public $chevalDeFriseSearch = @mysqli_query($dbc, $this->chevalDeFriseQuery);
-	public $moatSearch = @mysqli_query($dbc, $this->moatQuery);
-	public $rampartsSearch = @mysqli_query($dbc, $this->rampartsQuery);
-	public $drawbridgeSearch = @mysqli_query($dbc, $this->drawbridgeQuery);
-	public $sallyPortSearch = @mysqli_query($dbc, $this->sallyPortQuery);
-	public $rockWallSearch = @mysqli_query($dbc, $this->rockWallQuery);
-	public $roughTerrainSearch = @mysqli_query($this->dbc, $roughTerrainQuery);
-	public $lowBarSearch = @mysqli_query($dbc, $this->lowBarQuery);
+		// Functions which return data //
 
-	private $lowGoalHitsSearch = @mysqli_query($dbc, $this->lowGoalHitsQuery);
-	private $lowGoalMissesSearch = @mysqli_query($dbc, $this->lowGoalMissesQuery);
-	private $highGoalHitsSearch = @mysqli_query($dbc, $this->highGoalHitsQuery);
-	private $highGoalMissesSearch = @mysqli_query($dbc, $this->highGoalMissesQuery);
-	private $towerScaleSearch = @mysqli_query($dbc, $this->towerScaleQuery);
-	private $towerChallengeSearch = @mysqli_query($dbc, $this->towerChallengeQuery);
-
-	private $numMatchesSearch = @mysqli_query($dbc, $this->numMatchesQuery);
-	private $commentsSearch = @mysqli_query($dbc, $this->commentsQuery);
-
-	private $autoBreachedSearch = @mysqli_query($dbc, $this->autoBreachedQuery);
-	private $autoReachedSearch = @mysqli_query($dbc, $this->autoReachedQuery);
-	private $autoBreachedLowBarSearch = @mysqli_query($dbc, $this->autoBreachedLowBarQuery);
-	private $autoBreachedOtherSearch = @mysqli_query($dbc, $this->autoBreachedOtherQuery);
-	private $highGoalAutoShotsMadeSearch = @mysqli_query($dbc, $this->highGoalAutoShotsMadeQuery);
-	private $highGoalAutoMissesSearch = @mysqli_query($dbc, $this->highGoalAutoMissesQuery);
-	private $lowGoalAutoShotsMadeSearch = @mysqli_query($dbc, $this->lowGoalAutoShotsMadeQuery);
-	private $lowGoalAutoMissesSearch = @mysqli_query($dbc, $this->lowGoalAutoMissesQuery);
-	private $maxHighGoalAutoShotSearch = @mysqli_query($dbc, $this->maxHighGoalAutoShotQuery);
-	private $maxLowGoalAutoShotSearch = @mysqli_query($dbc, $this->maxLowGoalAutoShotQuery);
-
-	//Error Checking
-	
-	// Search Calculations //
-	if($this->portcullisSearch && $this->chevalDeFriseSearch && $this->moatSearch && $this->rampartsSearch && 
+	public function search_test(){ // [NOTE] Very Important This is checked before using anything else!!!
+		if($this->portcullisSearch && $this->chevalDeFriseSearch && $this->moatSearch && $this->rampartsSearch && 
 		$this->drawbridgeSearch && $this->sallyPortSearch && $this->rockWallSearch && $this->roughTerrainSearch &&
 		$this->lowBarSearch && $this->lowGoalHitsSearch && $this->lowGoalMissesSearch && $this->highGoalHitsSearch &&
 		$this->highGoalMissesSearch && $this->towerScaleSearch && $this->noTowerScaleSearch && $this->numMatchesSearch &&
@@ -85,116 +103,162 @@ class teamReport {
 		$this->autoBreachedLowBarSearch && $this->autoBreachedOtherSearch && $this->highGoalAutoShotsMadeSearch &&
 		$this->highGoalAutoMissesSearch && $this->lowGoalAutoShotsMadeSearch && $this->lowGoalAutoMissesSearch &&
 		$this->maxLowGoalAutoShotSearch && $this->maxHighGoalAutoShotSearch){
+			return true;
+		} else{
+			echo "Couldn't issue database query";
+			echo mysqli_error($dbc);
+			return false;
+		}
+	} //[RETURNS] Bool
 
-		//Varriables
-		private $numberOfMatches = mysqli_num_rows($this->numMatchesSearch);
-		private $autoLowBar = mysqli_num_rows($this->autoBreachedLowBarSearch);
-		private $autoOther = mysqli_num_rows($this->autoBreachedOtherSearch);
-		private $numScale = mysqli_num_rows($this->towerScaleSearch);
-		private $numChallenge = mysqli_num_rows($this->towerChallengeSearch);
+	public function auto_low_goals(){
+		$MLGAS = mysqli_fetch_assoc($this->maxLowGoalAutoShotSearch);
+		$autoLowGoalsMade = mysqli_fetch_assoc($this->lowGoalAutoShotsMadeSearch);
+		$totalAutoLowGoalShots = mysqli_fetch_assoc($this->lowGoalAutoShotsMadeSearch) + mysqli_fetch_assoc($this->lowGoalAutoMissesSearch);
 
+		if($this->MLGAS['LGAutoMax'] > 1){
+			return "{$this->autoLowGoalsMade}/{$this->totalAutoLowGoalShots}(Can Make {$this->MHGAS} Shots in Auto)";
+		} else {
+			return "{$this->autoLowGoalsMade}/{$this->totalAutoLowGoalShots}";
+		}
+	} //[RETURNS] STRING
 
-
-
-		//Auto Calculations
-		public $autoHighGoals = "0";
-		public $autoLowGoals = "0";
-		private $MHGAS = mysql_fetch_assoc($this->maxHighGoalAutoShotSearch);
-		private $MLGAS = mysql_fetch_assoc($this->maxLowGoalAutoShotSearch);
-		private $autoHighGoalsMade = mysql_fetch_assoc($this->highGoalAutoShotsMadeSearch);
-		private $totalAutoHighGoalShots = mysql_fetch_assoc($this->highGoalAutoShotsMadeSearch) + mysql_fetch_assoc($this->highGoalAutoMissesSearch);
-		private $autoLowGoalsMade = mysql_fetch_assoc($this->lowGoalAutoShotsMadeSearch);
-		private $totalAutoLowGoalShots = mysql_fetch_assoc($this->lowGoalAutoShotsMadeSearch) + mysql_fetch_assoc($this->lowGoalAutoMissesSearch);
+	public function auto_high_goals(){
+		$MHGAS = mysqli_fetch_assoc($this->maxHighGoalAutoShotSearch);
+		$autoHighGoalsMade = mysqli_fetch_assoc($this->highGoalAutoShotsMadeSearch);
+		$totalAutoHighGoalShots = mysqli_fetch_assoc($this->highGoalAutoShotsMadeSearch) + mysqli_fetch_assoc($this->highGoalAutoMissesSearch);
 
 		if($this->MHGAS['HGAutoMax'] > 1){
-			$this->autoHighGoals = "{$this->autoHighGoalsMade}/{$this->totalAutoHighGoalShots}(Can Make {$this->MHGAS} Shots in Auto)";
+			return "{$this->autoHighGoalsMade}/{$this->totalAutoHighGoalShots}(Can Make {$this->MHGAS} Shots in Auto)";
 		} else {
-			$this->autoHighGoals = "{$this->autoHighGoalsMade}/{$this->totalAutoHighGoalShots}";
+			return "{$this->autoHighGoalsMade}/{$this->totalAutoHighGoalShots}";
 		}
-		if($this->MLGAS['LGAutoMax'] > 1){
-			$this->autoLowGoals = "{$this->autoLowGoalsMade}/{$this->totalAutoLowGoalShots}(Can Make {$this->MHGAS} Shots in Auto)";
-		} else {
-			$this->autoLowGoals = "{$this->autoLowGoalsMade}/{$this->totalAutoLowGoalShots}";
-		}
-
-		public $highestAutoMovement = 'N/A';
+	} //[RETURNS] STRING
+	
+	public function highest_auto_movement(){
 		if(mysqli_num_rows($this->autoBreachedSearch) >= 1){
-			$this->highestAutoMovement = 'Breach';
+			return 'Breach';
 		} elseif(mysqli_num_rows($this->autoReachedSearch) >= 1) {
-			$this->highestAutoMovement = 'Reach';
+			return 'Reach';
 		} else {
-			$this->highestAutoMovement = 'No Interaction';
+			return 'No Interaction';
 		}
-
-		public $autoBreachLowBar = 'N/A';
+	} //[RETURNS] STRING
+	
+	public function auto_times_breached(){ // [NOTE] Displays Times crossed low bar : times crossed everything else
+		$autoOther = mysqli_num_rows($this->autoBreachedOtherSearch);
+		$autoLowBar = mysqli_num_rows($this->autoBreachedLowBarSearch);
 		if(mysqli_num_rows($this->autoBreachedSearch) >= 1){
 			if(mysqli_num_rows($this->autoBreachedLowBarSearch) >= 1 || mysqli_num_rows($this->autoBreachedOtherSearch) >= 1){
-				$this->autoBreachLowBar = "{$this->autoLowBar} : {$this->autoOther}";
+				return "{$this->autoLowBar} : {$this->autoOther}";
 			}
+		} else {
+			return "0";
 		}
+	} //[RETURNS] STRING
 
-
-		//Scaling / Challengeing Calculations //
-		public $scaleAccuracy = "N/A";
-		public $challengeAccuracy = "N/A";
+	public function times_scaled(){
+		$numScale = mysqli_num_rows($this->towerScaleSearch);
 		if($this->numScale > 0){
-			$this->scaleAccuracy = "{$this->numScale}/{$this->numberOfMatches}"; // Output for Challenge data
+			return "{$this->numScale}/{$this->numberOfMatches}";
+		} else {
+			return "N/A";
 		}
+	} //[RETURNS] STRING
+	
+	public function times_challenged(){
+		$numChallenge = mysqli_num_rows($this->towerChallengeSearch);
 		if($this->numChallenge > 0){
-			$this->challengeAccuracy = "{$this->numChallenge}/{$this->numberOfMatches}"; // Output for Challenge data
+			return "{$this->numChallenge}/{$this->numberOfMatches}";
+		} else {
+			return "N/A";
 		}
+	} //[RETURNS] STRING
 		
-		// Low goal Accuracy Calculations //	
 
-		private $lgha = mysql_fetch_assoc($this->lowGoalHitsSearch);
-		public $lowGoalHits = $this->lgha['LowGoalHits']; // Num low goal shots made
-		private $lgma = mysql_fetch_assoc($lowGoalMissesSearch); 
-		private $lowGoalMisses = $this->lgma['LowGoalMisses'];
-		public $totalLowGoalShots = ($this->lowGoalHits+$this->lowGoalMisses);
-		private $lowGoalAccuracy = (($this->lowGoalHits/$this->totalLowGoalShots)*100); 
-		$this->lowGoalAccuracy = round($this->lowGoalAccuracy, 1, PHP_ROUND_HALF_UP); //double value of hit precentage
-		public $lowGoalAccuracyFraction = {$this->lowGoalHits}/{$this->numberOfMatches};
+		// [NOTE] May have to fix having 2 lgha, lowgoalhits, hgha, highgoalhits in following functions
+
+
+	public function low_goal_accuracy(){
+		$lgha = mysqli_fetch_assoc($this->lowGoalHitsSearch);
+		$lowGoalHits = $this->lgha['LowGoalHits'];
+		$lgma = mysqli_fetch_assoc($lowGoalMissesSearch); 
+		$lowGoalMisses = $this->lgma['LowGoalMisses'];
+		$totalLowGoalShots = ($this->lowGoalHits+$this->lowGoalMisses);
+		$lowGoalAccuracy = (($this->lowGoalHits/$this->totalLowGoalShots)*100);
+		$this->lowGoalAccuracy = round($this->lowGoalAccuracy, 1, PHP_ROUND_HALF_UP); 
+		return "{$this->lowGoalHits}/{$this->totalLowGoalShots} ({$this->lowGoalAccuracy}%)";
+	} // [RETURNS] STRING
+
+	public function avg_low_goal_shots_per_match(){
+		$lgha = mysqli_fetch_assoc($this->lowGoalHitsSearch);
+		$lowGoalHits = $this->lgha['LowGoalHits'];
+		$lowGoalAccuracyFraction = ($this->lowGoalHits/$this->numberOfMatches); 
 		$this->lowGoalAccuracyFraction = round($this->lowGoalAccuracyFraction, 1, PHP_ROUND_HALF_UP);
-		public $lowGoalAccuracyPercent = "{$this->lowGoalHits}/{$this->totalLowGoalShots} ({$this->lowGoalAccuracy}%)";
+		return $this->lowGoalAccuracyFraction;
+	} // [RETURNS] FLOAT (1'st decimal place)
+		
 
-		// High Goal Accuracy Calculations //
-		private $hgha = mysql_fetch_assoc($this->highGoalHitsSearch); 
-		public $highGoalHits = $this->hgha['HighGoalHits']; // Num high goal shots made
-		private $hgma = mysql_fetch_assoc($this->highGoalMissesSearch); 
-		private $highGoalMisses = $this->hgma['HighGoalMisses'];
-		public $totalHighGoalShots = ($this->highGoalHits+$this->highGoalMisses);
-		private $highGoalAccuracy = (($this->highGoalHits/$this->totalHighGoalShots)*100); 
-		$this->highGoalAccuracy = round($this->highGoalAccuracy, 1, PHP_ROUND_HALF_UP); //double value of hit precentage
-		public $highGoalAccuracyFraction = {$this->highGoalHits}/{$this->numberOfMatches}; 
+		
+	public function high_goal_accuracy(){
+		$hgha = mysqli_fetch_assoc($this->highGoalHitsSearch); 
+		$highGoalHits = $this->hgha['HighGoalHits'];
+		$hgma = mysqli_fetch_assoc($this->highGoalMissesSearch); 
+		$highGoalMisses = $this->hgma['HighGoalMisses'];
+		$totalHighGoalShots = ($this->highGoalHits+$this->highGoalMisses);
+		$highGoalAccuracy = (($this->highGoalHits/$this->totalHighGoalShots)*100); 
+		$this->highGoalAccuracy = round($this->highGoalAccuracy, 1, PHP_ROUND_HALF_UP);
+		return "{$this->highGoalHits}/{$this->totalHighGoalShots} ({$this->highGoalAccuracy}%)";
+	} // [RETURNS] STRING
+
+	public function avg_high_goal_shots_per_match(){
+		$hgha = mysqli_fetch_assoc($this->highGoalHitsSearch); 
+		$highGoalHits = $this->hgha['HighGoalHits'];
+		$highGoalAccuracyFraction = ($this->highGoalHits/$this->numberOfMatches); 
 		$this->highGoalAccuracyFraction = round($this->highGoalAccuracyFraction, 1, PHP_ROUND_HALF_UP);
-		public $highGoalAccuracyPercent = "{$this->highGoalHits}/{$this->totalHighGoalShots} ({$this->highGoalAccuracy}%)";
+		return $this->highGoalAccuracyFraction;
+	} // [RETURNS] FLOAT (1'st decimal place)
 
-		//Defence Varriable's //
+	public function portcullis_corsses(){
+		return "{$this->portcullisVar['PortcullisCrosses']}/{$this->numberOfMatches}";
+	} // [RETURNS] STRING
+	public function cheval_de_frise_corsses(){
+		return "{$this->chevalDeFriseVar['ChevalCrosses']}/{$this->numberOfMatches}";
+	} // [RETURNS] STRING
+	public function moat_corsses(){
+		return "{$this->moatVar['MoatCrosses']}/{$this->numberOfMatches}";
+	} // [RETURNS] STRING
+	public function ramparts_corsses(){
+		return "{$this->rampartsVar['RampartCrosses']}/{$this->numberOfMatches}";
+	} // [RETURNS] STRING
+	public function drawbridge_corsses(){
+		return "{$this->drawbridgeVar['DrawbridgeCrosses']}/{$this->numberOfMatches}";
+	} // [RETURNS] STRING
+	public function sally_port_corsses(){
+		return "{$this->sallyPortVar['SallyPortCrosses']}/{$this->numberOfMatches}";
+	} // [RETURNS] STRING
+	public function rockwall_corsses(){
+		return "{$this->rockWallVar['RockWallCrosses']}/{$this->numberOfMatches}";
+	} // [RETURNS] STRING
+	public function rough_terrain_corsses(){
+		return "{$this->roughTerrainVar['RoughTerrainCrosses']}/{$this->numberOfMatches}";
+	} // [RETURNS] STRING
+	public function low_bar_corsses(){
+		return "{$this->lowBarVar['LowBarCrosses']}/{$this->numberOfMatches}";
+	} // [RETURNS] STRING
+		
 
-		private $portcullisVar = mysql_fetch_assoc($this->portcullisSearch);
-		private $chevalDeFriseVar = mysql_fetch_assoc($this->chevalDeFriseSearch);
-		private $moatVar = mysql_fetch_assoc($this->moatSearch);
-		private $rampartsVar = mysql_fetch_assoc($this->rampartsSearch);
-		private $drawbridgeVar = mysql_fetch_assoc($this->drawbridgeSearch);
-		private $sallyPortVar = mysql_fetch_assoc($this->sallyPortSearch);
-		private $rockWallVar = mysql_fetch_assoc($this->rockWallSearch);
-		private $roughTerrainVar = mysql_fetch_assoc($this->roughTerrainSearch);
-		private $lowBarVar = mysql_fetch_assoc($this->lowBarSearch);
+	
 
-		public $portcullis = "{$this->portcullisVar['PortcullisCrosses']}/{$this->numberOfMatches}";
-		public $chevalDeFrise = "{$this->chevalDeFriseVar['ChevalCrosses']}/{$this->numberOfMatches}";
-		public $moat = "{$this->moatVar['MoatCrosses']}/{$this->numberOfMatches}";
-		public $ramparts = "{$this->rampartsVar['RampartCrosses']}/{$this->numberOfMatches}";
-		public $drawbridge = "{$this->drawbridgeVar['DrawbridgeCrosses']}/{$this->numberOfMatches}";
-		public $sallyPort= "{$this->sallyPortVar['SallyPortCrosses']}/{$this->numberOfMatches}";
-		public $rockWall = "{$this->rockWallVar['RockWallCrosses']}/{$this->numberOfMatches}";
-		public $roughTerrain = "{$this->roughTerrainVar['RoughTerrainCrosses']}/{$this->numberOfMatches}";
-		public $lowBar = "{$this->lowBarVar['LowBarCrosses']}/{$this->numberOfMatches}";
-
-	} else{
-		echo "Couldn't issue database query";
-		echo mysqli_error($dbc);
-	}
+		
+		
+		
+		
+		
+		
+		
+		
+		
 };
 // Close connection to the database
 mysqli_close($dbc);

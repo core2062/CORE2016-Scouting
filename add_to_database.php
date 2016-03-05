@@ -2,8 +2,6 @@
 
 //if(isset($_POST['Submit'])){
 
-    echo 'Detect Submit';
-
     $alliance = trim($_POST['AllianceColor']);
     $matchNum = trim($_POST['MatchNumber']);
     $team = trim($_POST['TeamNumber']);
@@ -71,11 +69,7 @@
 
     $connect = require_once('sqli_connect.php');
 
-    if($connect == false){
-        echo 'Could not connect to mysqli';
-    } else {
-        echo 'Connected to mysqli';
-    
+    if($connect == true){
         $sql = "INSERT INTO `match` 
             (`match_id`, `alliance`, `matchNum`, `team`, 
             `scout`, `autoDefence`, `breachDefence`, `highGoalAutoShotsMade`, 
@@ -97,6 +91,8 @@
 
         mysql_query($sql)
           or die(mysql_error());
+    } else {
+        echo 'ERROR: COULD NOT CONNECT TO SQL!';
     }
 
 
@@ -106,5 +102,25 @@ mysqli_close($dbc);
 
 //ini_set('display_errors', 1);
 //error_reporting(E_ALL | E_STRICT);
+echo "<br>
+The Form You Submited contained: <br>
+Match Number: {$matchNum} <br>
+Team: {$team} <br>
+Alliance: {$alliance} <br>
+Scout: {$scout} <br>
+Auto Defence Interaction Type: {$autoDefence} <br>
+Team Breached In Auto Via: {$breachDefence} <br>
+High Goal Auto Shots: {$highGoalAutoShotsMade} / {$highGoalAutoMisses} <br>
+Low Goal Auto Shots: {$lowGoalAutoShotsMade} / {$lowGoalAutoMisses} <br>
+Tele High Goal Shots: {$highGoalShots} / {$missedHighGoalShots} <br>
+Tele Low Goal Shots: {$lowGoalShots} / {$missedLowGoalShots} <br>
+Category A Defence & Crosses: {$categoryA} = {$categoryAScore} <br>
+Category B Defence & Crosses: {$categoryB} = {$categoryBScore} <br>
+Category C Defence & Crosses: {$categoryC} = {$categoryCScore} <br>
+Category D Defence & Crosses: {$categoryD} = {$categoryDScore} <br>
+Low Bar Crosses: {$lowBarScore} <br>
+ChallengeTower?: {$challengeTower} <br>
+Scale Tower?: {$scaleTower} <br>
+";
 ?>
 <p><a href="MainForm.html">Click here to submit another Responce!</a></p>
