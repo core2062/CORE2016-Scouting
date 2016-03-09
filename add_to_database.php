@@ -77,17 +77,18 @@
             `categoryA`, `categoryAScore`, `categoryB`, `categoryBScore`, `categoryC`, 
             `categoryCScore`, `categoryD`, `categoryDScore`, `lowBarScore`, `lowGoalShots`, 
             `missedLowGoalShots`, `highGoalShots`, `missedHighGoalShots`, `challengeTower`, 
-            `scaleTower`) 
+            `scaleTower`, `fouls`, `techFouls`, `redCard`, `yellowCard`, `comments`) 
         VALUES 
             (NULL, '$alliance', $matchNum, $team, '$scout', '$autoDefence', 
             '$breachDefence', $highGoalAutoShotsMade,$highGoalAutoMisses, 
             $lowGoalAutoShotsMade, $lowGoalAutoMisses, '$categoryA', $categoryAScore, 
             '$categoryB', $categoryBScore, '$categoryC', $categoryCScore, '$categoryD', 
             $categoryDScore, $lowBarScore, $lowGoalShots, $missedLowGoalShots, $highGoalShots, 
-            $missedHighGoalShots, '$challengeTower', '$scaleTower');";
+            $missedHighGoalShots, '$challengeTower', '$scaleTower', $fouls, $techFouls, 
+            '$redCard', '$yellowCard', '$comments');";
 
-// , `fouls`, `techFouls`, `redCard`, `yellowCard`, `comments` TO BE ADDED
-//, $fouls, $techFouls, '$redCard', '$yellowCard', '$comments' TO BE ADDED
+//  TO BE ADDED
+// TO BE ADDED
 
         mysql_query($sql)
           or die(mysql_error());
@@ -98,7 +99,7 @@
 
 //}
 
-mysqli_close($dbc);
+//mysql_close($dbc);
 
 //ini_set('display_errors', 1);
 //error_reporting(E_ALL | E_STRICT);

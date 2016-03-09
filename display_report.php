@@ -2,15 +2,15 @@
 include 'get_from_database.php';
 
 // wait till it's posted
-if(isset($_POST['search'])){
+//if(isset($_POST['submit'])){
 
 // Which team is being searched for
-    $redTeam1 = trim($_POST['redTeam1']);
-    $redTeam2 = trim($_POST['redTeam2']);
-    $redTeam3 = trim($_POST['redTeam3']);
-    $blueTeam4 = trim($_POST['blueTeam1']);
-    $blueTeam5 = trim($_POST['blueTeam2']);
-    $blueTeam6 = trim($_POST['blueTeam3']);
+    $redTeam1 = trim($_POST['RedTeam1']);
+    $redTeam2 = trim($_POST['RedTeam2']);
+    $redTeam3 = trim($_POST['RedTeam3']);
+    $blueTeam1 = trim($_POST['BlueTeam1']);
+    $blueTeam2 = trim($_POST['BlueTeam2']);
+    $blueTeam3 = trim($_POST['BlueTeam3']);
 
 // Create team objects //
 // access by $obj->var & $obj->method()
@@ -20,13 +20,16 @@ if(isset($_POST['search'])){
 	$blueTeam1Object = new teamReport($blueTeam1);
 	$blueTeam2Object = new teamReport($blueTeam2);
 	$blueTeam3Object = new teamReport($blueTeam3);
-	$redTeam1Object->search_test();
-	$redTeam2Object->search_test();
-	$redTeam3Object->search_test();
-	$blueTeam1Object->search_test();
-	$blueTeam2Object->search_test();
-	$blueTeam3Object->search_test();
-	?>
+	//$redTeam1Object->search_test();
+	//$redTeam2Object->search_test();
+	//$redTeam3Object->search_test();
+	//$blueTeam1Object->search_test();
+	//$blueTeam2Object->search_test();
+	//$blueTeam3Object->search_test();
+//	} else {
+//		echo "DATA NOT SUBMITED!<br>";
+	//}
+?>
 	<table>
 		<tr>
 			<td align="left"><b>Allicance</b></td>
@@ -57,12 +60,12 @@ if(isset($_POST['search'])){
 		</tr>
 		<tr>
 			<td align="left"><b>Cheval de Frise</b></td>
-			<td align="left"><b><?php echo $redTeam1Object->chevalDeFrise_crosses() ?></b></td>
-			<td align="left"><b><?php echo $redTeam2Object->chevalDeFrise_crosses() ?></b></td>
-			<td align="left"><b><?php echo $redTeam3Object->chevalDeFrise_crosses() ?></b></td>
-			<td align="left"><b><?php echo $blueTeam1Object->chevalDeFrise_crosses() ?></b></td>
-			<td align="left"><b><?php echo $blueTeam2Object->chevalDeFrise_crosses() ?></b></td>
-			<td align="left"><b><?php echo $blueTeam3Object->chevalDeFrise_crosses() ?></b></td>
+			<td align="left"><b><?php echo $redTeam1Object->cheval_de_frise_crosses() ?></b></td>
+			<td align="left"><b><?php echo $redTeam2Object->cheval_de_frise_crosses() ?></b></td>
+			<td align="left"><b><?php echo $redTeam3Object->cheval_de_frise_crosses() ?></b></td>
+			<td align="left"><b><?php echo $blueTeam1Object->cheval_de_frise_crosses() ?></b></td>
+			<td align="left"><b><?php echo $blueTeam2Object->cheval_de_frise_crosses() ?></b></td>
+			<td align="left"><b><?php echo $blueTeam3Object->cheval_de_frise_crosses() ?></b></td>
 		</tr>
 		<tr>
 			<td align="left"><b>Moat Crosses</b></td>
@@ -93,39 +96,39 @@ if(isset($_POST['search'])){
 		</tr>
 		<tr>
 			<td align="left"><b>Sally Port Crosses</b></td>
-			<td align="left"><b><?php echo $redTeam1Object->sallyPort_crosses() ?></b></td>
-			<td align="left"><b><?php echo $redTeam2Object->sallyPort_crosses() ?></b></td>
-			<td align="left"><b><?php echo $redTeam3Object->sallyPort_crosses() ?></b></td>
-			<td align="left"><b><?php echo $blueTeam1Object->sallyPort_crosses() ?></b></td>
-			<td align="left"><b><?php echo $blueTeam2Object->sallyPort_crosses() ?></b></td>
-			<td align="left"><b><?php echo $blueTeam3Object->sallyPort_crosses() ?></b></td>
+			<td align="left"><b><?php echo $redTeam1Object->sally_port_crosses() ?></b></td>
+			<td align="left"><b><?php echo $redTeam2Object->sally_port_crosses() ?></b></td>
+			<td align="left"><b><?php echo $redTeam3Object->sally_port_crosses() ?></b></td>
+			<td align="left"><b><?php echo $blueTeam1Object->sally_port_crosses() ?></b></td>
+			<td align="left"><b><?php echo $blueTeam2Object->sally_port_crosses() ?></b></td>
+			<td align="left"><b><?php echo $blueTeam3Object->sally_port_crosses() ?></b></td>
 		</tr>
 		<tr>
 			<td align="left"><b>Rock Wall Crosses</b></td>
-			<td align="left"><b><?php echo $redTeam1Object->rockWall_crosses() ?></b></td>
-			<td align="left"><b><?php echo $redTeam2Object->rockWall_crosses() ?></b></td>
-			<td align="left"><b><?php echo $redTeam3Object->rockWall_crosses() ?></b></td>
-			<td align="left"><b><?php echo $blueTeam1Object->rockWall_crosses() ?></b></td>
-			<td align="left"><b><?php echo $blueTeam2Object->rockWall_crosses() ?></b></td>
-			<td align="left"><b><?php echo $blueTeam3Object->rockWall_crosses() ?></b></td>
+			<td align="left"><b><?php echo $redTeam1Object->rockwall_crosses() ?></b></td>
+			<td align="left"><b><?php echo $redTeam2Object->rockwall_crosses() ?></b></td>
+			<td align="left"><b><?php echo $redTeam3Object->rockwall_crosses() ?></b></td>
+			<td align="left"><b><?php echo $blueTeam1Object->rockwall_crosses() ?></b></td>
+			<td align="left"><b><?php echo $blueTeam2Object->rockwall_crosses() ?></b></td>
+			<td align="left"><b><?php echo $blueTeam3Object->rockwall_crosses() ?></b></td>
 		</tr>
 		<tr>
 			<td align="left"><b>Rough Terrain Crosses</b></td>
-			<td align="left"><b><?php echo $redTeam1Object->roughTerrain_crosses() ?></b></td>
-			<td align="left"><b><?php echo $redTeam2Object->roughTerrain_crosses() ?></b></td>
-			<td align="left"><b><?php echo $redTeam3Object->roughTerrain_crosses() ?></b></td>
-			<td align="left"><b><?php echo $blueTeam1Object->roughTerrain_crosses() ?></b></td>
-			<td align="left"><b><?php echo $blueTeam2Object->roughTerrain_crosses() ?></b></td>
-			<td align="left"><b><?php echo $blueTeam3Object->roughTerrain_crosses() ?></b></td>
+			<td align="left"><b><?php echo $redTeam1Object->rough_terrain_crosses() ?></b></td>
+			<td align="left"><b><?php echo $redTeam2Object->rough_terrain_crosses() ?></b></td>
+			<td align="left"><b><?php echo $redTeam3Object->rough_terrain_crosses() ?></b></td>
+			<td align="left"><b><?php echo $blueTeam1Object->rough_terrain_crosses() ?></b></td>
+			<td align="left"><b><?php echo $blueTeam2Object->rough_terrain_crosses() ?></b></td>
+			<td align="left"><b><?php echo $blueTeam3Object->rough_terrain_crosses() ?></b></td>
 		</tr>
 		<tr>
 			<td align="left"><b>Low Bar Crosses</b></td>
-			<td align="left"><b><?php echo $redTeam1Object->lowBar_crosses() ?></b></td>
-			<td align="left"><b><?php echo $redTeam2Object->lowBar_crosses() ?></b></td>
-			<td align="left"><b><?php echo $redTeam3Object->lowBar_crosses() ?></b></td>
-			<td align="left"><b><?php echo $blueTeam1Object->lowBar_crosses() ?></b></td>
-			<td align="left"><b><?php echo $blueTeam2Object->lowBar_crosses() ?></b></td>
-			<td align="left"><b><?php echo $blueTeam3Object->lowBar_crosses() ?></b></td>
+			<td align="left"><b><?php echo $redTeam1Object->low_bar_crosses() ?></b></td>
+			<td align="left"><b><?php echo $redTeam2Object->low_bar_crosses() ?></b></td>
+			<td align="left"><b><?php echo $redTeam3Object->low_bar_crosses() ?></b></td>
+			<td align="left"><b><?php echo $blueTeam1Object->low_bar_crosses() ?></b></td>
+			<td align="left"><b><?php echo $blueTeam2Object->low_bar_crosses() ?></b></td>
+			<td align="left"><b><?php echo $blueTeam3Object->low_bar_crosses() ?></b></td>
 		</tr>
 		<tr>
 			<td align="left"><b>Average High Goal Shots Made</b></td>
@@ -181,7 +184,7 @@ if(isset($_POST['search'])){
 			<td align="left"><b><?php echo $blueTeam2Object->times_scaled() ?></b></td>
 			<td align="left"><b><?php echo $blueTeam3Object->times_scaled() ?></b></td>
 		</tr>
-		<tr>
+		 <tr>
 			<td align="left"><b>Highest Auto Movement</b></td>
 			<td align="left"><b><?php echo $redTeam1Object->highest_auto_movement() ?></b></td>
 			<td align="left"><b><?php echo $redTeam2Object->highest_auto_movement() ?></b></td>
