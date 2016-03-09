@@ -75,7 +75,7 @@ html {
   }
     </script>
   	</head>
-	<body onLoad="initDynamicOptionLists()">
+	<body>
 
 	<form name="main" action="add_to_database.php" method="post">
 		
@@ -86,7 +86,7 @@ html {
       <li class="tab-title"><a href="#panel2">Defenses</a></li>
       <li class="tab-title"><a href="#panel3">Autonomous Period</a></li>
       <li class="tab-title"><a href="#panel4">Teleoperated Period</a></li>
-      <li class="tab-title"><a href="#panel5">Additional Abilities</a></li>
+      <li class="tab-title"><a href="#panel5">Other</a></li>
     </ul>
 
 	        	<dl class="accordion" data-accordion>
@@ -100,25 +100,84 @@ html {
 		        					<div class="row">
 										<div class="small-12 columns">
 										<label>Match Number
-											<input name="MatchNumber" type="text" placeholder="ex-1"/>
+											<input name="MatchNumber" type="number" placeholder="ex-1" required/>
 										</label>
 					         		</div>
+                      </div>
 		        					<div class="row">
 										<div class="small-12 columns">
 										<label>Team Number
-											<input name="TeamNumber" type="text" placeholder="ex-2062"/>
+											<input name="TeamNumber" type="number" class="awesomplete" placeholder="ex-2062" data-list=" 192,
+269,
+537,
+706,
+930,
+1091,
+1259,
+1306,
+1396,
+1675,
+1714,
+1716,
+1732,
+1792,
+2062,
+2077,
+2194,
+2202,
+2358,
+2498,
+2500,
+2506,
+2530,
+2574,
+2826,
+2830,
+3102,
+3197,
+3381,
+3418,
+3596,
+3692,
+3734,
+4241,
+4247,
+4531,
+4549,
+4786,
+4804,
+5003,
+5096,
+5148,
+5552,
+5586,
+5595,
+5773,
+5855,
+5903,
+5976,
+6038,
+6058,
+6064,
+6223,
+                      " required/>
 										</label>
-					         		</div>					      
+					         		</div>
+                      </div>				      
 		        					<div class="row">
-										<div class="small-12 columns">
-										<label>Alliance Color
-											<input name="AllianceColor" type="text" placeholder="ex-Red/Blue"/>
-										</label>
+                      <div class="row">
+                      <fieldset class="large-6 columns">
+                        <legend>Alliance Color</legend>
+                        <input type="radio" name="AllianceColor" value="Blue" required><label>Blue</label>
+                        <input type="radio" name="AllianceColor" value="Red" required><label>Red</label>
+                      </fieldset>
+                    </div>
+                    </div>
 		        					<div class="row">
 										<div class="small-12 columns">
 										<label>Scout Name
-											<input name="ScoutName" type="text" class="awesomplete" placeholder="John Doe" data-list="
-Noah Backhaus,
+											<input name="ScoutName" type="text" class="awesomplete" placeholder="John Doe" data-list=" 
+                      Noah Backhaus,
 Xander Blaetter,
 Katie Carroll,
 Jessica Copeland,
@@ -262,8 +321,9 @@ David Zastrow,
 		        					<div class="row">
   										<fieldset class="large-6 columns">
     										<legend>Interaction w/ Defenses?</legend>
-    										<input type="radio" name="DefenseInteractionAuto" value="Other" ><label>Other</label>
-    										<input type="radio" name="DefenseInteractionAuto" value="Low Bar"><label>Low Bar</label>
+    										<input type="radio" name="DefenseInteractionAuto" value="Other" required><label>Other</label>
+    										<input type="radio" name="DefenseInteractionAuto" value="Low Bar" required><label>Low Bar</label>
+                        <input type="radio" name="DefenseInteractionAuto" value="N/A" required><label>N/A</label>
   										</fieldset>
   									</div> 
 
@@ -275,7 +335,7 @@ David Zastrow,
                           <input required type='button' class="button postfix" name='subtract' onclick='document.getElementById("LowGoalAuto").stepDown(1);' value='-'/>
                         </div>  
                         <div class="small-4 columns">
-                            <input required type="number" name="LowGoalAuto" id="LowGoalAuto" min="0" step="1" value ="0" required>
+                            <input required type="number" name="LowGoalAuto" id="LowGoalAuto" min="0" step="1" value ="0" required readonly>
                         </div>
                         <div class="small-4 columns">
                           <input required type='button' class="button postfix" name='add' onclick='document.getElementById("LowGoalAuto").stepUp(1);' value='+'/>
@@ -293,7 +353,7 @@ David Zastrow,
                           <input required type='button' class="button postfix" name='subtract' onclick='document.getElementById("LowGoalAutoMisses").stepDown(1);' value='-'/>
                         </div>  
                         <div class="small-4 columns">
-                            <input required type="number" name="LowGoalAutoMisses" id="LowGoalAutoMisses" min="0" step="1" value ="0" required>
+                            <input required type="number" name="LowGoalAutoMisses" id="LowGoalAutoMisses" min="0" step="1" value ="0" readonly>
                         </div>
                         <div class="small-4 columns">
                           <input required type='button' class="button postfix" name='add' onclick='document.getElementById("LowGoalAutoMisses").stepUp(1);' value='+'/>
@@ -310,7 +370,7 @@ David Zastrow,
                           <input required type='button' class="button postfix" name='subtract' onclick='document.getElementById("HighGoalAuto").stepDown(1);' value='-'/>
                         </div>  
                         <div class="small-4 columns">
-                            <input required type="number" name="HighGoalAuto" id="HighGoalAuto" min="0" step="1" value ="0" required>
+                            <input required type="number" name="HighGoalAuto" id="HighGoalAuto" min="0" step="1" value ="0" readonly>
                         </div>
                         <div class="small-4 columns">
                           <input required type='button' class="button postfix" name='add' onclick='document.getElementById("HighGoalAuto").stepUp(1);' value='+'/>
@@ -327,7 +387,7 @@ David Zastrow,
                           <input required type='button' class="button postfix" name='subtract' onclick='document.getElementById("HighGoalAutoMisses").stepDown(1);' value='-'/>
                         </div>  
                         <div class="small-4 columns">
-                            <input required type="number" name="HighGoalAutoMisses" id="HighGoalAutoMisses" min="0" step="1" value ="0" required>
+                            <input required type="number" name="HighGoalAutoMisses" id="HighGoalAutoMisses" min="0" step="1" value ="0" readonly>
                         </div>
                         <div class="small-4 columns">
                           <input required type='button' class="button postfix" name='add' onclick='document.getElementById("HighGoalAutoMisses").stepUp(1);' value='+'/>
@@ -351,7 +411,7 @@ David Zastrow,
                           <input required type='button' class="button postfix" name='subtract' onclick='document.getElementById("LowGoalTeleop").stepDown(1);' value='-'/>
                         </div>  
                         <div class="small-4 columns">
-                            <input required type="number" name="LowGoalTeleop" id="LowGoalTeleop" min="0" step="1" value ="0" required>
+                            <input required type="number" name="LowGoalTeleop" id="LowGoalTeleop" min="0" step="1" value ="0" readonly>
                         </div>
                         <div class="small-4 columns">
                           <input required type='button' class="button postfix" name='add' onclick='document.getElementById("LowGoalTeleop").stepUp(1);' value='+'/>
@@ -368,7 +428,7 @@ David Zastrow,
                           <input required type='button' class="button postfix" name='subtract' onclick='document.getElementById("LowGoalTeleopMisses").stepDown(1);' value='-'/>
                         </div>  
                         <div class="small-4 columns">
-                            <input required type="number" name="LowGoalTeleopMisses" id="LowGoalTeleopMisses" min="0" step="1" value ="0" required>
+                            <input required type="number" name="LowGoalTeleopMisses" id="LowGoalTeleopMisses" min="0" step="1" value ="0" readonly>
                         </div>
                         <div class="small-4 columns">
                           <input required type='button' class="button postfix" name='add' onclick='document.getElementById("LowGoalTeleopMisses").stepUp(1);' value='+'/>
@@ -385,7 +445,7 @@ David Zastrow,
                           <input required type='button' class="button postfix" name='subtract' onclick='document.getElementById("HighGoalTeleop").stepDown(1);' value='-'/>
                         </div>  
                         <div class="small-4 columns">
-                            <input type="number" name="HighGoalTeleop" id="HighGoalTeleop" min="0" step="1" value ="0" required>
+                            <input type="number" name="HighGoalTeleop" id="HighGoalTeleop" min="0" step="1" value ="0" readonly>
                         </div>
                         <div class="small-4 columns">
                           <input required type='button' class="button postfix" name='add' onclick='document.getElementById("HighGoalTeleop").stepUp(1);' value='+'/>
@@ -402,7 +462,7 @@ David Zastrow,
                           <input required type='button' class="button postfix" name='subtract' onclick='document.getElementById("HighGoalTeleopMisses").stepDown(1);' value='-'/>
                         </div>  
                         <div class="small-4 columns">
-                            <input required type="number" name="HighGoalTeleopMisses" id="HighGoalTeleopMisses" min="0" step="1" value ="0" required>
+                            <input required type="number" name="HighGoalTeleopMisses" id="HighGoalTeleopMisses" min="0" step="1" value ="0" readonly>
                         </div>
                         <div class="small-4 columns">
                           <input required type='button' class="button postfix" name='add' onclick='document.getElementById("HighGoalTeleopMisses").stepUp(1);' value='+'/>
@@ -421,7 +481,7 @@ David Zastrow,
                           <input required type='button' class="button postfix" name='subtract' onclick='document.getElementById("CategoryACrosses").stepDown(1);' value='-'/>
                         </div>  
                         <div class="small-2 columns">
-                            <input required type="number" name="CategoryACrosses" id="CategoryACrosses" min="0" step="1" value ="0" required>
+                            <input required type="number" name="CategoryACrosses" id="CategoryACrosses" min="0" step="1" value ="0" readonly>
                         </div>
                         <div class="small-4 columns">
                           <input required type='button' class="button postfix" name='add' onclick='document.getElementById("CategoryACrosses").stepUp(1);' value='+'/>
@@ -440,7 +500,7 @@ David Zastrow,
                           <input required type='button' class="button postfix" name='subtract' onclick='document.getElementById("CategoryBCrosses").stepDown(1);' value='-'/>
                         </div>  
                         <div class="small-2 columns">
-                            <input required type="number" name="CategoryBCrosses" id="CategoryBCrosses" min="0" step="1" value ="0" required>
+                            <input required type="number" name="CategoryBCrosses" id="CategoryBCrosses" min="0" step="1" value ="0" readonly>
                         </div>
                         <div class="small-4 columns">
                           <input required type='button' class="button postfix" name='add' onclick='document.getElementById("CategoryBCrosses").stepUp(1);' value='+'/>
@@ -459,7 +519,7 @@ David Zastrow,
                           <input required type='button' class="button postfix" name='subtract' onclick='document.getElementById("CategoryCCrosses").stepDown(1);' value='-'/>
                         </div>  
                         <div class="small-2 columns">
-                            <input required type="number" name="CategoryCCrosses" id="CategoryCCrosses" min="0" step="1" value ="0" required>
+                            <input required type="number" name="CategoryCCrosses" id="CategoryCCrosses" min="0" step="1" value ="0" readonly>
                         </div>
                         <div class="small-4 columns">
                           <input required type='button' class="button postfix" name='add' onclick='document.getElementById("CategoryCCrosses").stepUp(1);' value='+'/>
@@ -478,7 +538,7 @@ David Zastrow,
                           <input required type='button' class="button postfix" name='subtract' onclick='document.getElementById("CategoryDCrosses").stepDown(1);' value='-'/>
                         </div>  
                         <div class="small-2 columns">
-                            <input required type="number" name="CategoryDCrosses" id="CategoryDCrosses" min="0" step="1" value ="0" required>
+                            <input required type="number" name="CategoryDCrosses" id="CategoryDCrosses" min="0" step="1" value ="0" readonly>
                         </div>
                         <div class="small-4 columns">
                           <input required type='button' class="button postfix" name='add' onclick='document.getElementById("CategoryDCrosses").stepUp(1);' value='+'/>
@@ -495,7 +555,7 @@ David Zastrow,
                           <input required type='button' class="button postfix" name='subtract' onclick='document.getElementById("LowBarCrosses").stepDown(1);' value='-'/>
                         </div>  
                         <div class="small-4 columns">
-                            <input required type="number" name="LowBarCrosses" id="LowBarCrosses" min="0" step="1" value ="0" required>
+                            <input required type="number" name="LowBarCrosses" id="LowBarCrosses" min="0" step="1" value ="0" readonly>
                         </div>
                         <div class="small-4 columns">
                           <input required type='button' class="button postfix" name='add' onclick='document.getElementById("LowBarCrosses").stepUp(1);' value='+'/>
@@ -527,6 +587,55 @@ David Zastrow,
 	        			<div id="panel5" class="content">
 	        				<div class="content-box section-box">
 		        				<h4>Other</h4>
+
+                  <div class="row">
+                    <div class="small-12 columns">
+                      <div class="row collapse">
+                          <label><strong>Fouls</strong></label>
+                        <div class="small-4 columns">
+                          <input required type='button' class="button postfix" name='subtract' onclick='document.getElementById("fouls").stepDown(1);' value='-'/>
+                        </div>  
+                        <div class="small-4 columns">
+                            <input required type="number" name="fouls" id="fouls" min="0" step="1" value ="0" readonly>
+                        </div>
+                        <div class="small-4 columns">
+                          <input required type='button' class="button postfix" name='add' onclick='document.getElementById("fouls").stepUp(1);' value='+'/>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="row">
+                    <div class="small-12 columns">
+                      <div class="row collapse">
+                          <label><strong>Tech Fouls</strong></label>
+                        <div class="small-4 columns">
+                          <input required type='button' class="button postfix" name='subtract' onclick='document.getElementById("techFouls").stepDown(1);' value='-'/>
+                        </div>  
+                        <div class="small-4 columns">
+                            <input required type="number" name="techFouls" id="techFouls" min="0" step="1" value ="0" readonly>
+                        </div>
+                        <div class="small-4 columns">
+                          <input required type='button' class="button postfix" name='add' onclick='document.getElementById("techFouls").stepUp(1);' value='+'/>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                      <div class="row">
+                      <fieldset class="large-6 columns">
+                        <legend>Yellow Card?</legend>
+                        <input type="checkbox" name="yellowcard" value="Yes"><label>Yes</label>
+                      </fieldset>
+                    </div> 
+
+                      <div class="row">
+                      <fieldset class="large-6 columns">
+                        <legend>Red Card?</legend>
+                        <input type="checkbox" name="redcard" value="Yes" ><label>Yes</label>
+                      </fieldset>
+                    </div>
+
                     </div>
 	        			</div>
 	        		</dd>
@@ -534,6 +643,13 @@ David Zastrow,
 
   </div>
 </div>
+  
+<div class="row">
+    <div class="large-12 columns">
+      <label>Comments
+        <textarea name="comments" placeholder="Comments explanation here"></textarea>
+      </label>
+    </div>
 
 	<input class="button round SubmitButton" type="submit" value="Submit"></input>
 	</form>
