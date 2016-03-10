@@ -271,31 +271,67 @@ class teamReport {
 	} // [RETURNS] FLOAT (1'st decimal place)
 
 	public function portcullis_crosses(){
-		return "{$this->portcullisVar['PortcullisCrosses']}/{$this->numberOfMatches}";
+		if($this->portcullisVar['PortcullisCrosses'] >= 1){
+			return "{$this->portcullisVar['PortcullisCrosses']}/{$this->numberOfMatches}";
+		} else {
+			return "0/{$this->numberOfMatches}";
+		}
 	} // [RETURNS] STRING
 	public function cheval_de_frise_crosses(){
-		return "{$this->chevalDeFriseVar['ChevalCrosses']}/{$this->numberOfMatches}";
+		if($this->chevalDeFriseVar['ChevalCrosses'] >= 1){
+			return "{$this->chevalDeFriseVar['ChevalCrosses']}/{$this->numberOfMatches}";
+		} else {
+			return "0/{$this->numberOfMatches}";
+		}
 	} // [RETURNS] STRING
 	public function moat_crosses(){
-		return "{$this->moatVar['MoatCrosses']}/{$this->numberOfMatches}";
+		if($this->moatVar['MoatCrosses'] >= 1){
+			return "{$this->moatVar['MoatCrosses']}/{$this->numberOfMatches}";
+		} else {
+			return "0/{$this->numberOfMatches}";
+		}
 	} // [RETURNS] STRING
 	public function ramparts_crosses(){
-		return "{$this->rampartsVar['RampartCrosses']}/{$this->numberOfMatches}";
+		if($this->rampartsVar['RampartCrosses'] >= 1){
+			return "{$this->rampartsVar['RampartCrosses']}/{$this->numberOfMatches}";
+		} else {
+			return "0/{$this->numberOfMatches}";
+		}
 	} // [RETURNS] STRING
 	public function drawbridge_crosses(){
-		return "{$this->drawbridgeVar['DrawbridgeCrosses']}/{$this->numberOfMatches}";
+		if($this->drawbridgeVar['DrawbridgeCrosses'] >= 1){
+			return "{$this->drawbridgeVar['DrawbridgeCrosses']}/{$this->numberOfMatches}";
+		} else {
+			return "0/{$this->numberOfMatches}";
+		}
 	} // [RETURNS] STRING
 	public function sally_port_crosses(){
-		return "{$this->sallyPortVar['SallyPortCrosses']}/{$this->numberOfMatches}";
+		if($this->sallyPortVar['SallyPortCrosses'] >= 1){
+			return "{$this->sallyPortVar['SallyPortCrosses']}/{$this->numberOfMatches}";
+		} else {
+			return "0/{$this->numberOfMatches}";
+		}
 	} // [RETURNS] STRING
 	public function rockwall_crosses(){
-		return "{$this->rockWallVar['RockWallCrosses']}/{$this->numberOfMatches}";
+		if($this->rockWallVar['RockWallCrosses'] >= 1){
+			return "{$this->rockWallVar['RockWallCrosses']}/{$this->numberOfMatches}";
+		} else {
+			return "0/{$this->numberOfMatches}";
+		}
 	} // [RETURNS] STRING
 	public function rough_terrain_crosses(){
-		return "{$this->roughTerrainVar['RoughTerrainCrosses']}/{$this->numberOfMatches}";
+		if($this->roughTerrainVar['RoughTerrainCrosses'] >= 1){
+			return "{$this->roughTerrainVar['RoughTerrainCrosses']}/{$this->numberOfMatches}";
+		} else {
+			return "0/{$this->numberOfMatches}";
+		}
 	} // [RETURNS] STRING
 	public function low_bar_crosses(){
-		return "{$this->lowBarVar['LowBarCrosses']}/{$this->numberOfMatches}";
+		if($this->lowBarVar['LowBarCrosses'] >= 1){
+			return "{$this->lowBarVar['LowBarCrosses']}/{$this->numberOfMatches}";
+		} else {
+			return "0/{$this->numberOfMatches}";
+		}
 	} // [RETURNS] STRING
 		
 		
