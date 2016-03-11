@@ -17,13 +17,13 @@
     <script type="text/javascript" src="dynamicoptionlist.js"></script> 
 		<style type="text/css">
 label.RadiopPic > input{ /* HIDE RADIO */
-  display: none;
+  display: none !important;
 }
-label.RadioPic > input + img{ /* IMAGE STYLES */
+label.RadiopPic > input + img{ /* IMAGE STYLES */
   cursor: pointer;
   border: 2px solid transparent;
 }
-label.radiopic > input:checked + img{ /* (CHECKED) IMAGE STYLES */
+label.RadiopPic > input:checked + img{ /* (CHECKED) IMAGE STYLES */
   border:2px solid #FF731C;
 }
 input{
@@ -31,6 +31,20 @@ input{
 }
 html {
     -webkit-text-size-adjust: none
+}
+input[type=radio] { 
+transform: scale(2); 
+-moz-transform: scale(2); 
+-ms-transform: scale(2); 
+-webkit-transform: scale(2); 
+-o-transform: scale(2); 
+}
+input[type=checkbox] { 
+transform: scale(2); 
+-moz-transform: scale(2); 
+-ms-transform: scale(2); 
+-webkit-transform: scale(2); 
+-o-transform: scale(2); 
 }
 		</style>
     <script type="text/javascript">
@@ -244,13 +258,13 @@ David Zastrow,
 		        				
 		        					<div class="row">
 										<div class="small-6 columns">
-											<label class="radiopic">Portcullis
+											<label class="RadiopPic">Portcullis
 												<input type="radio" name="CategoryA" value="Portcullis" onchange="DefenseALogic()" required>
 												<img src="images/Portcullis.PNG">
 											</label>
 										</div>
 										<div class="small-6 columns">
-											<label class="radiopic">Cheval de Frise
+											<label class="RadiopPic">Cheval de Frise
 												<input type="radio" name="CategoryA" value="ChevaldeFrise" onchange="DefenseALogic()" required>
 												<img src="images/Cheval%20de%20Frise.PNG">
 											</label>
@@ -259,13 +273,13 @@ David Zastrow,
 
 		        					<div class="row">
 										<div class="small-6 columns">
-											<label class="radiopic">Ramparts
+											<label class="RadiopPic">Ramparts
 												<input type="radio" name="CategoryB" value="Ramparts" onchange="DefenseBLogic()" required>
 												<img src="images/Ramparts.PNG">
 											</label>
 										</div>
 										<div class="small-6 columns">
-											<label class="radiopic">Moat
+											<label class="RadiopPic">Moat
 												<input type="radio" name="CategoryB" value="Moat" onchange="DefenseBLogic()" required>
 												<img src="images/Moat.PNG">
 											</label>
@@ -274,13 +288,13 @@ David Zastrow,
 
 		        					<div class="row">
 										<div class="small-6 columns">
-											<label class="radiopic">Drawbridge
+											<label class="RadiopPic">Drawbridge
 												<input type="radio" name="CategoryC" value="Drawbridge" onchange="DefenseCLogic()" required>
 												<img src="images/Drawbridge.PNG">
 											</label>
 										</div>
 										<div class="small-6 columns">
-											<label class="radiopic">Sally Port
+											<label class="RadiopPic">Sally Port
 												<input type="radio" name="CategoryC" value="Sally Port" onchange="DefenseCLogic()" required>
 												<img src="images/Sally%20port.PNG">
 											</label>
@@ -289,13 +303,13 @@ David Zastrow,
 
 		        					<div class="row">
 										<div class="small-6 columns">
-											<label class="radiopic">Rock Wall
+											<label class="RadiopPic">Rock Wall
 												<input type="radio" name="CategoryD" value="Rock Wall" onchange="DefenseDLogic()" required>
 												<img src="images/Rock%20wall.PNG">
 											</label>
 										</div>
 										<div class="small-6 columns">
-											<label class="radiopic">Rough Terrain
+											<label class="RadiopPic">Rough Terrain
 												<input type="radio" name="CategoryD" value="Rough Terrain" onchange="DefenseDLogic()" required>
 												<img src="images/Rough%20terrain.PNG">
 											</label>
