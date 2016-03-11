@@ -5,7 +5,7 @@ class teamReport {
 	
 	public $team;
 
-
+/*
 	public $numberOfMatches;
 	public $portcullisVar;
 	public $chevalDeFriseVar;
@@ -16,6 +16,27 @@ class teamReport {
 	public $rockWallVar;
 	public $roughTerrainVar;
 	public $lowBarVar;
+	*/
+
+	public $portcullisSearch;
+	public $chevalDeFriseSearch;
+	public $moatSearch;
+	public $rampartsSearch;
+	public $drawbridgeSearch;
+	public $sallyPortSearch;
+	public $rockWallSearch;
+	public $roughTerrainSearch;
+	public $lowBarSearch;
+
+	public $numportcullis;
+	public $numchevalDeFrise;
+	public $nummoat;
+	public $numramparts;
+	public $numdrawbridge;
+	public $numsallyPort;
+	public $numrockWall;
+	public $numroughTerrain;
+	public $numlowBar;
 
 	public $autoBreachedSearch;
 	public $autoReachedSearch;
@@ -40,19 +61,19 @@ class teamReport {
     function __construct($team) {
     	$this->team = $team;
 
-		require('special_sqli_connect.php');
+		require('SQLi_connect.php');
 
     	// Creates querys for the database
 	
-		$portcullisQuery = "SELECT SUM(categoryAScore) AS PortcullisCrosses FROM `match` WHERE `team` = {$this->team} AND `categoryA` ='Portcullis'";
-		$chevalDeFriseQuery = "SELECT SUM(categoryAScore) AS ChevalCrosses FROM `match` WHERE `team` = {$this->team} AND `categoryA` ='Cheval de Frise'";
-		$moatQuery = "SELECT SUM(categoryBScore) AS MoatCrosses FROM `match` WHERE `team` = {$this->team} AND `categoryB` ='Moat'";
-		$rampartsQuery = "SELECT SUM(categoryBScore) AS RampartCrosses FROM `match` WHERE `team` = {$this->team} AND `categoryB` ='Ramparts'";
-		$drawbridgeQuery = "SELECT SUM(categoryCScore) AS DrawbridgeCrosses FROM `match` WHERE `team` = {$this->team} AND `categoryC` ='Drawbridge'";
-		$sallyPortQuery = "SELECT SUM(categoryCScore) AS SallyPortCrosses FROM `match` WHERE `team` = {$this->team} AND `categoryC` ='Sally Port'";
-		$rockWallQuery = "SELECT SUM(categoryDScore) AS RockWallCrosses FROM `match` WHERE `team` = {$this->team} AND `categoryD` ='Rock Wall'";
-		$roughTerrainQuery = "SELECT SUM(categoryDScore) AS RoughTerrainCrosses FROM `match` WHERE `team` = {$this->team} AND `categoryD` ='Rough Terrain'";
-		$lowBarQuery = "SELECT SUM(lowBarScore) AS LowBarCrosses FROM `match` WHERE `team` = {$this->team}";
+		$portcullisQuery = "SELECT categoryAScore AS PortcullisCrosses FROM `match` WHERE `team` = {$this->team} AND `categoryA` ='Portcullis'";
+		$chevalDeFriseQuery = "SELECT categoryAScore AS ChevalCrosses FROM `match` WHERE `team` = {$this->team} AND `categoryA` ='Cheval de Frise'";
+		$moatQuery = "SELECT categoryBScore AS MoatCrosses FROM `match` WHERE `team` = {$this->team} AND `categoryB` ='Moat'";
+		$rampartsQuery = "SELECT categoryBScore AS RampartCrosses FROM `match` WHERE `team` = {$this->team} AND `categoryB` ='Ramparts'";
+		$drawbridgeQuery = "SELECT categoryCScore AS DrawbridgeCrosses FROM `match` WHERE `team` = {$this->team} AND `categoryC` ='Drawbridge'";
+		$sallyPortQuery = "SELECT categoryCScore AS SallyPortCrosses FROM `match` WHERE `team` = {$this->team} AND `categoryC` ='Sally Port'";
+		$rockWallQuery = "SELECT categoryDScore AS RockWallCrosses FROM `match` WHERE `team` = {$this->team} AND `categoryD` ='Rock Wall'";
+		$roughTerrainQuery = "SELECT categoryDScore AS RoughTerrainCrosses FROM `match` WHERE `team` = {$this->team} AND `categoryD` ='Rough Terrain'";
+		$lowBarQuery = "SELECT lowBarScore AS LowBarCrosses FROM `match` WHERE `team` = {$this->team}";
 		
 		$lowGoalHitsQuery = "SELECT SUM(lowGoalShots) AS LowGoalHits FROM `match` WHERE `team` = {$this->team}";
 		$lowGoalMissesQuery = "SELECT SUM(missedLowGoalShots) AS LowGoalMisses FROM `match` WHERE `team` = {$this->team}";
@@ -79,15 +100,15 @@ class teamReport {
 		// Searching Database for what we need //
 
 
-		$portcullisSearch = $dbc->query($portcullisQuery);
-		$chevalDeFriseSearch = $dbc->query($chevalDeFriseQuery);
-		$moatSearch = $dbc->query($moatQuery);
-		$rampartsSearch = $dbc->query($rampartsQuery);
-		$drawbridgeSearch = $dbc->query($drawbridgeQuery);
-		$sallyPortSearch = $dbc->query($sallyPortQuery);
-		$rockWallSearch = $dbc->query($rockWallQuery);
-		$roughTerrainSearch = $dbc->query($roughTerrainQuery);
-		$lowBarSearch = $dbc->query($lowBarQuery);
+		$this->portcullisSearch = $dbc->query($portcullisQuery);
+		$this->chevalDeFriseSearch = $dbc->query($chevalDeFriseQuery);
+		$this->moatSearch = $dbc->query($moatQuery);
+		$this->rampartsSearch = $dbc->query($rampartsQuery);
+		$this->drawbridgeSearch = $dbc->query($drawbridgeQuery);
+		$this->sallyPortSearch = $dbc->query($sallyPortQuery);
+		$this->rockWallSearch = $dbc->query($rockWallQuery);
+		$this->roughTerrainSearch = $dbc->query($roughTerrainQuery);
+		$this->lowBarSearch = $dbc->query($lowBarQuery);
 
 		$lowGoalHitsSearch = $dbc->query($lowGoalHitsQuery);
 		$lowGoalMissesSearch = $dbc->query($lowGoalMissesQuery);
@@ -115,7 +136,7 @@ class teamReport {
 			// Varriables //
 
 		$this->numberOfMatches = mysqli_num_rows($numMatchesSearch);
-
+/*
 		$this->portcullisVar = mysqli_fetch_assoc($portcullisSearch);
 		$this->chevalDeFriseVar = mysqli_fetch_assoc($chevalDeFriseSearch);
 		$this->moatVar = mysqli_fetch_assoc($moatSearch);
@@ -125,6 +146,16 @@ class teamReport {
 		$this->rockWallVar = mysqli_fetch_assoc($rockWallSearch);
 		$this->roughTerrainVar = mysqli_fetch_assoc($roughTerrainSearch);
 		$this->lowBarVar = mysqli_fetch_assoc($lowBarSearch);
+*/
+		$this->numportcullis = mysqli_num_rows($this->portcullisSearch);
+		$this->numchevalDeFrise = mysqli_num_rows($this->chevalDeFriseSearch);
+		$this->nummoat = mysqli_num_rows($this->moatSearch);
+		$this->numramparts = mysqli_num_rows($this->rampartsSearch);
+		$this->numdrawbridge = mysqli_num_rows($this->drawbridgeSearch);
+		$this->numsallyPort = mysqli_num_rows($this->sallyPortSearch);
+		$this->numrockWall = mysqli_num_rows($this->rockWallSearch);
+		$this->numroughTerrain = mysqli_num_rows($this->roughTerrainSearch);
+		$this->numlowBar = mysqli_num_rows($this->lowBarSearch);
 
 
 		$this->MLGAS = mysqli_fetch_assoc($maxLowGoalAutoShotSearch);
@@ -148,7 +179,7 @@ class teamReport {
 
 
 		// Functions which return data //
-/*
+
 	public function search_test(){ // [NOTE] Very Important This is checked before using anything else!!!
 		if($this->portcullisSearch && $this->chevalDeFriseSearch && $this->moatSearch && $this->rampartsSearch && 
 		$this->drawbridgeSearch && $this->sallyPortSearch && $this->rockWallSearch && $this->roughTerrainSearch &&
@@ -163,7 +194,31 @@ class teamReport {
 			echo mysqli_error($dbc);
 		}
 	} //[RETURNS] Bool
-*/
+
+	private function query_sum($search){
+		$total = 0;
+		$numRows = 0;
+		while($row = mysqli_fetch_assoc($search)){
+			$numRows += 1;
+			foreach ($row as $key => $value){
+				$total += $value;
+			}
+		}
+		if($numRows != 0){
+			return $total;
+		} else {
+			return 0;
+		}
+	} //[RETURNS] Query data sum
+
+	private function defence_crosses($defsearch, $defnum){
+		if($defnum >= 1){
+			return "{$this->query_sum($defsearch)}/{$defnum}";
+		} else {
+			return "0/{$defnum}";
+		}
+	} // [RETURNS] Defence report
+
 	public function auto_low_goals(){
 		
 		$totalAutoLowGoalShots = $this->autoLowGoalsMade['LGAutoMade'] + $this->lowGoalAutoMisses['LGAutoMisses'];
@@ -270,68 +325,33 @@ class teamReport {
 		return $highGoalAccuracyFraction;
 	} // [RETURNS] FLOAT (1'st decimal place)
 
+
 	public function portcullis_crosses(){
-		if($this->portcullisVar['PortcullisCrosses'] >= 1){
-			return "{$this->portcullisVar['PortcullisCrosses']}/{$this->numberOfMatches}";
-		} else {
-			return "0/{$this->numberOfMatches}";
-		}
+		return $this->defence_crosses($this->portcullisSearch, $this->numportcullis);
 	} // [RETURNS] STRING
 	public function cheval_de_frise_crosses(){
-		if($this->chevalDeFriseVar['ChevalCrosses'] >= 1){
-			return "{$this->chevalDeFriseVar['ChevalCrosses']}/{$this->numberOfMatches}";
-		} else {
-			return "0/{$this->numberOfMatches}";
-		}
+		return $this->defence_crosses($this->chevalDeFriseSearch, $this->numchevalDeFrise);
 	} // [RETURNS] STRING
 	public function moat_crosses(){
-		if($this->moatVar['MoatCrosses'] >= 1){
-			return "{$this->moatVar['MoatCrosses']}/{$this->numberOfMatches}";
-		} else {
-			return "0/{$this->numberOfMatches}";
-		}
+		return $this->defence_crosses($this->moatSearch, $this->nummoat);
 	} // [RETURNS] STRING
 	public function ramparts_crosses(){
-		if($this->rampartsVar['RampartCrosses'] >= 1){
-			return "{$this->rampartsVar['RampartCrosses']}/{$this->numberOfMatches}";
-		} else {
-			return "0/{$this->numberOfMatches}";
-		}
+		return $this->defence_crosses($this->rampartsSearch, $this->numramparts);
 	} // [RETURNS] STRING
 	public function drawbridge_crosses(){
-		if($this->drawbridgeVar['DrawbridgeCrosses'] >= 1){
-			return "{$this->drawbridgeVar['DrawbridgeCrosses']}/{$this->numberOfMatches}";
-		} else {
-			return "0/{$this->numberOfMatches}";
-		}
+		return $this->defence_crosses($this->drawbridgeSearch, $this->numdrawbridge);
 	} // [RETURNS] STRING
 	public function sally_port_crosses(){
-		if($this->sallyPortVar['SallyPortCrosses'] >= 1){
-			return "{$this->sallyPortVar['SallyPortCrosses']}/{$this->numberOfMatches}";
-		} else {
-			return "0/{$this->numberOfMatches}";
-		}
+		return $this->defence_crosses($this->sallyPortSearch, $this->numsallyPort);
 	} // [RETURNS] STRING
 	public function rockwall_crosses(){
-		if($this->rockWallVar['RockWallCrosses'] >= 1){
-			return "{$this->rockWallVar['RockWallCrosses']}/{$this->numberOfMatches}";
-		} else {
-			return "0/{$this->numberOfMatches}";
-		}
+		return $this->defence_crosses($this->rockWallSearch, $this->numrockWall);
 	} // [RETURNS] STRING
 	public function rough_terrain_crosses(){
-		if($this->roughTerrainVar['RoughTerrainCrosses'] >= 1){
-			return "{$this->roughTerrainVar['RoughTerrainCrosses']}/{$this->numberOfMatches}";
-		} else {
-			return "0/{$this->numberOfMatches}";
-		}
+		return $this->defence_crosses($this->roughTerrainSearch, $this->numroughTerrain);
 	} // [RETURNS] STRING
 	public function low_bar_crosses(){
-		if($this->lowBarVar['LowBarCrosses'] >= 1){
-			return "{$this->lowBarVar['LowBarCrosses']}/{$this->numberOfMatches}";
-		} else {
-			return "0/{$this->numberOfMatches}";
-		}
+		return $this->defence_crosses($this->lowBarSearch, $this->numlowBar);
 	} // [RETURNS] STRING
 		
 		
