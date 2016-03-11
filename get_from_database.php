@@ -5,6 +5,8 @@ class teamReport {
 	
 	public $team;
 
+	private $searchError = false;
+
 /*
 	public $numberOfMatches;
 	public $portcullisVar;
@@ -18,45 +20,45 @@ class teamReport {
 	public $lowBarVar;
 	*/
 
-	public $portcullisSearch;
-	public $chevalDeFriseSearch;
-	public $moatSearch;
-	public $rampartsSearch;
-	public $drawbridgeSearch;
-	public $sallyPortSearch;
-	public $rockWallSearch;
-	public $roughTerrainSearch;
-	public $lowBarSearch;
+	private $portcullisSearch;
+	private $chevalDeFriseSearch;
+	private $moatSearch;
+	private $rampartsSearch;
+	private $drawbridgeSearch;
+	private $sallyPortSearch;
+	private $rockWallSearch;
+	private $roughTerrainSearch;
+	private $lowBarSearch;
 
-	public $numportcullis;
-	public $numchevalDeFrise;
-	public $nummoat;
-	public $numramparts;
-	public $numdrawbridge;
-	public $numsallyPort;
-	public $numrockWall;
-	public $numroughTerrain;
-	public $numlowBar;
+	private $numportcullis;
+	private $numchevalDeFrise;
+	private $nummoat;
+	private $numramparts;
+	private $numdrawbridge;
+	private $numsallyPort;
+	private $numrockWall;
+	private $numroughTerrain;
+	private $numlowBar;
 
-	public $autoBreachedSearch;
-	public $autoReachedSearch;
-	public $towerScaleSearch;
-	public $towerChallengeSearch;
+	private $autoBreachedSearch;
+	private $autoReachedSearch;
+	private $towerScaleSearch;
+	private $towerChallengeSearch;
 
 
-	public $MLGAS;
-	public $autoLowGoalsMade;
-	public $lowGoalAutoMisses;
-	public $MHGAS;
-	public $autoHighGoalsMade;
-	public $highGoalAutoMisses;
-	public $autoOther;
-	public $autoLowBar;
+	private $MLGAS;
+	private $autoLowGoalsMade;
+	private $lowGoalAutoMisses;
+	private $MHGAS;
+	private $autoHighGoalsMade;
+	private $highGoalAutoMisses;
+	private $autoOther;
+	private $autoLowBar;
 
-	public $lgma;
-	public $lgha;
-	public $hgma;
-	public $hgha; 
+	private $lgma;
+	private $lgha;
+	private $hgma;
+	private $hgha; 
 
     function __construct($team) {
     	$this->team = $team;
@@ -132,6 +134,20 @@ class teamReport {
 		$lowGoalAutoMissesSearch = $dbc->query($lowGoalAutoMissesQuery);
 		$maxHighGoalAutoShotSearch = $dbc->query($maxHighGoalAutoShotQuery);
 		$maxLowGoalAutoShotSearch = $dbc->query($maxLowGoalAutoShotQuery);
+
+		    // Search Test
+		if(!($portcullisSearch && $chevalDeFriseSearch && $moatSearch && $rampartsSearch && 
+		$drawbridgeSearch && $sallyPortSearch && $rockWallSearch && $roughTerrainSearch &&
+		$lowBarSearch && $lowGoalHitsSearch && $lowGoalMissesSearch && $highGoalHitsSearch &&
+		$highGoalMissesSearch && $towerScaleSearch && $noTowerScaleSearch && $numMatchesSearch &&
+		$commentsSearch && $autoNoInteractionSearch && $autoBreachedSearch && $autoReachedSearch &&
+		$autoBreachedLowBarSearch && $autoBreachedOtherSearch && $highGoalAutoShotsMadeSearch &&
+		$highGoalAutoMissesSearch && $lowGoalAutoShotsMadeSearch && $lowGoalAutoMissesSearch &&
+		$maxLowGoalAutoShotSearch && $maxHighGoalAutoShotSearch)){
+			$this->searchError = true;
+			echo "Couldn't issue database query/'s";
+			echo mysqli_error($dbc);
+		}
 	
 			// Varriables //
 
@@ -175,25 +191,12 @@ class teamReport {
 
 	}
 
-
+	public function check_error(){
+		return $searchError;
+	}
 
 
 		// Functions which return data //
-
-	public function search_test(){ // [NOTE] Very Important This is checked before using anything else!!!
-		if($this->portcullisSearch && $this->chevalDeFriseSearch && $this->moatSearch && $this->rampartsSearch && 
-		$this->drawbridgeSearch && $this->sallyPortSearch && $this->rockWallSearch && $this->roughTerrainSearch &&
-		$this->lowBarSearch && $this->lowGoalHitsSearch && $this->lowGoalMissesSearch && $this->highGoalHitsSearch &&
-		$this->highGoalMissesSearch && $this->towerScaleSearch && $this->noTowerScaleSearch && $this->numMatchesSearch &&
-		$this->commentsSearch && $this->autoNoInteractionSearch && $this->autoBreachedSearch && $this->autoReachedSearch &&
-		$this->autoBreachedLowBarSearch && $this->autoBreachedOtherSearch && $this->highGoalAutoShotsMadeSearch &&
-		$this->highGoalAutoMissesSearch && $this->lowGoalAutoShotsMadeSearch && $this->lowGoalAutoMissesSearch &&
-		$this->maxLowGoalAutoShotSearch && $this->maxHighGoalAutoShotSearch){
-		} else{
-			echo "Couldn't issue database query";
-			echo mysqli_error($dbc);
-		}
-	} //[RETURNS] Bool
 
 	private function query_sum($search){
 		$total = 0;
