@@ -123,4 +123,4 @@ ChallengeTower?: {$challengeTower} <br>
 Scale Tower?: {$scaleTower} <br>
 ";
 ?>
-<p><a href="https://scouting.core2062.com">Click here to submit another Response!</a></p>
+<p><a href="MainForm.html">Click here to submit another Responce!</a></p>
