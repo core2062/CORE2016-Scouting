@@ -49,7 +49,7 @@ transform: scale(2);
 		</style>
     <script type="text/javascript">
   function DefenseALogic(){
-    switch(main.CategoryA.value){
+    switch(main.elements.CategoryA.value){
        case "Portcullis":
          document.getElementById("DefenseAPicture").innerHTML = "<img src='images/Portcullis.PNG' width='200px'>";
          break;
@@ -59,7 +59,7 @@ transform: scale(2);
     }
   }
   function DefenseBLogic(){
-    switch(main.CategoryB.value){
+    switch(main.elements.CategoryB.value){
        case "Ramparts":
          document.getElementById("DefenseBPicture").innerHTML = "<img src='images/Ramparts.PNG' width='200px'>";
          break;
@@ -69,7 +69,7 @@ transform: scale(2);
     }
   }
   function DefenseCLogic(){
-    switch(main.CategoryC.value){
+    switch(main.elements.CategoryC.value){
        case "Drawbridge":
          document.getElementById("DefenseCPicture").innerHTML = "<img src='images/Drawbridge.PNG' width='200px'>";
          break;
@@ -79,7 +79,7 @@ transform: scale(2);
     }
   }
   function DefenseDLogic(){
-    switch(main.CategoryD.value){
+    switch(main.elements.CategoryD.value){
        case "Rock Wall":
          document.getElementById("DefenseDPicture").innerHTML = "<img src='images/Rock%20wall.PNG' width='200px'>";
          break;
