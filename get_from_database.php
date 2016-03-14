@@ -136,11 +136,11 @@ class teamReport {
 		$maxLowGoalAutoShotSearch = $dbc->query($maxLowGoalAutoShotQuery);
 
 		    // Search Test
-		if(!($portcullisSearch && $chevalDeFriseSearch && $moatSearch && $rampartsSearch && 
-		$drawbridgeSearch && $sallyPortSearch && $rockWallSearch && $roughTerrainSearch &&
-		$lowBarSearch && $lowGoalHitsSearch && $lowGoalMissesSearch && $highGoalHitsSearch &&
-		$highGoalMissesSearch && $towerScaleSearch && $noTowerScaleSearch && $numMatchesSearch &&
-		$commentsSearch && $autoNoInteractionSearch && $autoBreachedSearch && $autoReachedSearch &&
+		if(!($this->portcullisSearch && $this->chevalDeFriseSearch && $this->moatSearch && $this->rampartsSearch && 
+		$this->drawbridgeSearch && $this->sallyPortSearch && $this->rockWallSearch && $this->roughTerrainSearch &&
+		$this->lowBarSearch && $lowGoalHitsSearch && $lowGoalMissesSearch && $highGoalHitsSearch &&
+		$highGoalMissesSearch && $this->towerScaleSearch && $this->towerChallengeSearch && $numMatchesSearch &&
+		$this->autoBreachedSearch && $this->autoReachedSearch &&
 		$autoBreachedLowBarSearch && $autoBreachedOtherSearch && $highGoalAutoShotsMadeSearch &&
 		$highGoalAutoMissesSearch && $lowGoalAutoShotsMadeSearch && $lowGoalAutoMissesSearch &&
 		$maxLowGoalAutoShotSearch && $maxHighGoalAutoShotSearch)){
@@ -192,7 +192,7 @@ class teamReport {
 	}
 
 	public function check_error(){
-		return $searchError;
+		return $this->searchError;
 	}
 
 

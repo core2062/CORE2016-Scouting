@@ -20,15 +20,10 @@ include 'get_from_database.php';
 	$blueTeam1Object = new teamReport($blueTeam1);
 	$blueTeam2Object = new teamReport($blueTeam2);
 	$blueTeam3Object = new teamReport($blueTeam3);
-	//$redTeam1Object->search_test();
-	//$redTeam2Object->search_test();
-	//$redTeam3Object->search_test();
-	//$blueTeam1Object->search_test();
-	//$blueTeam2Object->search_test();
-	//$blueTeam3Object->search_test();
-//	} else {
-//		echo "DATA NOT SUBMITED!<br>";
-	//}
+	if($redTeam1Object->check_error() || $redTeam2Object->check_error() || $redTeam3Object->check_error() || 
+	$blueTeam1Object->check_error() || $blueTeam2Object->check_error() || $blueTeam3Object->check_error()){
+		echo "DATA NOT SUBMITED!<br>";
+	}
 ?>
 	<table>
 		<tr>
