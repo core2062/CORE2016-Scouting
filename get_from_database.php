@@ -222,6 +222,19 @@ class teamReport {
 		}
 	} // [RETURNS] Defence report
 
+	private function defence_score($defsearch, $defnum){
+		$avgCrosses = $this->query_sum($defsearch) / $defnum;
+		$score = 0;
+		for ($i = 0; $i <= $avgCrosses; $i++){
+			if($i <=2){
+				$score += 4.5;
+			} else {
+				$score += 2;
+			}
+		}
+		return $score;
+	}
+
 	public function auto_low_goals(){
 		
 		$totalAutoLowGoalShots = $this->autoLowGoalsMade['LGAutoMade'] + $this->lowGoalAutoMisses['LGAutoMisses'];
@@ -303,8 +316,8 @@ class teamReport {
 		$lowGoalHits = $this->lgha['LowGoalHits'];
 		$lowGoalAccuracyFraction = ($lowGoalHits/$this->numberOfMatches); 
 		$lowGoalAccuracyFraction = round($lowGoalAccuracyFraction, 1, PHP_ROUND_HALF_UP);
-		return $lowGoalAccuracyFraction;
-	} // [RETURNS] FLOAT (1'st decimal place)
+		return "{$lowGoalAccuracyFraction}";
+	} // [RETURNS] STRING (1'st decimal place)
 		
 
 		
@@ -325,8 +338,8 @@ class teamReport {
 		$highGoalHits = $this->hgha['HighGoalHits'];
 		$highGoalAccuracyFraction = ($highGoalHits/$this->numberOfMatches); 
 		$highGoalAccuracyFraction = round($highGoalAccuracyFraction, 1, PHP_ROUND_HALF_UP);
-		return $highGoalAccuracyFraction;
-	} // [RETURNS] FLOAT (1'st decimal place)
+		return "{$highGoalAccuracyFraction}";
+	} // [RETURNS] STRING (1'st decimal place)
 
 
 	public function portcullis_crosses(){
@@ -356,9 +369,151 @@ class teamReport {
 	public function low_bar_crosses(){
 		return $this->defence_crosses($this->lowBarSearch, $this->numlowBar);
 	} // [RETURNS] STRING
-		
-		
-		
+
+
+
+
+
+
+
+						///////////////////////////////////
+						////                           //// 
+						////          OPR STATS        ////
+						////                           ////
+						///////////////////////////////////
+
+
+
+	public function portcullis_score(){
+		return $this->defence_score($this->portcullisSearch, $this->numportcullis);
+	} // [RETURNS] FLOAT
+	public function cheval_de_frise_score(){
+		return $this->defence_score($this->chevalDeFriseSearch, $this->numchevalDeFrise);
+	} // [RETURNS] FLOAT
+	public function moat_score(){
+		return $this->defence_score($this->moatSearch, $this->nummoat);
+	} // [RETURNS] FLOAT
+	public function ramparts_score(){
+		return $this->defence_score($this->rampartsSearch, $this->numramparts);
+	} // [RETURNS] FLOAT
+	public function drawbridge_score(){
+		return $this->defence_score($this->drawbridgeSearch, $this->numdrawbridge);
+	} // [RETURNS] FLOAT
+	public function sally_port_score(){
+		return $this->defence_score($this->sallyPortSearch, $this->numsallyPort);
+	} // [RETURNS] FLOAT
+	public function rockwall_score(){
+		return $this->defence_score($this->rockWallSearch, $this->numrockWall);
+	} // [RETURNS] FLOAT
+	public function rough_terrain_score(){
+		return $this->defence_score($this->roughTerrainSearch, $this->numroughTerrain);
+	} // [RETURNS] FLOAT
+	public function low_bar_score(){
+		return $this->defence_score($this->lowBarSearch, $this->numlowBar);
+	} // [RETURNS] FLOAT
+
+
+	public function high_goal_score(){
+		$highGoalHits = $this->hgha['HighGoalHits'];
+		$highGoalMisses = $this->hgma['HighGoalMisses'];
+		$totalHighGoalShots = ($highGoalHits+$highGoalMisses);
+		$multiplier = 1.0;                          // MULTIPLIER IS SUBJECT TO CHANGE / GET RID OF
+		if($totalHighGoalShots > 0){
+			$highGoalAccuracy = (($highGoalHits/$totalHighGoalShots)*100); 
+			$highGoalAccuracy = round($highGoalAccuracy, 1, PHP_ROUND_HALF_UP);
+			if($highGoalAccuracy > .75)
+				$multiplier = 1.15; 
+			if($highGoalAccuracy > .5 && $highGoalAccuracy <= .75)
+				$multiplier = 1.0;
+			if($highGoalAccuracy >.25 && $highGoalAccuracy <= .5)
+				$multiplier = 0.9;
+			if($highGoalAccuracy <= .25)
+				$multiplier = 0.8;
+			$highGoalAccuracyFraction = ($highGoalHits/$this->numberOfMatches); 
+			$highGoalAccuracyFraction = round($highGoalAccuracyFraction, 1, PHP_ROUND_HALF_UP);
+			$totalScore = ($highGoalAccuracyFraction * 5) * $multiplier;
+			return $totalScore;
+		} else {
+			return 0;
+		}
+	} // [RETURNS] FLOAT
+
+	public function low_goal_score(){
+		$lowGoalHits = $this->lgha['LowGoalHits'];
+		$lowGoalMisses = $this->lgma['LowGoalMisses'];
+		$totalLowGoalShots = ($lowGoalHits+$lowGoalMisses);
+		$multiplier = 1.0;                          // MULTIPLIER IS SUBJECT TO CHANGE / GET RID OF
+		if($totalLowGoalShots > 0){
+			$lowGoalAccuracy = (($lowGoalHits/$totalLowGoalShots)*100);
+			$lowGoalAccuracy = round($lowGoalAccuracy, 1, PHP_ROUND_HALF_UP); 
+			if($lowGoalAccuracy > .75)
+				$multiplier = 1.15; 
+			elseif($lowGoalAccuracy > .5 && $highGoalAccuracy <= .75)
+				$multiplier = 1.0;
+			elseif($lowGoalAccuracy >.25 && $highGoalAccuracy <= .5)
+				$multiplier = 0.9;
+			else 
+				$multiplier = 0.8;
+			$lowGoalAccuracyFraction = ($lowGoalHits/$this->numberOfMatches); 
+			$lowGoalAccuracyFraction = round($lowGoalAccuracyFraction, 1, PHP_ROUND_HALF_UP);
+			$totalScore = ($lowGoalAccuracyFraction * 5) * $multiplier;
+			return $totalScore;
+		} else {
+			return 0;
+		}
+	} // [RETURNS] FLOAT
+
+	public function scale_score(){
+		$numScale = mysqli_num_rows($this->towerScaleSearch);
+		if($numScale > 0){
+			$score = $numScale * 15;
+			return $score;
+		} else {
+			return 0;
+		}
+	} //[RETURNS] FLOAT
+
+	public function auto_score(){
+		$cumulativeScore = 0;
+		if(mysqli_num_rows($this->autoBreachedSearch) >= 1){
+			$cumulativeScore =+ 10;
+			$totalAutoLowGoalShots = $this->autoLowGoalsMade['LGAutoMade'] + $this->lowGoalAutoMisses['LGAutoMisses'];
+			$totalAutoHighGoalShots = $this->autoHighGoalsMade['HGAutoMade'] + $this->highGoalAutoMisses['HGAutoMisses'];
+
+			if($totalAutoLowGoalShots > 0){
+				$lowGoalsMade = $this->autoLowGoalsMade['LGAutoMade'];
+				if($this->MLGAS['LGAutoMax'] > 1){
+					$cumulativeScore =+ (($lowGoalsMade * 5) * 1.15);
+				} else {
+					$cumulativeScore =+ ($lowGoalsMade * 5);
+				}
+			}
+			if($totalAutoHighGoalShots > 0){
+				$highGoalsMade = $this->autoHighGoalsMade['HGAutoMade'];
+				if($this->MHGAS['HGAutoMax'] > 1){
+					$cumulativeScore += (($highGoalsMade * 5) * 1.15);
+				} else {
+					$cumulativeScore += ($highGoalsMade * 5);
+				}
+			}  
+		} elseif(mysqli_num_rows($this->autoReachedSearch) >= 1) {
+			$cumulativeScore += (mysqli_num_rows($this->autoReachedSearch) * 2);
+			return $cumulativeScore;
+		} else {
+			return 0;
+		}
+	} //[RETURNS] FLOAT
+
+	public function score_sum(){
+		$score = 0;
+		$score = ($this->portcullis_score() + $this->cheval_de_frise_score() + $this->moat_score() + $this->ramparts_score() + 
+			$this->drawbridge_score() + $this->sally_port_score() + $this->rockwall_score() + $this->rough_terrain_score() + 
+			$this->low_bar_score() + $this->high_goal_score() + $this->low_goal_score() + $this->scale_score() + $this->auto_score());
+		return $score;
+	}// [RETURNS] FLOAT
+
+
+
 };
 // Close connection to the database
 //mysqli_close($dbc);
