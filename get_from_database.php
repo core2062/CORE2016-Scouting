@@ -194,6 +194,9 @@ class teamReport {
 	public function check_error(){
 		return $this->searchError;
 	}
+	public function team_number(){
+		return $this->team;
+	}
 
 
 		// Functions which return data //
@@ -223,6 +226,8 @@ class teamReport {
 	} // [RETURNS] Defence report
 
 	private function defence_score($defsearch, $defnum){
+		if($defnum == 0)
+			return 0;
 		$avgCrosses = $this->query_sum($defsearch) / $defnum;
 		$score = 0;
 		for ($i = 0; $i <= $avgCrosses; $i++){
