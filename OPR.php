@@ -24,17 +24,83 @@ class advancedReport{
 	private $numberOfTeams;
 	private $objArray;
 	private $teamData = array();
+
+	private $portcullisArray = array();
+	private $chevalDefriseArray = array();
+	private $moatArray = array();
+	private $rampartsArray = array();
+	private $drawbridgeArray = array();
+	private $sallyPortArray = array();
+	private $rockwallArray = array();
+	private $roughTerrainArray = array();
+	private $lowBarArray = array();
+	private $highGoalArray = array();
+	private $lowGoalArray = array();
+	private $scaleArray = array();
+	private $autoArray = array();
 		
 
 	 function __construct(&$array){
 	 	$this->objArray = $array;
 	 	$this->numberOfTeams = count($this->objArray);
 
+	 	           // Populates and sorts the arrays //
 	 	foreach($this->objArray as $x => $x_value){
 			$this->teamData[$x_value->team_number()] = $x_value->score_sum();
 		}
 		arsort($this->teamData);
-
+		foreach($this->objArray as $x => $x_value){
+			$this->portcullisArray[$x_value->team_number()] = $x_value->portcullis_score();
+		}
+		arsort($this->portcullisArray);
+		foreach($this->objArray as $x => $x_value){
+			$this->chevalDeFriseArray[$x_value->team_number()] = $x_value->cheval_de_frise_score();
+		}
+		arsort($this->chevalDeFriseArray);
+		foreach($this->objArray as $x => $x_value){
+			$this->moatArray[$x_value->team_number()] = $x_value->moat_score();
+		}
+		arsort($this->moatArray);
+		foreach($this->objArray as $x => $x_value){
+			$this->rampartsArray[$x_value->team_number()] = $x_value->ramparts_score();
+		}
+		arsort($this->rampartsArray);
+		foreach($this->objArray as $x => $x_value){
+			$this->drawbridgeArray[$x_value->team_number()] = $x_value->drawbridge_score();
+		}
+		arsort($this->drawbridgeArray);
+		foreach($this->objArray as $x => $x_value){
+			$this->sallyPortArray[$x_value->team_number()] = $x_value->sally_port_score();
+		}
+		arsort($this->sallyPortArray);
+		foreach($this->objArray as $x => $x_value){
+			$this->rockwallArray[$x_value->team_number()] = $x_value->rockwall_score();
+		}
+		arsort($this->rockwallArray);
+		foreach($this->objArray as $x => $x_value){
+			$this->roughTerrainArray[$x_value->team_number()] = $x_value->rough_terrain_score();
+		}
+		arsort($this->roughTerrainArray);
+		foreach($this->objArray as $x => $x_value){
+			$this->lowBarArray[$x_value->team_number()] = $x_value->low_bar_score();
+		}
+		arsort($this->lowBarArray);
+		foreach($this->objArray as $x => $x_value){
+			$this->highGoalArray[$x_value->team_number()] = $x_value->high_goal_score();
+		}
+		arsort($this->highGoalArray);
+		foreach($this->objArray as $x => $x_value){
+			$this->lowGoalArray[$x_value->team_number()] = $x_value->low_goal_score();
+		}
+		arsort($this->lowGoalArray);
+		foreach($this->objArray as $x => $x_value){
+			$this->scaleArray[$x_value->team_number()] = $x_value->scale_score();
+		}
+		arsort($this->scaleArray);
+		foreach($this->objArray as $x => $x_value){
+			$this->autoArray[$x_value->team_number()] = $x_value->auto_score();
+		}
+		arsort($this->autoArray);
 	}
 
 	private function determine_precentile($data){
@@ -56,7 +122,7 @@ class advancedReport{
 		}
 	}
 	
-	public function sum_precentile($team){
+	private function sum_precentile($team){
 		$count = (int) 1;
 		$flag = false;
 		foreach($this->teamData as $x => $x_value) {
@@ -68,98 +134,233 @@ class advancedReport{
 		return $count;
 
 	}
-	public function display_i_precentile(){
-		return determine_precentile($rank);
+
+	private function portcullis_precentile($team){
+		$count = (int) 1;
+		$flag = false;
+		foreach($this->portcullisArray as $x => $x_value) {
+		    if($x == $team)
+				$flag = true;
+		    if(!$flag)
+		    	$count++;
+		}
+		return $count;
+
+	}
+
+	private function cheval_de_frise_precentile($team){
+		$count = (int) 1;
+		$flag = false;
+		foreach($this->chevalDefriseArray as $x => $x_value) {
+		    if($x == $team)
+				$flag = true;
+		    if(!$flag)
+		    	$count++;
+		}
+		return $count;
+
+	}
+
+	private function moat_precentile($team){
+		$count = (int) 1;
+		$flag = false;
+		foreach($this->moatArray as $x => $x_value) {
+		    if($x == $team)
+				$flag = true;
+		    if(!$flag)
+		    	$count++;
+		}
+		return $count;
+
+	}
+
+	private function ramparts_precentile($team){
+		$count = (int) 1;
+		$flag = false;
+		foreach($this->rampartsArray as $x => $x_value) {
+		    if($x == $team)
+				$flag = true;
+		    if(!$flag)
+		    	$count++;
+		}
+		return $count;
+
+	}
+
+	private function drawbridge_precentile($team){
+		$count = (int) 1;
+		$flag = false;
+		foreach($this->drawbridgeArray as $x => $x_value) {
+		    if($x == $team)
+				$flag = true;
+		    if(!$flag)
+		    	$count++;
+		}
+		return $count;
+
+	}
+
+	private function sally_port_precentile($team){
+		$count = (int) 1;
+		$flag = false;
+		foreach($this->sallyPortArray as $x => $x_value) {
+		    if($x == $team)
+				$flag = true;
+		    if(!$flag)
+		    	$count++;
+		}
+		return $count;
+
+	}
+
+	private function rockwall_precentile($team){
+		$count = (int) 1;
+		$flag = false;
+		foreach($this->rockwallArray as $x => $x_value) {
+		    if($x == $team)
+				$flag = true;
+		    if(!$flag)
+		    	$count++;
+		}
+		return $count;
+
+	}
+
+	private function rough_terrain_precentile($team){
+		$count = (int) 1;
+		$flag = false;
+		foreach($this->roughTerrainArray as $x => $x_value) {
+		    if($x == $team)
+				$flag = true;
+		    if(!$flag)
+		    	$count++;
+		}
+		return $count;
+
+	}
+
+	private function low_bar_precentile($team){
+		$count = (int) 1;
+		$flag = false;
+		foreach($this->lowBarArray as $x => $x_value) {
+		    if($x == $team)
+				$flag = true;
+		    if(!$flag)
+		    	$count++;
+		}
+		return $count;
+
+	}
+
+	private function high_goal_precentile($team){
+		$count = (int) 1;
+		$flag = false;
+		foreach($this->highGoalArray as $x => $x_value) {
+		    if($x == $team)
+				$flag = true;
+		    if(!$flag)
+		    	$count++;
+		}
+		return $count;
+
+	}
+
+	private function low_goal_precentile($team){
+		$count = (int) 1;
+		$flag = false;
+		foreach($this->lowGoalArray as $x => $x_value) {
+		    if($x == $team)
+				$flag = true;
+		    if(!$flag)
+		    	$count++;
+		}
+		return $count;
+
+	}
+
+	private function scale_precentile($team){
+		$count = (int) 1;
+		$flag = false;
+		foreach($this->scaleArray as $x => $x_value) {
+		    if($x == $team)
+				$flag = true;
+		    if(!$flag)
+		    	$count++;
+		}
+		return $count;
+
+	}
+
+	private function auto_precentile($team){
+		$count = (int) 1;
+		$flag = false;
+		foreach($this->autoArray as $x => $x_value) {
+		    if($x == $team)
+				$flag = true;
+		    if(!$flag)
+		    	$count++;
+		}
+		return $count;
+
+	}
+
+	public function display_auto_precentile($team){
+		return $this->determine_precentile($this->auto_precentile($team));
+	}
+
+	public function display_scale_precentile($team){
+		return $this->determine_precentile($this->scale_precentile($team));
+	}
+
+	public function display_low_goal_precentile($team){
+		return $this->determine_precentile($this->low_goal_precentile($team));
+	}
+
+	public function display_high_goal_precentile($team){
+		return $this->determine_precentile($this->high_goal_precentile($team));
+	}
+
+	public function display_low_bar_precentile($team){
+		return $this->determine_precentile($this->low_bar_precentile($team));
+	}
+
+	public function display_rough_terrain_precentile($team){
+		return $this->determine_precentile($this->rough_terrain_precentile($team));
+	}
+
+	public function display_rockwall_precentile($team){
+		return $this->determine_precentile($this->rockwall_precentile($team));
+	}
+
+	public function display_sally_port_precentile($team){
+		return $this->determine_precentile($this->sally_port_precentile($team));
+	}
+
+	public function display_drawbridge_precentile($team){
+		return $this->determine_precentile($this->drawbridge_precentile($team));
+	}
+
+	public function display_ramparts_precentile($team){
+		return $this->determine_precentile($this->ramparts_precentile($team));
+	}
+
+	public function display_moat_precentile($team){
+		return $this->determine_precentile($this->moat_precentile($team));
+	}
+
+	public function display_cheval_de_frise_precentile($team){
+		return $this->determine_precentile($this->cheval_de_frise_precentile($team));
+	}
+
+	public function display_portcullis_precentile($team){
+		return $this->determine_precentile($this->portcullis_precentile($team));
+	}
+
+	public function display_sum_precentile($team){
+		return $this->determine_precentile($this->sum_precentile($team));
 	}
 	
 
-	
-	/*
-	private function add_portcullis_score(){
-		foreach($this->objArray as $x => $x_value){
-			$old = $this->teamData[$x_value->team_number()];
-			$new = $x_value->portcullis_score();
-			$sum = $old + $new;
-			$this->teamData[$x_value->team_number()] = $sum;
-		}
-	}
-	private function add_cheval_de_frise_score(){
-		foreach($this->objArray as $x => $x_value){
-			$old = $this->teamData[$x_value->team_number()];
-			$new = $x_value->cheval_de_frise_score();
-			$sum = $old + $new;
-			$this->teamData[$x_value->team_number()] = $sum;
-		}
-	}
-	private function add_moat_score(){
-		foreach($this->objArray as $x => $x_value){
-			$old = $this->teamData[$x_value->team_number()];
-			$new = $x_value->moat_score();
-			$sum = $old + $new;
-			$this->teamData[$x_value->team_number()] = $sum;
-		}
-	}
-	private function add_ramparts_score(){
-		foreach($this->objArray as $x => $x_value){
-			$old = $this->teamData[$x_value->team_number()];
-			$new = $x_value->ramparts_score();
-			$sum = $old + $new;
-			$this->teamData[$x_value->team_number()] = $sum;
-		}
-	}
-	private function add_drawbridge_score(){
-		foreach($this->objArray as $x => $x_value){
-			$old = $this->teamData[$x_value->team_number()];
-			$new = $x_value->drawbridge_score();
-			$sum = $old + $new;
-			$this->teamData[$x_value->team_number()] = $sum;
-		}
-	}
-	private function add_sally_port_score(){
-		foreach($this->objArray as $x => $x_value){
-			$old = $this->teamData[$x_value->team_number()];
-			$new = $x_value->sally_port_score();
-			$sum = $old + $new;
-			$this->teamData[$x_value->team_number()] = $sum;
-		}
-	}
-	private function add_rockwall_score(){
-		foreach($this->objArray as $x => $x_value){
-			$old = $this->teamData[$x_value->team_number()];
-			$new = $x_value->rockwall_score();
-			$sum = $old + $new;
-			$this->teamData[$x_value->team_number()] = $sum;
-		}
-	}
-	private function add_rough_terrain_score(){
-		foreach($this->objArray as $x => $x_value){
-			$old = $this->teamData[$x_value->team_number()];
-			$new = $x_value->rough_terrain_score();
-			$sum = $old + $new;
-			$this->teamData[$x_value->team_number()] = $sum;
-		}
-	}
-	private function add_low_bar_score(){
-		foreach($this->objArray as $x => $x_value){
-			$old = $this->teamData[$x_value->team_number()];
-			$new = $x_value->low_bar_score();
-			$sum = $old + $new;
-			$this->teamData[$x_value->team_number()] = $sum;
-		}
-	}
-	public function calc_all(){
-		$this->initialize_data_array();
-		$this->add_portcullis_score();
-		$this->add_cheval_de_frise_score();
-		$this->add_moat_score();
-		$this->add_ramparts_score();
-		$this->add_drawbridge_score();
-		$this->add_sally_port_score();
-		$this->add_rockwall_score();
-		$this->add_rough_terrain_score();
-		$this->add_low_bar_score();
-	}*/
-	
 
 	public function rank_teams(){
 		arsort($this->teamData);
@@ -179,10 +380,7 @@ class advancedReport{
 	} // [RETURNS] HTML Raw Report
 }
 $OPRReport = new advancedReport($objArray);
-//$OPRReport->initialize_data_array();
-//$OPRReport->sum_score();
-//$OPRReport->display_raw_OPR();
 $OPRReport->rank_teams();
-$OPRReport->sum_precentile(1);
+echo "{$OPRReport->display_sum_precentile(1)}";
 
 ?>
