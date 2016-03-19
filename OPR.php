@@ -100,27 +100,30 @@ class advancedReport{
 		}
 		arsort($this->cardArray);
 	}
+	public function number_of_teams(){
+		return $this->numberOfTeams;
+	}
 
 	private function determine_precentile($data){
 		$precentile = (100-(($data/$this->numberOfTeams)*100));
 		if($data == 1){
 			return "the best team";
 		}elseif($precentile >= 95){
-			return "in the top 5% of teams, rank {$data}. ";
+			return "in the top 5% of teams, rank {$data} ";
 		}elseif($precentile >= 90){
-			return "in the top 10% of teams, rank {$data}. ";
+			return "in the top 10% of teams, rank {$data} ";
 		}elseif($precentile >= 75){
-			return "in the top 25% of teams, rank {$data}. ";
+			return "in the top 25% of teams, rank {$data} ";
 		}elseif($precentile >= 50){
-			return "in the top 50% of teams, rank {$data}. ";
+			return "in the top 50% of teams, rank {$data} ";
 		}elseif($precentile >= 25){
-			return "in the bottom 50% of teams, rank {$data}. ";
+			return "in the bottom 50% of teams, rank {$data} ";
 		}else{
-			return "in the bottom 25% of teams, rank {$data}. ";
+			return "in the bottom 25% of teams, rank {$data} ";
 		}
 	}
 	
-	private function sum_rank($team){
+	public function sum_rank($team){
 		$count = (int) 1;
 		$flag = false;
 		foreach($this->teamData as $x => $x_value) {
@@ -133,7 +136,7 @@ class advancedReport{
 
 	}
 
-	private function portcullis_rank($team){
+	public function portcullis_rank($team){
 		$count = (int) 1;
 		$flag = false;
 		foreach($this->portcullisArray as $x => $x_value) {
@@ -146,7 +149,7 @@ class advancedReport{
 
 	}
 
-	private function cheval_de_frise_rank($team){
+	public function cheval_de_frise_rank($team){
 		$count = (int) 1;
 		$flag = false;
 		foreach($this->chevalDefriseArray as $x => $x_value) {
@@ -159,7 +162,7 @@ class advancedReport{
 
 	}
 
-	private function moat_rank($team){
+	public function moat_rank($team){
 		$count = (int) 1;
 		$flag = false;
 		foreach($this->moatArray as $x => $x_value) {
@@ -172,7 +175,7 @@ class advancedReport{
 
 	}
 
-	private function ramparts_rank($team){
+	public function ramparts_rank($team){
 		$count = (int) 1;
 		$flag = false;
 		foreach($this->rampartsArray as $x => $x_value) {
@@ -185,7 +188,7 @@ class advancedReport{
 
 	}
 
-	private function drawbridge_rank($team){
+	public function drawbridge_rank($team){
 		$count = (int) 1;
 		$flag = false;
 		foreach($this->drawbridgeArray as $x => $x_value) {
@@ -198,7 +201,7 @@ class advancedReport{
 
 	}
 
-	private function sally_port_rank($team){
+	public function sally_port_rank($team){
 		$count = (int) 1;
 		$flag = false;
 		foreach($this->sallyPortArray as $x => $x_value) {
@@ -211,7 +214,7 @@ class advancedReport{
 
 	}
 
-	private function rockwall_rank($team){
+	public function rockwall_rank($team){
 		$count = (int) 1;
 		$flag = false;
 		foreach($this->rockwallArray as $x => $x_value) {
@@ -224,7 +227,7 @@ class advancedReport{
 
 	}
 
-	private function rough_terrain_rank($team){
+	public function rough_terrain_rank($team){
 		$count = (int) 1;
 		$flag = false;
 		foreach($this->roughTerrainArray as $x => $x_value) {
@@ -237,7 +240,7 @@ class advancedReport{
 
 	}
 
-	private function low_bar_rank($team){
+	public function low_bar_rank($team){
 		$count = (int) 1;
 		$flag = false;
 		foreach($this->lowBarArray as $x => $x_value) {
@@ -250,7 +253,7 @@ class advancedReport{
 
 	}
 
-	private function high_goal_rank($team){
+	public function high_goal_rank($team){
 		$count = (int) 1;
 		$flag = false;
 		foreach($this->highGoalArray as $x => $x_value) {
@@ -263,7 +266,7 @@ class advancedReport{
 
 	}
 
-	private function low_goal_rank($team){
+	public function low_goal_rank($team){
 		$count = (int) 1;
 		$flag = false;
 		foreach($this->lowGoalArray as $x => $x_value) {
@@ -276,7 +279,7 @@ class advancedReport{
 
 	}
 
-	private function scale_rank($team){
+	public function scale_rank($team){
 		$count = (int) 1;
 		$flag = false;
 		foreach($this->scaleArray as $x => $x_value) {
@@ -289,7 +292,7 @@ class advancedReport{
 
 	}
 
-	private function auto_rank($team){
+	public function auto_rank($team){
 		$count = (int) 1;
 		$flag = false;
 		foreach($this->autoArray as $x => $x_value) {
@@ -302,7 +305,7 @@ class advancedReport{
 
 	}
 
-	private function card_rank($team){
+	public function card_rank($team){
 		$count = (int) 1;
 		$flag = false;
 		foreach($this->cardArray as $x => $x_value) {
@@ -324,56 +327,70 @@ class advancedReport{
 	}
 
 	public function scale_precentile($team){
-		return $this->determine_precentile($this->scale_rank($team));
+		$data = "{$this->determine_precentile($this->scale_rank($team))}" . "for scaling points. ";
+		return $data;
 	}
 
 	public function low_goal_precentile($team){
-		return $this->determine_precentile($this->low_goal_rank($team));
+		$data = "{$this->determine_precentile($this->low_goal_rank($team))}" . "for low goal points. ";
+		return $data;
 	}
 
 	public function high_goal_precentile($team){
-		return $this->determine_precentile($this->high_goal_rank($team));
+		$data = "{$this->determine_precentile($this->high_goal_rank($team))}" . "for high goal points. ";
+		return $data;
 	}
 
 	public function low_bar_precentile($team){
-		return $this->determine_precentile($this->low_bar_rank($team));
+		$data = "{$this->determine_precentile($this->low_bar_rank($team))}" . "for low bar points. ";
+		return $data;
 	}
 
 	public function rough_terrain_precentile($team){
-		return $this->determine_precentile($this->rough_terrain_rank($team));
+		$data = "{$this->determine_precentile($this->rough_terrain_rank($team))}" . "for rough terrain points. ";
+		return $data;
 	}
 
 	public function rockwall_precentile($team){
-		return $this->determine_precentile($this->rockwall_rank($team));
+		$data = "{$this->determine_precentile($this->rockwall_rank($team))}" . "for rockwall points. ";
+		return $data;
 	}
 
 	public function sally_port_precentile($team){
-		return $this->determine_precentile($this->sally_port_rank($team));
+		$data = "{$this->determine_precentile($this->sally_port_rank($team))}" . "for sally port points. ";
+		return $data;
 	}
 
 	public function drawbridge_precentile($team){
-		return $this->determine_precentile($this->drawbridge_rank($team));
+		$data = "{$this->determine_precentile($this->drawbridge_rank($team))}" . "for drawbridge points. ";
+		return $data;
 	}
 
 	public function ramparts_precentile($team){
-		return $this->determine_precentile($this->ramparts_rank($team));
+		$data = "{$this->determine_precentile($this->ramparts_rank($team))}" . "for ramparts points. ";
+		return $data;
 	}
 
 	public function moat_precentile($team){
-		return $this->determine_precentile($this->moat_rank($team));
+		$data = "{$this->determine_precentile($this->moat_rank($team))}" . "for moat points. ";
+		return $data;
 	}
 
 	public function cheval_de_frise_precentile($team){
-		return $this->determine_precentile($this->cheval_de_frise_rank($team));
+		$data = "{$this->determine_precentile($this->cheval_de_frise_rank($team))}" . "for cheval de frise points. ";
+		return $data;
 	}
 
 	public function portcullis_precentile($team){
-		return $this->determine_precentile($this->portcullis_rank($team));
+		$data = "{$this->determine_precentile($this->portcullis_rank($team))}" . "for portcullis points. ";
+		return $data;
 	}
 
 	public function sum_precentile($team){
-		return $this->determine_precentile($this->sum_rank($team));
+		$data = "{$this->determine_precentile($this->sum_rank($team))}" . "overall. ";
+		return $data;
 	}
+
 
 	public function rank_teams(){
 		arsort($this->teamData);
