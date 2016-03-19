@@ -67,6 +67,11 @@
     } else {
         $comments = mysql_real_escape_string(trim($_POST['comments']));
     }
+    if(empty($_POST['disabled']) || !(isset($_POST['disabled']))){ // Not implimented
+        $disabled = 'No';
+    } else {
+        $disabled = 'Yes';
+    }
 
     if($connect == true){
         $sql = "INSERT INTO `match` 
@@ -76,7 +81,7 @@
             `categoryA`, `categoryAScore`, `categoryB`, `categoryBScore`, `categoryC`, 
             `categoryCScore`, `categoryD`, `categoryDScore`, `lowBarScore`, `lowGoalShots`, 
             `missedLowGoalShots`, `highGoalShots`, `missedHighGoalShots`, `challengeTower`, 
-            `scaleTower`, `fouls`, `techFouls`, `redCard`, `yellowCard`, `comments`) 
+            `scaleTower`, `fouls`, `techFouls`, `redCard`, `yellowCard`, `comments`, `disabled`) 
         VALUES 
             (NULL, '$alliance', $matchNum, $team, '$scout', '$autoDefence', 
             '$breachDefence', $highGoalAutoShotsMade,$highGoalAutoMisses, 
@@ -84,7 +89,7 @@
             '$categoryB', $categoryBScore, '$categoryC', $categoryCScore, '$categoryD', 
             $categoryDScore, $lowBarScore, $lowGoalShots, $missedLowGoalShots, $highGoalShots, 
             $missedHighGoalShots, '$challengeTower', '$scaleTower', $fouls, $techFouls, 
-            '$redCard', '$yellowCard', '$comments');";
+            '$redCard', '$yellowCard', '$comments', '$disabled');";
 
 //  TO BE ADDED
 // TO BE ADDED
@@ -121,6 +126,8 @@ Category D Defence & Crosses: {$categoryD} = {$categoryDScore} <br>
 Low Bar Crosses: {$lowBarScore} <br>
 ChallengeTower?: {$challengeTower} <br>
 Scale Tower?: {$scaleTower} <br>
+Fouls: {$fouls} : Tech: {$techFouls} <br>
+Disabled?: {$disabled} <br>
 ";
 ?>
 <p><a href="https://scouting.core2062.com">Click here to submit another Response!</a></p>   

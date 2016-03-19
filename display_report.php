@@ -215,5 +215,32 @@ include 'get_from_database.php';
 			<td align="left"><b><?php echo $blueTeam2Object->auto_high_goals() ?></b></td>
 			<td align="left"><b><?php echo $blueTeam3Object->auto_high_goals() ?></b></td>
 		</tr>
+		<tr>
+			<td align="left"><b>Yellow Card : Red Card</b></td>
+			<td align="left"><b><?php echo $redTeam1Object->report_cards() ?></b></td>
+			<td align="left"><b><?php echo $redTeam2Object->report_cards() ?></b></td>
+			<td align="left"><b><?php echo $redTeam3Object->report_cards() ?></b></td>
+			<td align="left"><b><?php echo $blueTeam1Object->report_cards() ?></b></td>
+			<td align="left"><b><?php echo $blueTeam2Object->report_cards() ?></b></td>
+			<td align="left"><b><?php echo $blueTeam3Object->report_cards() ?></b></td>
+		</tr>
+		<tr>
+			<td align="left"><b>Disabled</b></td>
+			<td align="left"><b><?php echo $redTeam1Object->times_disabled() ?></b></td>
+			<td align="left"><b><?php echo $redTeam2Object->times_disabled() ?></b></td>
+			<td align="left"><b><?php echo $redTeam3Object->times_disabled() ?></b></td>
+			<td align="left"><b><?php echo $blueTeam1Object->times_disabled() ?></b></td>
+			<td align="left"><b><?php echo $blueTeam2Object->times_disabled() ?></b></td>
+			<td align="left"><b><?php echo $blueTeam3Object->times_disabled() ?></b></td>
+		</tr>
+		<tr>
+			<td align="left"><b>Comments</b></td>
+			<td align="left"><b><?php echo $redTeam1Object->all_comments() ?></b></td>
+			<td align="left"><b><?php echo $redTeam2Object->all_comments() ?></b></td>
+			<td align="left"><b><?php echo $redTeam3Object->all_comments() ?></b></td>
+			<td align="left"><b><?php echo $blueTeam1Object->all_comments() ?></b></td>
+			<td align="left"><b><?php echo $blueTeam2Object->all_comments() ?></b></td>
+			<td align="left"><b><?php echo $blueTeam3Object->all_comments() ?></b></td>
+		</tr>
 
 	</table>

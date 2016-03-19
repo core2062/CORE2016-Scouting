@@ -44,6 +44,7 @@ class teamReport {
 	private $autoReachedSearch;
 	private $towerScaleSearch;
 	private $towerChallengeSearch;
+	private $commentsSearch;
 
 
 	private $MLGAS;
@@ -54,6 +55,12 @@ class teamReport {
 	private $highGoalAutoMisses;
 	private $autoOther;
 	private $autoLowBar;
+
+	private $numFouls;
+	private $numTechFouls;
+	private $numRedCards;
+	private $numYellowCards;
+	private $numDisabled;
 
 	private $lgma;
 	private $lgha;
@@ -84,7 +91,7 @@ class teamReport {
 		$numMatchesQuery = "SELECT team FROM `match` WHERE `team` = {$this->team}";
 		$towerScaleQuery = "SELECT scaleTower FROM `match` WHERE `team` = {$this->team} AND `scaleTower` = 'Yes'";
 		$towerChallengeQuery = "SELECT challengeTower FROM `match` WHERE `team` = {$this->team} AND `challengeTower` = 'Yes'";
-		//$commentsQuery = "SELECT comments FROM `match` WHERE `team` = {$this->team} AND `comments` != 'N/A'";
+		$commentsQuery = "SELECT comments FROM `match` WHERE `team` = {$this->team} AND `comments` != 'N/A'";
 
 		$autoBreachedQuery = "SELECT autoDefence FROM `match` WHERE `team` = {$this->team} AND `autoDefence` = 'Breached'";
 		$autoReachedQuery = "SELECT autoDefence FROM `match` WHERE `team` = {$this->team} AND `autoDefence` = 'Reached'";
@@ -98,6 +105,12 @@ class teamReport {
 		$maxHighGoalAutoShotQuery = "SELECT MAX(highGoalAutoShotsMade) AS HGAutoMax FROM `match` WHERE `team` = {$this->team}";
 		$maxLowGoalAutoShotQuery = "SELECT MAX(lowGoalAutoShotsMade) AS LGAutoMax FROM `match` WHERE `team` = {$this->team}";
 		
+
+		$foulQuery = "SELECT SUM(fouls) AS FoulSum FROM `match` WHERE `team` = {$this->team}";
+		$techFoulQuery = "SELECT SUM(techFouls) AS TechFoulSum FROM `match` WHERE `team` = {$this->team}";
+		$redCardQuery = "SELECT redCard FROM `match` WHERE `team` = {$this->team} AND `redCard` = 'Yes'";
+		$yellowCardQuery = "SELECT yellowCard FROM `match` WHERE `team` = {$this->team} AND `yellowCard` = 'Yes'";
+		$disabledQuery = "SELECT disabled FROM `match` WHERE `team` = {$this->team} AND `disabled` = 'Yes'";
 
 		// Searching Database for what we need //
 
@@ -121,7 +134,7 @@ class teamReport {
 		$this->towerChallengeSearch = $dbc->query($towerChallengeQuery);
 
 		$numMatchesSearch = $dbc->query($numMatchesQuery);
-		//$commentsSearch = $dbc->query($commentsQuery);
+		$this->commentsSearch = $dbc->query($commentsQuery);
 
 		$this->autoBreachedSearch = $dbc->query($autoBreachedQuery);
 		$this->autoReachedSearch = $dbc->query($autoReachedQuery);
@@ -134,6 +147,12 @@ class teamReport {
 		$lowGoalAutoMissesSearch = $dbc->query($lowGoalAutoMissesQuery);
 		$maxHighGoalAutoShotSearch = $dbc->query($maxHighGoalAutoShotQuery);
 		$maxLowGoalAutoShotSearch = $dbc->query($maxLowGoalAutoShotQuery);
+
+		$foulSearch = $dbc->query($foulQuery);
+		$techFoulSearch = $dbc->query($techFoulQuery);
+		$redCardSearch = $dbc->query($redCardQuery);
+		$yellowCardSearch = $dbc->query($yellowCardQuery);
+		$disabledSearch = $dbc->query($disabledQuery);
 
 		    // Search Test
 		if(!($this->portcullisSearch && $this->chevalDeFriseSearch && $this->moatSearch && $this->rampartsSearch && 
@@ -152,17 +171,7 @@ class teamReport {
 			// Varriables //
 
 		$this->numberOfMatches = mysqli_num_rows($numMatchesSearch);
-/*
-		$this->portcullisVar = mysqli_fetch_assoc($portcullisSearch);
-		$this->chevalDeFriseVar = mysqli_fetch_assoc($chevalDeFriseSearch);
-		$this->moatVar = mysqli_fetch_assoc($moatSearch);
-		$this->rampartsVar = mysqli_fetch_assoc($rampartsSearch);
-		$this->drawbridgeVar = mysqli_fetch_assoc($drawbridgeSearch);
-		$this->sallyPortVar = mysqli_fetch_assoc($sallyPortSearch);
-		$this->rockWallVar = mysqli_fetch_assoc($rockWallSearch);
-		$this->roughTerrainVar = mysqli_fetch_assoc($roughTerrainSearch);
-		$this->lowBarVar = mysqli_fetch_assoc($lowBarSearch);
-*/
+
 		$this->numportcullis = mysqli_num_rows($this->portcullisSearch);
 		$this->numchevalDeFrise = mysqli_num_rows($this->chevalDeFriseSearch);
 		$this->nummoat = mysqli_num_rows($this->moatSearch);
@@ -174,6 +183,7 @@ class teamReport {
 		$this->numlowBar = mysqli_num_rows($this->lowBarSearch);
 
 
+
 		$this->MLGAS = mysqli_fetch_assoc($maxLowGoalAutoShotSearch);
 		$this->autoLowGoalsMade = mysqli_fetch_assoc($lowGoalAutoShotsMadeSearch);
 		$this->lowGoalAutoMisses = mysqli_fetch_assoc($lowGoalAutoMissesSearch);
@@ -183,6 +193,11 @@ class teamReport {
 		$this->autoOther = mysqli_num_rows($autoBreachedOtherSearch);
 		$this->autoLowBar = mysqli_num_rows($autoBreachedLowBarSearch);
 
+		$this->numFouls = mysqli_fetch_assoc($foulSearch);
+		$this->numTechFouls = mysqli_fetch_assoc($techFoulSearch);
+		$this->numRedCards = mysqli_num_rows($redCardSearch);
+		$this->numYellowCards = mysqli_num_rows($yellowCardSearch);
+		$this->numDisabled = mysqli_num_rows($disabledSearch);
 
 		$this->lgma = mysqli_fetch_assoc($lowGoalMissesSearch);
 		$this->lgha = mysqli_fetch_assoc($lowGoalHitsSearch);
@@ -374,10 +389,22 @@ class teamReport {
 	public function low_bar_crosses(){
 		return $this->defence_crosses($this->lowBarSearch, $this->numlowBar);
 	} // [RETURNS] STRING
-
-
-
-
+	public function report_cards(){
+		return "{$this->numYellowCards} : {$this->numRedCards}";
+		//{$this->numFouls['FoulSum']} : {$this->numTechFouls['TechFoulSum']} : 
+	} //[RETURNS] STRING
+	public function times_disabled(){
+		return $this->numDisabled;
+	} // [RETURNS] INT
+	public function all_comments(){
+		$comments = (string)" ";
+		while($row = mysqli_fetch_assoc($this->commentsSearch)){
+			foreach ($row as $key => $value){
+				$comments .= "{$value}; ";
+			}
+		}
+		return $comments;
+	} //[RETURNS] all comments
 
 
 
@@ -509,13 +536,32 @@ class teamReport {
 		}
 	} //[RETURNS] FLOAT
 
+	public function foul_score(){
+		$foulpts = $this->numFouls['FoulSum'] * 5;
+		return $foulpts;
+	}//[RETURNS] INT
+	
+	public function tech_foul_score(){
+		$foulpts = $this->numTechFouls['TechFoulSum'] * 15;
+		return $foulpts;
+	}//[RETURNS] INT
+
+	public function card_score(){
+		$foulpts = $this->numRedCards + $this->numYellowCards;
+		$foulpts = $foulpts * 100;
+		return $foulpts;
+	}//[RETURNS] INT
+
 	public function score_sum(){
 		$score = 0;
 		$score = ($this->portcullis_score() + $this->cheval_de_frise_score() + $this->moat_score() + $this->ramparts_score() + 
 			$this->drawbridge_score() + $this->sally_port_score() + $this->rockwall_score() + $this->rough_terrain_score() + 
-			$this->low_bar_score() + $this->high_goal_score() + $this->low_goal_score() + $this->scale_score() + $this->auto_score());
+			$this->low_bar_score() + $this->high_goal_score() + $this->low_goal_score() + $this->scale_score() + 
+			$this->auto_score() - $this->foul_score() - $this->tech_foul_score() - $this->card_score());
 		return $score;
 	}// [RETURNS] FLOAT
+
+
 
 
 
