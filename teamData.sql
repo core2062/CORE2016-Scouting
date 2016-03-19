@@ -1,0 +1,20 @@
+CREATE TABLE IF NOT EXISTS `teamData` (
+  `entryID` int(11) NOT NULL AUTO_INCREMENT,
+  `team` int(11) NOT NULL,
+  `portcullisScore` int(11) NOT NULL,
+  `chevalDeFriseScore` int(11) NOT NULL,
+  `moatScore` int(11) NOT NULL,
+  `rampartsScore` int(11) NOT NULL,
+  `drawbridgeScore` int(11) NOT NULL,
+  `sallyPortScore` int(11) NOT NULL,
+  `rockwallScore` int(11) NOT NULL,
+  `roughTerrainScore` int(11) NOT NULL,
+  `lowBarScore` int(11) NOT NULL,
+  `highGoalScore` int(11) NOT NULL,
+  `lowGoalScore` int(11) NOT NULL,
+  `scalingScore` int(11) NOT NULL,
+  `autoScore` int(11) NOT NULL,
+  `scoreSum` int(11) NOT NULL,
+  PRIMARY KEY (`entryID`),
+  UNIQUE KEY `entryID` (`entryID`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=3 ;
