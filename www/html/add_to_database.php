@@ -1,7 +1,7 @@
 <?php
 
 //if(isset($_POST['Submit'])){
-    $connect = require_once('SQL_connect.php');
+    $connect = require_once('../SQL_connect.php');
 
     $alliance = mysql_real_escape_string(trim($_POST['AllianceColor']));
     $matchNum = mysql_real_escape_string(trim($_POST['MatchNumber']));

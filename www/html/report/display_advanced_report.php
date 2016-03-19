@@ -5,7 +5,7 @@ include "OPR.php"
 $objArray = array();
 $teamNumberArray = array();
 
-require_once('SQLi_connect.php');
+require_once('/var/www/sqli_connect.php');
 $Query = "SELECT DISTINCT team FROM `match`";
 $Search = $dbc->query($Query);
 while($row = mysqli_fetch_assoc($Search)){

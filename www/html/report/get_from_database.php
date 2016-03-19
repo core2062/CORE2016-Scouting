@@ -70,7 +70,7 @@ class teamReport {
     function __construct($team) {
     	$this->team = $team;
 
-		require('SQLi_connect.php');
+		require('/var/www/sqli_connect.php');
 
     	// Creates querys for the database
 	
