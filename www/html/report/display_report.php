@@ -25,9 +25,10 @@ include 'get_from_database.php';
 		echo "DATA NOT SUBMITED!<br>";
 	}
 ?>
+<link rel="stylesheet" type="text/css" href="mystyle.css">
 	<table>
 		<tr>
-			<td align="left">Allicance</td>
+			<td align="left">Alliance</td>
 			<td align="left">RED</td>
 			<td align="left">RED</td>
 			<td align="left">RED</td>
