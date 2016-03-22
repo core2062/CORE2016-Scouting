@@ -1,6 +1,7 @@
 <!doctype html>
 <html>
 <body>
+	<b>NORMAL REPORT:<b><br>
 	<form action="display_report.php" method="post">
 		Red Alliance 1: <input type="number" name="RedTeam1" required> <br>
 		Red Alliance 2: <input type="number" name="RedTeam2" required> <br>
@@ -9,7 +10,22 @@
 		Blue Alliance 1: <input type="number" name="BlueTeam1" required> <br>
 		Blue Alliance 2: <input type="number" name="BlueTeam2" required> <br> 
 		Blue Alliance 3: <input type="number" name="BlueTeam3" required> <br>
+		Paragraph Report: <input type="checkbox" name="paragraphReport"><br>
 		PDF <input type="checkbox" name="usePDF"> <br>
+		<input type="submit" value ="submit">
+		<br>
+		<b>OPR REPORT:</b><br>
+	</form>
+	<br>
+	<form action="display_OPR_report.php" method="post">
+		Search Based On:<br>
+		Overall <input type="radio" name="reportType" value="overall"> <br>
+		Breaching Rank <input type="radio" name="reportType" value="breachRank"> <br>
+		High Goal Pts <input type="radio" name="reportType" value="highGoalPts"> <br>
+		Low Goal Pts <input type="radio" name="reportType" value="lowGoalPts"> <br>
+		Auto Pts <input type="radio" name="reportType" value="AutoPts"> <br>
+		Scaling Pts <input name="reportType" type="radio" value="scale"> <br>
+		Yellow/Red Cards <input name="reportType" type="radio" value="cards"> <br>
 		<input type="submit" value ="submit">
 	</form>
 </body>

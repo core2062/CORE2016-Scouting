@@ -11,6 +11,7 @@ include 'get_from_database.php';
     $blueTeam1 = trim($_POST['BlueTeam1']);
     $blueTeam2 = trim($_POST['BlueTeam2']);
     $blueTeam3 = trim($_POST['BlueTeam3']);
+    
 
 // Create team objects //
 // access by $obj->var & $obj->method()
@@ -25,6 +26,7 @@ include 'get_from_database.php';
 		echo "DATA NOT SUBMITED!<br>";
 	}
 ?>
+<link href="style.css" rel="stylesheet" type="text/css" />
 	<table>
 		<tr>
 			<td align="left"><b>Allicance</b></td>
@@ -242,5 +244,118 @@ include 'get_from_database.php';
 			<td align="left"><b><?php echo $blueTeam2Object->all_comments() ?></b></td>
 			<td align="left"><b><?php echo $blueTeam3Object->all_comments() ?></b></td>
 		</tr>
+		<?php
+		if(isset($_POST['paragraphReport'])){
+			$redTeam1 = trim($_POST['RedTeam1']);
+		    $redTeam2 = trim($_POST['RedTeam2']);
+		    $redTeam3 = trim($_POST['RedTeam3']);
+		    $blueTeam1 = trim($_POST['BlueTeam1']);
+		    $blueTeam2 = trim($_POST['BlueTeam2']);
+		    $blueTeam3 = trim($_POST['BlueTeam3']);
+	    	require 'paragraph_report.php';
+
+	    	$redTeam1Objectpr = new showAdvancedReport($redTeam1, $OPRReport);
+			$redTeam2Objectpr = new showAdvancedReport($redTeam2, $OPRReport);
+			$redTeam3Objectpr = new showAdvancedReport($redTeam3, $OPRReport);
+			$blueTeam1Objectpr = new showAdvancedReport($blueTeam1, $OPRReport);
+			$blueTeam2Objectpr = new showAdvancedReport($blueTeam2, $OPRReport);
+			$blueTeam3Objectpr = new showAdvancedReport($blueTeam3, $OPRReport);
+			echo "
+			<tr>
+				<td><b>Overall Competition Rank</b></td>
+				<td><b>{$redTeam1Objectpr->overall_rank()}</b></td>
+				<td><b>{$redTeam2Objectpr->overall_rank()}</b></td>
+				<td><b>{$redTeam3Objectpr->overall_rank()}</b></td>
+				<td><b>{$blueTeam1Objectpr->overall_rank()}</b></td>
+				<td><b>{$blueTeam2Objectpr->overall_rank()}</b></td>
+				<td><b>{$blueTeam3Objectpr->overall_rank()}</b></td>
+			</tr>";
+			echo "
+			<tr>
+				<td><b>Primary Shooter Type & Rank</b></td>
+				<td><b>{$redTeam1Objectpr->display_shooter_rank()}</b></td>
+				<td><b>{$redTeam2Objectpr->display_shooter_rank()}</b></td>
+				<td><b>{$redTeam3Objectpr->display_shooter_rank()}</b></td>
+				<td><b>{$blueTeam1Objectpr->display_shooter_rank()}</b></td>
+				<td><b>{$blueTeam2Objectpr->display_shooter_rank()}</b></td>
+				<td><b>{$blueTeam3Objectpr->display_shooter_rank()}</b></td>
+			</tr>";
+			echo "
+			<tr>
+				<td><b>Auto Rank</b></td>
+				<td><b>{$redTeam1Objectpr->display_auto_rank()}</b></td>
+				<td><b>{$redTeam2Objectpr->display_auto_rank()}</b></td>
+				<td><b>{$redTeam3Objectpr->display_auto_rank()}</b></td>
+				<td><b>{$blueTeam1Objectpr->display_auto_rank()}</b></td>
+				<td><b>{$blueTeam2Objectpr->display_auto_rank()}</b></td>
+				<td><b>{$blueTeam3Objectpr->display_auto_rank()}</b></td>
+			</tr>";
+			echo "
+			<tr>
+				<td><b>Best at Defence: </b></td>
+				<td><b>{$redTeam1Objectpr->display_top_rank()}</b></td>
+				<td><b>{$redTeam2Objectpr->display_top_rank()}</b></td>
+				<td><b>{$redTeam3Objectpr->display_top_rank()}</b></td>
+				<td><b>{$blueTeam1Objectpr->display_top_rank()}</b></td>
+				<td><b>{$blueTeam2Objectpr->display_top_rank()}</b></td>
+				<td><b>{$blueTeam3Objectpr->display_top_rank()}</b></td>
+			</tr>";
+			echo "
+			<tr>
+				<td><b>Second Best at Defence: </b></td>
+				<td><b>{$redTeam1Objectpr->display_second_rank()}</b></td>
+				<td><b>{$redTeam2Objectpr->display_second_rank()}</b></td>
+				<td><b>{$redTeam3Objectpr->display_second_rank()}</b></td>
+				<td><b>{$blueTeam1Objectpr->display_second_rank()}</b></td>
+				<td><b>{$blueTeam2Objectpr->display_second_rank()}</b></td>
+				<td><b>{$blueTeam3Objectpr->display_second_rank()}</b></td>
+			</tr>";
+			echo "
+			<tr>
+				<td><b>Third Best at Defence: </b></td>
+				<td><b>{$redTeam1Objectpr->display_third_rank()}</b></td>
+				<td><b>{$redTeam2Objectpr->display_third_rank()}</b></td>
+				<td><b>{$redTeam3Objectpr->display_third_rank()}</b></td>
+				<td><b>{$blueTeam1Objectpr->display_third_rank()}</b></td>
+				<td><b>{$blueTeam2Objectpr->display_third_rank()}</b></td>
+				<td><b>{$blueTeam3Objectpr->display_third_rank()}</b></td>
+			</tr>";
+			echo "
+			<tr>
+				<td><b>Climber Rank: </b></td>
+				<td><b>{$redTeam1Objectpr->display_scaler_rank()}</b></td>
+				<td><b>{$redTeam2Objectpr->display_scaler_rank()}</b></td>
+				<td><b>{$redTeam3Objectpr->display_scaler_rank()}</b></td>
+				<td><b>{$blueTeam1Objectpr->display_scaler_rank()}</b></td>
+				<td><b>{$blueTeam2Objectpr->display_scaler_rank()}</b></td>
+				<td><b>{$blueTeam3Objectpr->display_scaler_rank()}</b></td>
+			</tr>";
+
+
+
+
+
+
+	    	/*
+	    	$redTeam1Report = report($redTeam1, $OPRReport);
+	    	$redTeam2Report = report($redTeam2, $OPRReport);
+	    	$redTeam3Report = report($redTeam3, $OPRReport);
+	    	$blueTeam1Report =  report($blueTeam1, $OPRReport);
+	    	$blueTeam2Report = report($blueTeam2, $OPRReport);
+	    	$blueTeam3Report = report($blueTeam3, $OPRReport);
+			echo "
+			<tr>
+				<td><b>Relative Report</b></td>
+				<td><b>{$redTeam1Report}</b></td>
+				<td><b>{$redTeam2Report}</b></td>
+				<td><b>{$redTeam3Report}</b></td>
+				<td><b>{$blueTeam1Report}</b></td>
+				<td><b>{$blueTeam2Report}</b></td>
+				<td><b>{$blueTeam3Report}</b></td>
+
+			</tr>";
+			*/
+		}	
+		?>
 
 	</table>

@@ -507,17 +507,17 @@ class teamReport {
 
 	public function auto_score(){
 		$cumulativeScore = 0;
-		if(mysqli_num_rows($this->autoBreachedSearch) >= 1){
-			$cumulativeScore =+ 10;
-			$totalAutoLowGoalShots = $this->autoLowGoalsMade['LGAutoMade'] + $this->lowGoalAutoMisses['LGAutoMisses'];
-			$totalAutoHighGoalShots = $this->autoHighGoalsMade['HGAutoMade'] + $this->highGoalAutoMisses['HGAutoMisses'];
+		if(mysqli_num_rows($this->autoBreachedSearch) > 0){
+			$cumulativeScore += (mysqli_num_rows($this->autoBreachedSearch) * 10);
+			$totalAutoLowGoalShots = ($this->autoLowGoalsMade['LGAutoMade'] + $this->lowGoalAutoMisses['LGAutoMisses']);
+			$totalAutoHighGoalShots = ($this->autoHighGoalsMade['HGAutoMade'] + $this->highGoalAutoMisses['HGAutoMisses']);
 
 			if($totalAutoLowGoalShots > 0){
 				$lowGoalsMade = $this->autoLowGoalsMade['LGAutoMade'];
 				if($this->MLGAS['LGAutoMax'] > 1){
-					$cumulativeScore =+ (($lowGoalsMade * 5) * 1.15);
+					$cumulativeScore += (($lowGoalsMade * 5) * 1.15);
 				} else {
-					$cumulativeScore =+ ($lowGoalsMade * 5);
+					$cumulativeScore += ($lowGoalsMade * 5);
 				}
 			}
 			if($totalAutoHighGoalShots > 0){
@@ -528,12 +528,11 @@ class teamReport {
 					$cumulativeScore += ($highGoalsMade * 5);
 				}
 			}  
-		} elseif(mysqli_num_rows($this->autoReachedSearch) >= 1) {
-			$cumulativeScore += (mysqli_num_rows($this->autoReachedSearch) * 2);
-			return $cumulativeScore;
-		} else {
-			return 0;
 		}
+		if(mysqli_num_rows($this->autoReachedSearch) > 0) {
+			$cumulativeScore += (mysqli_num_rows($this->autoReachedSearch) * 2);
+		} 
+		return $cumulativeScore;
 	} //[RETURNS] FLOAT
 
 	public function foul_score(){
@@ -561,6 +560,13 @@ class teamReport {
 		return $score;
 	}// [RETURNS] FLOAT
 
+	public function breach_sum(){
+		$score = 0;
+		$score = ($this->portcullis_score() + $this->cheval_de_frise_score() + $this->moat_score() + $this->ramparts_score() + 
+			$this->drawbridge_score() + $this->sally_port_score() + $this->rockwall_score() + $this->rough_terrain_score() + 
+			$this->low_bar_score());
+		return $score;
+	}// [RETURNS] FLOAT
 
 
 
