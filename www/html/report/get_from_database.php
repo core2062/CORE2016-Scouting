@@ -75,7 +75,7 @@ class teamReport {
     	// Creates querys for the database
 	
 		$portcullisQuery = "SELECT categoryAScore AS PortcullisCrosses FROM `match` WHERE `team` = {$this->team} AND `categoryA` ='Portcullis'";
-		$chevalDeFriseQuery = "SELECT categoryAScore AS ChevalCrosses FROM `match` WHERE `team` = {$this->team} AND `categoryA` ='Cheval de Frise'";
+		$chevalDeFriseQuery = "SELECT categoryAScore AS ChevalCrosses FROM `match` WHERE `team` = {$this->team} AND `categoryA` ='ChevaldeFrise'";
 		$moatQuery = "SELECT categoryBScore AS MoatCrosses FROM `match` WHERE `team` = {$this->team} AND `categoryB` ='Moat'";
 		$rampartsQuery = "SELECT categoryBScore AS RampartCrosses FROM `match` WHERE `team` = {$this->team} AND `categoryB` ='Ramparts'";
 		$drawbridgeQuery = "SELECT categoryCScore AS DrawbridgeCrosses FROM `match` WHERE `team` = {$this->team} AND `categoryC` ='Drawbridge'";
@@ -241,17 +241,19 @@ class teamReport {
 	} // [RETURNS] Defence report
 
 	private function defence_score($defsearch, $defnum){
-		if($defnum == 0)
-			return 0;
-		$avgCrosses = $this->query_sum($defsearch) / $defnum;
-		$score = 0;
-		for ($i = 0; $i <= $avgCrosses; $i++){
-			if($i <=2){
-				$score += 4.5;
-			} else {
-				$score += 2;
-			}
-		}
+		//if($defnum == 0)
+		//	return 0;
+		//$avgCrosses = $this->query_sum($defsearch) / $defnum;
+		//$score = 0;
+		//for ($i = 0; $i <= $defnum; $i++){
+		//	if($i <=2){
+		//		$score += 4.5;
+		//	} else {
+		//		$score += 2;
+		//	}
+		//}
+		//return $score;
+		$score =  ($this->query_sum($defsearch) * 3);
 		return $score;
 	}
 

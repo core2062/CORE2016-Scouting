@@ -191,7 +191,7 @@ include 'get_from_database.php';
 			<td align="left"><b><?php echo $blueTeam3Object->highest_auto_movement() ?></b></td>
 		</tr>
 		<tr>
-			<td align="left"><b>Auto Low Bar : Other Breach</b></td>
+			<td align="left"><b>Auto Low Bar : Other Cross</b></td>
 			<td align="left"><b><?php echo $redTeam1Object->auto_times_breached() ?></b></td>
 			<td align="left"><b><?php echo $redTeam2Object->auto_times_breached() ?></b></td>
 			<td align="left"><b><?php echo $redTeam3Object->auto_times_breached() ?></b></td>
@@ -289,6 +289,16 @@ include 'get_from_database.php';
 				<td><b>{$blueTeam1Objectpr->display_auto_rank()}</b></td>
 				<td><b>{$blueTeam2Objectpr->display_auto_rank()}</b></td>
 				<td><b>{$blueTeam3Objectpr->display_auto_rank()}</b></td>
+			</tr>";
+			echo "
+			<tr>
+				<td><b>WORST at Defence: </b></td>
+				<td><b>{$redTeam1Objectpr->display_worst_rank()}</b></td>
+				<td><b>{$redTeam2Objectpr->display_worst_rank()}</b></td>
+				<td><b>{$redTeam3Objectpr->display_worst_rank()}</b></td>
+				<td><b>{$blueTeam1Objectpr->display_worst_rank()}</b></td>
+				<td><b>{$blueTeam2Objectpr->display_worst_rank()}</b></td>
+				<td><b>{$blueTeam3Objectpr->display_worst_rank()}</b></td>
 			</tr>";
 			echo "
 			<tr>

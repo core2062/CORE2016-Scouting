@@ -9,7 +9,7 @@ class advancedReport{
 	private $teamData = array();
 
 	private $portcullisArray = array();
-	private $chevalDefriseArray = array();
+	private $chevalDeFriseArray = array();
 	private $moatArray = array();
 	private $rampartsArray = array();
 	private $drawbridgeArray = array();
@@ -157,7 +157,7 @@ class advancedReport{
 	public function cheval_de_frise_rank($team){
 		$count = (int) 1;
 		$flag = false;
-		foreach($this->chevalDefriseArray as $x => $x_value) {
+		foreach($this->chevalDeFriseArray as $x => $x_value) {
 		    if($x == $team)
 				$flag = true;
 		    if(!$flag)
@@ -470,8 +470,18 @@ class advancedReport{
 	public function rank_by_scaling_pts(){
 		arsort($this->scaleArray);
 		$it = 1;
-		foreach($this->scaleArray as $x => $it) {
+		foreach($this->scaleArray as $x => $x_value) {
 		    echo "Team=" . $x . ", Rank=" . $it;
+		    echo "<br>";
+		    $it++;
+		}
+	} // [RETURNS] Rank report of team based on red/yellow cards
+
+	public function rank_cheval_de_frise_pts(){
+		arsort($this->chevalDeFriseArray);
+		$it = 1;
+		foreach($this->chevalDeFriseArray as $x => $x_value) {
+		    echo "Team=" . $x . ", Rank=" . $x_value;
 		    echo "<br>";
 		    $it++;
 		}

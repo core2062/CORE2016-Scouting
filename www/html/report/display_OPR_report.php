@@ -12,6 +12,7 @@ if($reportType == 'overall'){
 }elseif($reportType == 'lowGoalPts'){
 	$OPRReport->rank_by_low_goal_pts();
 }elseif($reportType == 'AutoPts'){
+	//$OPRReport->rank_cheval_de_frise_pts();
 	$OPRReport->rank_by_auto_pts();
 }elseif($reportType == 'cards'){
 	$OPRReport->rank_by_cards();
