@@ -10,13 +10,14 @@
 
     $autoDefence = mysql_real_escape_string(trim($_POST['DefenseInteractionType'])); // Reached, Breached, No Interaction
 
-    if(empty($_POST['DefenseInteractionAuto'])){ //CategoryA-D Low Bar
+    $breachDefence = mysql_real_escape_string(trim($_POST['DefenseInteractionAuto']));
+   /* if($_POST['DefenseInteractionAuto'] == 'N/A'){ //CategoryA-D Low Bar
         $breachDefence = 'N/A'; // Also the name for if alliance interacts with defence in auto, which defence?
     } elseif(trim($_POST['DefenseInteractionAuto']) == 'Low Bar'){
         $breachDefence = mysql_real_escape_string(trim($_POST['DefenseInteractionAuto']));
     } else {
         $breachDefence = 'Other';
-    }
+    } */
     //$autoShoot = trim($_POST['autoShoot']);
     $highGoalAutoShotsMade = mysql_real_escape_string(trim($_POST['HighGoalAuto']));
     $highGoalAutoMisses = mysql_real_escape_string(trim($_POST['HighGoalAutoMisses']));
