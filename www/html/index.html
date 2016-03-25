@@ -91,7 +91,7 @@ transform: scale(2);
   	</head>
 	<body>
 
-	<form name="main" action="add_to_database.php" method="post">
+	<form name="main" action="add_to_database.php" autocomplete="off" method="post">
 		
 <div class="row">
   <div class="small-12 columns">
@@ -114,14 +114,14 @@ transform: scale(2);
 		        					<div class="row">
 										<div class="small-12 columns">
 										<label>Match Number
-											<input name="MatchNumber" type="number" placeholder="ex-1" required/>
+											<input name="MatchNumber" type="number" min="1" max="89" placeholder="ex-1" autofocus required/>
 										</label>
 					         		</div>
                       </div>
 		        					<div class="row">
 										<div class="small-12 columns">
 										<label>Team Number
-											<input name="TeamNumber" type="number" class="awesomplete" placeholder="ex-2062" data-list=" 192,
+											<input name="TeamNumber" type="number" max="7000" class="awesomplete" placeholder="ex-2062" data-list=" 192,
 269,
 537,
 706,
@@ -582,7 +582,7 @@ David Zastrow,
   										<fieldset class="large-6 columns">
     										<legend>Challenged tower?</legend>
     										<input type="radio" name="ChallengedTower" value="Yes" required><label>Yes</label>
-    										<input type="radio" name="ChallengedTower" value="No" required><label>No</label>
+    										<input type="radio" name="ChallengedTower" value="No" checked required><label>No</label>
   										</fieldset>
   									</div>
 
@@ -590,7 +590,7 @@ David Zastrow,
   										<fieldset class="large-6 columns">
     										<legend>Scaled Tower?</legend>
     										<input type="radio" name="ScaledTower" value="Yes" required><label>Yes</label>
-    										<input type="radio" name="ScaledTower" value="No" required><label>No</label>
+    										<input type="radio" name="ScaledTower" value="No" checked required><label>No</label>
   										</fieldset>
   									</div>  														         								         							         						         							         					         		
 
@@ -668,7 +668,7 @@ David Zastrow,
 <div class="row">
     <div class="large-12 columns">
       <label>Comments
-        <textarea name="comments" placeholder="Driving ability (Skills and Decision making), Cycle Times, Specific Strengths and Weaknesses "></textarea>
+        <textarea name="comments" placeholder="Driving ability (Skills and Decision making), Cycle Times, Specific Strengths and Weaknesses"></textarea>
       </label>
     </div>
 
