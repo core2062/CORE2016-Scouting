@@ -14,6 +14,7 @@
 		<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/foundation/5.5.3/js/foundation/foundation.accordion.min.js"></script>
 		<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/foundation/5.5.3/js/foundation/foundation.tab.min.js"></script>
     <script type="text/javascript" src="awesomplete.js"></script>
+    <script type="text/javascript" src="Val.js"></script>
 		<style type="text/css">
 label.RadiopPic > input{ /* HIDE RADIO */
   display: none !important;
@@ -91,7 +92,7 @@ transform: scale(2);
   	</head>
 	<body>
 
-	<form name="main" action="add_to_database.php" autocomplete="off" method="post">
+	<form name="main" action="add_to_database.php" autocomplete="off" onsubmit="return ValidateForm()" method="post">
 		
 <div class="row">
   <div class="small-12 columns">
