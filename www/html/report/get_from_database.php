@@ -67,6 +67,17 @@ class teamReport {
 	private $hgma;
 	private $hgha; 
 
+
+	private $total;
+	private $portcullisTotal;
+	private $moatTotal;
+	private $rampartsTotal;
+	private $drawbridgeTotal;
+	private $sallyPortTotal;
+	private $rockWallTotal;
+	private $roughTerrainTotal;
+	private $lowBarTotal;
+
     function __construct($team) {
     	$this->team = $team;
 
@@ -112,7 +123,39 @@ class teamReport {
 		$yellowCardQuery = "SELECT yellowCard FROM `match` WHERE `team` = {$this->team} AND `yellowCard` = 'Yes'";
 		$disabledQuery = "SELECT disabled FROM `match` WHERE `team` = {$this->team} AND `disabled` = 'Yes'";
 
+
+
+
+		$sumchevaldefriseQuery = "SELECT SUM(categoryAScore) AS sumCheval FROM `match` WHERE `team` = {$this->team} AND `categoryA` ='ChevaldeFrise'";
+		$sumChevalDeFriseSearch = $dbc->query($sumchevaldefriseQuery);
+		$this->total = mysqli_fetch_assoc($sumChevalDeFriseSearch); 
+		$sumPortcullisQuery = "SELECT SUM(categoryAScore) AS sumPortcullis FROM `match` WHERE `team` = {$this->team} AND `categoryA` ='Portcullis'";
+		$sumPortcullisSearch = $dbc->query($sumPortcullisQuery);
+		$this->portcullisTotal = mysqli_fetch_assoc($sumPortcullisSearch);
+		$sumMoatQuery = "SELECT SUM(categoryBScore) AS sumMoat FROM `match` WHERE `team` = {$this->team} AND `categoryB` ='Moat'";
+		$sumMoatSearch = $dbc->query($sumMoatQuery);
+		$this->moatTotal = mysqli_fetch_assoc($sumMoatSearch);
+		$sumRampartsQuery = "SELECT SUM(categoryBScore) AS sumRamparts FROM `match` WHERE `team` = {$this->team} AND `categoryB` ='Ramparts'";
+		$sumRampartsSearch = $dbc->query($sumRampartsQuery);
+		$this->rampartsTotal = mysqli_fetch_assoc($sumRampartsSearch);
+		$sumDrawbridgeQuery = "SELECT SUM(categoryCScore) AS sumDrawbridge FROM `match` WHERE `team` = {$this->team} AND `categoryC` ='Drawbridge'";
+		$sumDrawbridgeSearch = $dbc->query($sumDrawbridgeQuery);
+		$this->drawbridgeTotal = mysqli_fetch_assoc($sumDrawbridgeSearch);
+		$sumSallyPortQuery = "SELECT SUM(categoryCScore) AS sumSallyPort FROM `match` WHERE `team` = {$this->team} AND `categoryC` ='Sally Port'";
+		$sumSallyPortSearch = $dbc->query($sumSallyPortQuery);
+		$this->sallyPortTotal = mysqli_fetch_assoc($sumSallyPortSearch);
+		$sumRockWallQuery = "SELECT SUM(categoryDScore) AS sumRockWall FROM `match` WHERE `team` = {$this->team} AND `categoryD` ='Rock Wall'";
+		$sumRockWallSearch = $dbc->query($sumRockWallQuery);
+		$this->rockWallTotal = mysqli_fetch_assoc($sumRockWallSearch);
+		$sumRoughTerrainQuery = "SELECT SUM(categoryDScore) AS sumRoughTerrain FROM `match` WHERE `team` = {$this->team} AND `categoryD` ='Rough Terrain'";
+		$sumRoughTerrainSearch = $dbc->query($sumRoughTerrainQuery);
+		$this->roughTerrainTotal = mysqli_fetch_assoc($sumRoughTerrainSearch);
+		$sumLowBarQuery = "SELECT SUM(lowBarScore) AS sumLowBar FROM `match` WHERE `team` = {$this->team}";
+		$sumLowBarSearch = $dbc->query($sumLowBarQuery);
+		$this->lowBarTotal = mysqli_fetch_assoc($sumLowBarSearch);
 		// Searching Database for what we need //
+
+
 
 
 		$this->portcullisSearch = $dbc->query($portcullisQuery);
@@ -204,6 +247,22 @@ class teamReport {
 		$this->hgma = mysqli_fetch_assoc($highGoalMissesSearch);
 		$this->hgha = mysqli_fetch_assoc($highGoalHitsSearch); 
 
+
+
+/*
+		$this->total = 0;
+		$numRows = 0;
+		while($row = mysqli_fetch_assoc($this->chevalDeFriseSearch)){
+			$numRows += 1;
+			foreach ($row as $key => $value){
+				$this->total += $value;
+			}
+		}
+		if($numRows != 0){
+			$this->total = 0;
+		}
+		$this->total = $this->total*3;
+*/
 	}
 
 	public function check_error(){
@@ -419,31 +478,49 @@ class teamReport {
 
 
 	public function portcullis_score(){
-		return $this->defence_score($this->portcullisSearch, $this->numportcullis);
+		$score = $this->portcullisTotal['sumPortcullis'];
+ 		$score = $score * 3;
+		return $score;
 	} // [RETURNS] FLOAT
 	public function cheval_de_frise_score(){
-		return $this->defence_score($this->chevalDeFriseSearch, $this->numchevalDeFrise);
+ 		$score = $this->total['sumCheval'];
+ 		$score = $score * 3;
+		return $score;
 	} // [RETURNS] FLOAT
 	public function moat_score(){
-		return $this->defence_score($this->moatSearch, $this->nummoat);
+		$score = $this->moatTotal['sumMoat'];
+ 		$score = $score * 3;
+		return $score;
 	} // [RETURNS] FLOAT
 	public function ramparts_score(){
-		return $this->defence_score($this->rampartsSearch, $this->numramparts);
+		$score = $this->rampartsTotal['sumRamparts'];
+ 		$score = $score * 3;
+		return $score;
 	} // [RETURNS] FLOAT
 	public function drawbridge_score(){
-		return $this->defence_score($this->drawbridgeSearch, $this->numdrawbridge);
+		$score = $this->drawbridgeTotal['sumDrawbridge'];
+ 		$score = $score * 3;
+		return $score;
 	} // [RETURNS] FLOAT
 	public function sally_port_score(){
-		return $this->defence_score($this->sallyPortSearch, $this->numsallyPort);
+		$score = $this->sallyPortTotal['sumSallyPort'];
+ 		$score = $score * 3;
+		return $score;
 	} // [RETURNS] FLOAT
 	public function rockwall_score(){
-		return $this->defence_score($this->rockWallSearch, $this->numrockWall);
+		$score = $this->rockWallTotal['sumRockWall'];
+ 		$score = $score * 3;
+		return $score;
 	} // [RETURNS] FLOAT
 	public function rough_terrain_score(){
-		return $this->defence_score($this->roughTerrainSearch, $this->numroughTerrain);
+		$score = $this->roughTerrainTotal['sumRoughTerrain'];
+ 		$score = $score * 3;
+		return $score;
 	} // [RETURNS] FLOAT
 	public function low_bar_score(){
-		return $this->defence_score($this->lowBarSearch, $this->numlowBar);
+		$score = $this->lowBarTotal['sumLowBar'];
+ 		$score = $score * 3;
+		return $score;
 	} // [RETURNS] FLOAT
 
 
@@ -557,7 +634,7 @@ class teamReport {
 		$score = 0;
 		$score = ($this->portcullis_score() + $this->cheval_de_frise_score() + $this->moat_score() + $this->ramparts_score() + 
 			$this->drawbridge_score() + $this->sally_port_score() + $this->rockwall_score() + $this->rough_terrain_score() + 
-			$this->low_bar_score() + $this->high_goal_score() + $this->low_goal_score() + $this->scale_score() + 
+			/*$this->low_bar_score() + */$this->high_goal_score() + $this->low_goal_score() + $this->scale_score() + 
 			$this->auto_score() - $this->foul_score() - $this->tech_foul_score() - $this->card_score());
 		return $score;
 	}// [RETURNS] FLOAT

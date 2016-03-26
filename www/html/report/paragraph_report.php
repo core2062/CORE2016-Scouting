@@ -1,5 +1,5 @@
 <?php
-//include 'get_from_database.php';
+include 'get_from_database.php';
 include "OPR.php";
 
 $objArray = array();
@@ -92,7 +92,7 @@ class showAdvancedReport{
 		} elseif($this->wrank1 == $this->chevalDeFrise){
 			$this->chevalDeFrise = 99;
 			return $this->OPRReport->cheval_de_frise_precentile($this->team);
-		} else/*($this->rank1 == $this->portcullis)*/{
+		} else{
 			$this->portcullis = 99;
 			return $this->OPRReport->portcullis_precentile($this->team);
 		}
@@ -124,7 +124,7 @@ class showAdvancedReport{
 		} elseif($this->rank1 == $this->chevalDeFrise){
 			$this->chevalDeFrise = 99;
 			return $this->OPRReport->cheval_de_frise_precentile($this->team);
-		} else/*($this->rank1 == $this->portcullis)*/{
+		} else{
 			$this->portcullis = 99;
 			return $this->OPRReport->portcullis_precentile($this->team);
 		}
@@ -156,7 +156,7 @@ class showAdvancedReport{
 		} elseif($this->rank2 == $this->chevalDeFrise){
 			$this->chevalDeFrise = 99;
 			return $this->OPRReport->cheval_de_frise_precentile($this->team);
-		} else/*($this->rank2 == $this->portcullis)*/{
+		} else{
 			$this->portcullis = 99;
 			return $this->OPRReport->portcullis_precentile($this->team);
 		}
@@ -188,7 +188,7 @@ class showAdvancedReport{
 		} elseif($this->rank3 == $this->chevalDeFrise){
 			$this->chevalDeFrise = 99;
 			return $this->OPRReport->cheval_de_frise_precentile($this->team);
-		} else/*($this->rank3 == $this->portcullis)*/{
+		} else{
 			$this->portcullis = 99;
 			return $this->OPRReport->portcullis_precentile($this->team);
 		}

@@ -34,75 +34,41 @@ class advancedReport{
 	 	           // Populates and sorts the arrays //
 	 	foreach($this->objArray as $x => $x_value){
 			$this->teamData[$x_value->team_number()] = $x_value->score_sum();
-		}
-		arsort($this->teamData);
-		foreach($this->objArray as $x => $x_value){
 			$this->portcullisArray[$x_value->team_number()] = $x_value->portcullis_score();
-		}
-		arsort($this->portcullisArray);
-		foreach($this->objArray as $x => $x_value){
 			$this->chevalDeFriseArray[$x_value->team_number()] = $x_value->cheval_de_frise_score();
-		}
-		arsort($this->chevalDeFriseArray);
-		foreach($this->objArray as $x => $x_value){
 			$this->moatArray[$x_value->team_number()] = $x_value->moat_score();
-		}
-		arsort($this->moatArray);
-		foreach($this->objArray as $x => $x_value){
 			$this->rampartsArray[$x_value->team_number()] = $x_value->ramparts_score();
-		}
-		arsort($this->rampartsArray);
-		foreach($this->objArray as $x => $x_value){
 			$this->drawbridgeArray[$x_value->team_number()] = $x_value->drawbridge_score();
-		}
-		arsort($this->drawbridgeArray);
-		foreach($this->objArray as $x => $x_value){
 			$this->sallyPortArray[$x_value->team_number()] = $x_value->sally_port_score();
-		}
-		arsort($this->sallyPortArray);
-		foreach($this->objArray as $x => $x_value){
 			$this->rockwallArray[$x_value->team_number()] = $x_value->rockwall_score();
-		}
-		arsort($this->rockwallArray);
-		foreach($this->objArray as $x => $x_value){
 			$this->roughTerrainArray[$x_value->team_number()] = $x_value->rough_terrain_score();
-		}
-		arsort($this->roughTerrainArray);
-		foreach($this->objArray as $x => $x_value){
 			$this->lowBarArray[$x_value->team_number()] = $x_value->low_bar_score();
-		}
-		arsort($this->lowBarArray);
-		foreach($this->objArray as $x => $x_value){
 			$this->highGoalArray[$x_value->team_number()] = $x_value->high_goal_score();
-		}
-		arsort($this->highGoalArray);
-		foreach($this->objArray as $x => $x_value){
 			$this->lowGoalArray[$x_value->team_number()] = $x_value->low_goal_score();
-		}
-		arsort($this->lowGoalArray);
-		foreach($this->objArray as $x => $x_value){
 			$this->scaleArray[$x_value->team_number()] = $x_value->scale_score();
-		}
-		arsort($this->scaleArray);
-		foreach($this->objArray as $x => $x_value){
 			$this->autoArray[$x_value->team_number()] = $x_value->auto_score();
-		}
-		arsort($this->autoArray);
-		foreach($this->objArray as $x => $x_value){
 			$this->foulArray[$x_value->team_number()] = $x_value->foul_score();
-		}
-		arsort($this->foulArray);
-		foreach($this->objArray as $x => $x_value){
 			$this->techFoulArray[$x_value->team_number()] = $x_value->tech_foul_score();
-		}
-		arsort($this->techFoulArray);
-		foreach($this->objArray as $x => $x_value){
 			$this->cardArray[$x_value->team_number()] = $x_value->card_score();
-		}
-		arsort($this->cardArray);
-		foreach($this->objArray as $x => $x_value){
 			$this->breachArray[$x_value->team_number()] = $x_value->breach_sum();
 		}
+		arsort($this->teamData);
+		arsort($this->portcullisArray);
+		arsort($this->chevalDeFriseArray);
+		arsort($this->moatArray);
+		arsort($this->rampartsArray);
+		arsort($this->drawbridgeArray);
+		arsort($this->sallyPortArray);
+		arsort($this->rockwallArray);
+		arsort($this->roughTerrainArray);
+		arsort($this->lowBarArray);
+		arsort($this->highGoalArray);
+		arsort($this->lowGoalArray);
+		arsort($this->scaleArray);
+		arsort($this->autoArray);
+		arsort($this->foulArray);
+		arsort($this->techFoulArray);
+		arsort($this->cardArray);
 		arsort($this->breachArray);
 	}
 	public function number_of_teams(){
@@ -404,7 +370,7 @@ class advancedReport{
 		arsort($this->teamData);
 		$it = 1;
 		foreach($this->teamData as $x => $x_value) {
-		    echo "Team=" . $x . ", Rank=" . $it;
+		    echo "Team=" . $x . ", Rank=" . $it . ", Score=" . $x_value;
 		    echo "<br>";
 		    $it++;
 		}
@@ -421,7 +387,7 @@ class advancedReport{
 		arsort($this->breachArray);
 		$it = 1;
 		foreach($this->breachArray as $x => $x_value) {
-		    echo "Team=" . $x . ", Rank=" . $it;
+		    echo "Team=" . $x . ", Rank=" . $it . ", Score=" . $x_value;
 		    echo "<br>";
 		    $it++;
 		}
@@ -431,7 +397,7 @@ class advancedReport{
 		arsort($this->highGoalArray);
 		$it = 1;
 		foreach($this->highGoalArray as $x => $x_value) {
-		    echo "Team=" . $x . ", Rank=" . $it;
+		    echo "Team=" . $x . ", Rank=" . $it . ", Score=" . $x_value;
 		    echo "<br>";
 		    $it++;
 		}
@@ -441,7 +407,7 @@ class advancedReport{
 		arsort($this->lowGoalArray);
 		$it = 1;
 		foreach($this->lowGoalArray as $x => $x_value) {
-		    echo "Team=" . $x . ", Rank=" . $it;
+		    echo "Team=" . $x . ", Rank=" . $it . ", Score=" . $x_value;
 		    echo "<br>";
 		    $it++;
 		}
@@ -451,7 +417,7 @@ class advancedReport{
 		arsort($this->autoArray);
 		$it = 1;
 		foreach($this->autoArray as $x => $x_value) {
-		    echo "Team=" . $x . ", Rank=" . $it;//$it;
+		    echo "Team=" . $x . ", Broken Rank=" . $x_value;//$it;
 		    echo "<br>";
 		    $it++;
 		}
@@ -461,7 +427,7 @@ class advancedReport{
 		arsort($this->cardArray);
 		$it = 1;
 		foreach($this->cardArray as $x => $x_value) {
-		    echo "Team=" . $x . ", Rank=" . $it;
+		    echo "Team=" . $x . ", Rank=" . $it . ", Score=" . $x_value;
 		    echo "<br>";
 		    $it++;
 		}
@@ -471,14 +437,14 @@ class advancedReport{
 		arsort($this->scaleArray);
 		$it = 1;
 		foreach($this->scaleArray as $x => $x_value) {
-		    echo "Team=" . $x . ", Rank=" . $it;
+		    echo "Team=" . $x . ", Rank=" . $it . ", Score=" . $x_value;
 		    echo "<br>";
 		    $it++;
 		}
 	} // [RETURNS] Rank report of team based on red/yellow cards
 
 	public function rank_cheval_de_frise_pts(){
-		arsort($this->chevalDeFriseArray);
+		//arsort($this->chevalDeFriseArray);
 		$it = 1;
 		foreach($this->chevalDeFriseArray as $x => $x_value) {
 		    echo "Team=" . $x . ", Rank=" . $x_value;
@@ -486,6 +452,35 @@ class advancedReport{
 		    $it++;
 		}
 	} // [RETURNS] Rank report of team based on red/yellow cards
+
+	public function raw_low_bar(){
+		//arsort($this->lowBarArray);
+		$it = 1;
+		foreach($this->lowBarArray as $x => $x_value) {
+		    echo "Team=" . $x . ", Rank=" . $it . ", Score=" . $x_value;
+		    echo "<br>";
+		    $it++;
+		}
+	} // [RETURNS] HTML Raw Report
+
+	/*public function low_goal_test($team){
+		$count = (int) 1;
+		$flag = false;
+		$score = 0;
+		foreach($this->objArray as $x => $x_value){
+		   /* if($x == $team){
+		    	$score = $x_value;
+		    	$flag = true;
+		    }
+				
+		    if(!$flag)
+		    	$count++;*/
+		    //echo $x_value->cheval_de_frise_score();
+		//}
+		//echo $score;
+
+		
+	//}
 
 
 

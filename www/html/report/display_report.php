@@ -183,7 +183,6 @@ include 'get_from_database.php';
 			<td align="left"><?php echo $blueTeam3Object->times_scaled() ?></td>
 		</tr>
 		 <tr>
-<<<<<<< HEAD
 			<td align="left"><b>Highest Auto Movement</b></td>
 			<td align="left"><b><?php echo $redTeam1Object->highest_auto_movement() ?></b></td>
 			<td align="left"><b><?php echo $redTeam2Object->highest_auto_movement() ?></b></td>
@@ -237,78 +236,7 @@ include 'get_from_database.php';
 			<td align="left"><b><?php echo $blueTeam2Object->times_disabled() ?></b></td>
 			<td align="left"><b><?php echo $blueTeam3Object->times_disabled() ?></b></td>
 		</tr>
-		<tr>
-			<td align="left"><b>Comments</b></td>
-			<td align="left"><b><?php echo $redTeam1Object->all_comments() ?></b></td>
-			<td align="left"><b><?php echo $redTeam2Object->all_comments() ?></b></td>
-			<td align="left"><b><?php echo $redTeam3Object->all_comments() ?></b></td>
-			<td align="left"><b><?php echo $blueTeam1Object->all_comments() ?></b></td>
-			<td align="left"><b><?php echo $blueTeam2Object->all_comments() ?></b></td>
-			<td align="left"><b><?php echo $blueTeam3Object->all_comments() ?></b></td>
-=======
-			<td align="left">Highest Auto Movement</td>
-			<td align="left"><?php echo $redTeam1Object->highest_auto_movement() ?></td>
-			<td align="left"><?php echo $redTeam2Object->highest_auto_movement() ?></td>
-			<td align="left"><?php echo $redTeam3Object->highest_auto_movement() ?></td>
-			<td align="left"><?php echo $blueTeam1Object->highest_auto_movement() ?></td>
-			<td align="left"><?php echo $blueTeam2Object->highest_auto_movement() ?></td>
-			<td align="left"><?php echo $blueTeam3Object->highest_auto_movement() ?></td>
-		</tr>
-		<tr>
-			<td align="left">Auto Low Bar : Other Breach</td>
-			<td align="left"><?php echo $redTeam1Object->auto_times_breached() ?></td>
-			<td align="left"><?php echo $redTeam2Object->auto_times_breached() ?></td>
-			<td align="left"><?php echo $redTeam3Object->auto_times_breached() ?></td>
-			<td align="left"><?php echo $blueTeam1Object->auto_times_breached() ?></td>
-			<td align="left"><?php echo $blueTeam2Object->auto_times_breached() ?></td>
-			<td align="left"><?php echo $blueTeam3Object->auto_times_breached() ?></td>
-		</tr>
-		<tr>
-			<td align="left">Low Goals Made in Auto</td>
-			<td align="left"><?php echo $redTeam1Object->auto_low_goals() ?></td>
-			<td align="left"><?php echo $redTeam2Object->auto_low_goals() ?></td>
-			<td align="left"><?php echo $redTeam3Object->auto_low_goals() ?></td>
-			<td align="left"><?php echo $blueTeam1Object->auto_low_goals() ?></td>
-			<td align="left"><?php echo $blueTeam2Object->auto_low_goals() ?></td>
-			<td align="left"><?php echo $blueTeam3Object->auto_low_goals() ?></td>
-		</tr>
-		<tr>
-			<td align="left">High Goals Made in Auto</td>
-			<td align="left"><?php echo $redTeam1Object->auto_high_goals() ?></td>
-			<td align="left"><?php echo $redTeam2Object->auto_high_goals() ?></td>
-			<td align="left"><?php echo $redTeam3Object->auto_high_goals() ?></td>
-			<td align="left"><?php echo $blueTeam1Object->auto_high_goals() ?></td>
-			<td align="left"><?php echo $blueTeam2Object->auto_high_goals() ?></td>
-			<td align="left"><?php echo $blueTeam3Object->auto_high_goals() ?></td>
-		</tr>
-		<tr>
-			<td align="left">Yellow Card : Red Card</td>
-			<td align="left"><?php echo $redTeam1Object->report_cards() ?></td>
-			<td align="left"><?php echo $redTeam2Object->report_cards() ?></td>
-			<td align="left"><?php echo $redTeam3Object->report_cards() ?></td>
-			<td align="left"><?php echo $blueTeam1Object->report_cards() ?></td>
-			<td align="left"><?php echo $blueTeam2Object->report_cards() ?></td>
-			<td align="left"><?php echo $blueTeam3Object->report_cards() ?></td>
-		</tr>
-		<tr>
-			<td align="left">Disabled</td>
-			<td align="left"><?php echo $redTeam1Object->times_disabled() ?></td>
-			<td align="left"><?php echo $redTeam2Object->times_disabled() ?></td>
-			<td align="left"><?php echo $redTeam3Object->times_disabled() ?></td>
-			<td align="left"><?php echo $blueTeam1Object->times_disabled() ?></td>
-			<td align="left"><?php echo $blueTeam2Object->times_disabled() ?></td>
-			<td align="left"><?php echo $blueTeam3Object->times_disabled() ?></td>
-		</tr>
-		<tr>
-			<td align="left">Comments</td>
-			<td align="left"><?php echo $redTeam1Object->all_comments() ?></td>
-			<td align="left"><?php echo $redTeam2Object->all_comments() ?></td>
-			<td align="left"><?php echo $redTeam3Object->all_comments() ?></td>
-			<td align="left"><?php echo $blueTeam1Object->all_comments() ?></td>
-			<td align="left"><?php echo $blueTeam2Object->all_comments() ?></td>
-			<td align="left"><?php echo $blueTeam3Object->all_comments() ?></td>
->>>>>>> origin/master
-		</tr>
+		
 		<?php
 		if(isset($_POST['paragraphReport'])){
 			$redTeam1 = trim($_POST['RedTeam1']);
@@ -345,7 +273,7 @@ include 'get_from_database.php';
 				<td><b>{$blueTeam2Objectpr->display_shooter_rank()}</b></td>
 				<td><b>{$blueTeam3Objectpr->display_shooter_rank()}</b></td>
 			</tr>";
-			echo "
+			/*echo "
 			<tr>
 				<td><b>Auto Rank</b></td>
 				<td><b>{$redTeam1Objectpr->display_auto_rank()}</b></td>
@@ -354,7 +282,7 @@ include 'get_from_database.php';
 				<td><b>{$blueTeam1Objectpr->display_auto_rank()}</b></td>
 				<td><b>{$blueTeam2Objectpr->display_auto_rank()}</b></td>
 				<td><b>{$blueTeam3Objectpr->display_auto_rank()}</b></td>
-			</tr>";
+			</tr>";*/
 			echo "
 			<tr>
 				<td><b>WORST at Defence: </b></td>
@@ -432,5 +360,15 @@ include 'get_from_database.php';
 			*/
 		}	
 		?>
+		<tr>
+			<td align="left"><b>Comments</b></td>
+			<td align="left"><b><?php echo $redTeam1Object->all_comments() ?></b></td>
+			<td align="left"><b><?php echo $redTeam2Object->all_comments() ?></b></td>
+			<td align="left"><b><?php echo $redTeam3Object->all_comments() ?></b></td>
+			<td align="left"><b><?php echo $blueTeam1Object->all_comments() ?></b></td>
+			<td align="left"><b><?php echo $blueTeam2Object->all_comments() ?></b></td>
+			<td align="left"><b><?php echo $blueTeam3Object->all_comments() ?></b></td>
+			
+		</tr>
 
 	</table>

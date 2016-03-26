@@ -9,20 +9,19 @@
     $scout = mysql_real_escape_string(trim($_POST['ScoutName']));
 
     $autoDefence = mysql_real_escape_string(trim($_POST['DefenseInteractionType'])); // Reached, Breached, No Interaction
-
-    if(empty($_POST['DefenseInteractionAuto'])){ //CategoryA-D Low Bar
+    $breachDefence = mysql_real_escape_string(trim($_POST['DefenseInteractionAuto']));
+    /*if(empty($_POST['DefenseInteractionAuto'])){ //CategoryA-D Low Bar
         $breachDefence = 'N/A'; // Also the name for if alliance interacts with defence in auto, which defence?
     } elseif(trim($_POST['DefenseInteractionAuto']) == 'Low Bar'){
         $breachDefence = mysql_real_escape_string(trim($_POST['DefenseInteractionAuto']));
     } else {
         $breachDefence = 'Other';
-    }
+    }*/
     //$autoShoot = trim($_POST['autoShoot']);
     $highGoalAutoShotsMade = mysql_real_escape_string(trim($_POST['HighGoalAuto']));
     $highGoalAutoMisses = mysql_real_escape_string(trim($_POST['HighGoalAutoMisses']));
     $lowGoalAutoShotsMade = mysql_real_escape_string(trim($_POST['LowGoalAuto']));
     $lowGoalAutoMisses = mysql_real_escape_string(trim($_POST['LowGoalAutoMisses']));
-
 
 
     $categoryA = mysql_real_escape_string(trim($_POST['CategoryA'])); // Portcullis Cheval de Frise
@@ -45,12 +44,12 @@
     if(isset($_POST['fouls'])){
         $fouls = mysql_real_escape_string(trim($_POST['fouls'])); //Not implimented
     } else {
-        $fouls = 'N/A';
+        $fouls = 'ERROR';
     }
     if(isset($_POST['techFouls'])){
         $techFouls = mysql_real_escape_string(trim($_POST['techFouls'])); // Not implimented
     } else {
-        $techFouls = 'N/A';
+        $techFouls = 'ERROR';
     }
     if(isset($_POST['redCard'])){
         $redCard = mysql_real_escape_string(trim($_POST['redCard'])); // Not implimented
@@ -72,6 +71,19 @@
     } else {
         $disabled = 'Yes';
     }
+    if(empty($alliance))
+        echo '<font size="5"><b> ALLIANCE COLOR NOT ENTERED! </b></font>';
+    if(empty($matchNum))
+        echo '<font size="5"><b> MATCH NUMBER NOT ENTERED! </b></font>';
+    if(empty($team))
+        echo '<font size="5"><b> TEAM NUMBER NOT ENTERED! </b></font>';
+    if(empty($scout))
+        echo '<font size="5"><b> SCOUT NAME NOT ENTERED! </b></font>';
+    if(empty($autoDefence) || empty($breachDefence))
+        echo '<font size="5"><b> AUTO DEFENCE INFORMATION NOT CORRECTLY SELECTED! </b></font>';
+    if(empty($categoryA) || empty($categoryB) || empty($categoryC) || empty($categoryD))
+        echo '<font size="5"><b> MAKE SURE A DEFENCE WAS SELECTED FOR EVERY CATEGORY EVEN IF IT IS NOT ON THE FIELD! </b></font>';
+
 
     if($connect == true){
         $sql = "INSERT INTO `match` 

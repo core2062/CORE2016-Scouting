@@ -13,7 +13,9 @@ if($reportType == 'overall'){
 	$OPRReport->rank_by_low_goal_pts();
 }elseif($reportType == 'AutoPts'){
 	//$OPRReport->rank_cheval_de_frise_pts();
-	$OPRReport->rank_by_auto_pts();
+	//$OPRReport->rank_by_auto_pts();
+	$OPRReport->raw_low_bar();
+	//$OPRReport->low_goal_test(1675);
 }elseif($reportType == 'cards'){
 	$OPRReport->rank_by_cards();
 }elseif($reportType == 'scale'){
