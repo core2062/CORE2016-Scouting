@@ -6,9 +6,10 @@ class teamReport {
 	public $team;
 
 	private $searchError = false;
+	public $numberOfMatches;
 
 /*
-	public $numberOfMatches;
+	
 	public $portcullisVar;
 	public $chevalDeFriseVar;
 	public $moatVar;
@@ -479,75 +480,108 @@ class teamReport {
 
 	public function portcullis_score(){
 		$score = $this->portcullisTotal['sumPortcullis'];
- 		$score = $score * 3;
+ 		$score = $score / $this->numberOfMatches;
 		return $score;
 	} // [RETURNS] FLOAT
 	public function cheval_de_frise_score(){
  		$score = $this->total['sumCheval'];
- 		$score = $score * 3;
+ 		$score = $score / $this->numberOfMatches;
 		return $score;
 	} // [RETURNS] FLOAT
 	public function moat_score(){
 		$score = $this->moatTotal['sumMoat'];
- 		$score = $score * 3;
+ 		$score = $score / $this->numberOfMatches;
 		return $score;
 	} // [RETURNS] FLOAT
 	public function ramparts_score(){
 		$score = $this->rampartsTotal['sumRamparts'];
- 		$score = $score * 3;
+ 		$score = $score / $this->numberOfMatches;
 		return $score;
 	} // [RETURNS] FLOAT
 	public function drawbridge_score(){
 		$score = $this->drawbridgeTotal['sumDrawbridge'];
- 		$score = $score * 3;
+ 		$score = $score / $this->numberOfMatches;
 		return $score;
 	} // [RETURNS] FLOAT
 	public function sally_port_score(){
 		$score = $this->sallyPortTotal['sumSallyPort'];
- 		$score = $score * 3;
+ 		$score = $score / $this->numberOfMatches;
 		return $score;
 	} // [RETURNS] FLOAT
 	public function rockwall_score(){
 		$score = $this->rockWallTotal['sumRockWall'];
- 		$score = $score * 3;
+ 		$score = $score / $this->numberOfMatches;
 		return $score;
 	} // [RETURNS] FLOAT
 	public function rough_terrain_score(){
 		$score = $this->roughTerrainTotal['sumRoughTerrain'];
- 		$score = $score * 3;
+ 		$score = $score / $this->numberOfMatches;
 		return $score;
 	} // [RETURNS] FLOAT
 	public function low_bar_score(){
 		$score = $this->lowBarTotal['sumLowBar'];
- 		$score = $score * 3;
+ 		$score = $score / $this->numberOfMatches;
 		return $score;
 	} // [RETURNS] FLOAT
 
 
-	public function high_goal_score(){
+	public function avg_high_goal_score(){
 		$highGoalHits = $this->hgha['HighGoalHits'];
 		$highGoalMisses = $this->hgma['HighGoalMisses'];
 		$totalHighGoalShots = ($highGoalHits+$highGoalMisses);
-		$multiplier = 1.0;                          // MULTIPLIER IS SUBJECT TO CHANGE / GET RID OF
 		if($totalHighGoalShots > 0){
-			$highGoalAccuracy = (($highGoalHits/$totalHighGoalShots)*100); 
-			$highGoalAccuracy = round($highGoalAccuracy, 1, PHP_ROUND_HALF_UP);
-			if($highGoalAccuracy > .75)
-				$multiplier = 1.15; 
-			if($highGoalAccuracy > .5 && $highGoalAccuracy <= .75)
-				$multiplier = 1.0;
-			if($highGoalAccuracy >.25 && $highGoalAccuracy <= .5)
-				$multiplier = 0.9;
-			if($highGoalAccuracy <= .25)
-				$multiplier = 0.8;
-			$highGoalAccuracyFraction = ($highGoalHits/$this->numberOfMatches); 
-			$highGoalAccuracyFraction = round($highGoalAccuracyFraction, 1, PHP_ROUND_HALF_UP);
-			$totalScore = ($highGoalAccuracyFraction * 5) * $multiplier;
+			$totalScore = ($highGoalHits / $this->numberOfMatches);
+			$totalScore = round($totalScore, 3, PHP_ROUND_HALF_UP);
 			return $totalScore;
 		} else {
 			return 0;
 		}
 	} // [RETURNS] FLOAT
+
+	public function high_goal_score(){
+		$highGoalHits = $this->hgha['HighGoalHits'];
+		$highGoalMisses = $this->hgma['HighGoalMisses'];
+		$totalHighGoalShots = ($highGoalHits+$highGoalMisses);
+		$multiplier = 1.0;
+		if($totalHighGoalShots > 0){
+			$highGoalAccuracy = (($highGoalHits/$totalHighGoalShots)*100); 
+			$highGoalAccuracy = round($highGoalAccuracy, 3, PHP_ROUND_HALF_UP);
+			if($highGoalAccuracy > .75)
+				$multiplier = 1.15; 
+			elseif($highGoalAccuracy > .5 && $highGoalAccuracy <= .75)
+				$multiplier = 1.0;
+			elseif($highGoalAccuracy >.25 && $highGoalAccuracy <= .5)
+				$multiplier = 0.9;
+			else 
+				$multiplier = 0.8;
+			$totalScore = (($highGoalHits * 5) * $multiplier);
+			$totalScore = ($totalScore / $this->numberOfMatches);
+			return $totalScore;
+		} else {
+			return 0;
+		}
+	} // [RETURNS] FLOAT
+
+	public function high_goal_accuracy_num(){
+		$highGoalHits = $this->hgha['HighGoalHits'];
+		$highGoalMisses = $this->hgma['HighGoalMisses'];
+		$totalHighGoalShots = ($highGoalHits+$highGoalMisses);
+		if($totalHighGoalShots > 0){
+			$highGoalAccuracy = ($highGoalHits/$totalHighGoalShots); 
+			$highGoalAccuracy = round($highGoalAccuracy, 3, PHP_ROUND_HALF_UP);
+			return $highGoalAccuracy;
+		} else {
+			return 0;
+		}
+		
+	}
+
+	public function challenge_precentage(){
+		$numChallenge = mysqli_num_rows($this->towerChallengeSearch);
+		$score = ($numChallenge / $this->numberOfMatches);
+		$score = round($score, 3, PHP_ROUND_HALF_UP);
+		return $score;
+	}
 
 	public function low_goal_score(){
 		$lowGoalHits = $this->lgha['LowGoalHits'];
@@ -559,26 +593,50 @@ class teamReport {
 			$lowGoalAccuracy = round($lowGoalAccuracy, 1, PHP_ROUND_HALF_UP); 
 			if($lowGoalAccuracy > .75)
 				$multiplier = 1.15; 
-			elseif($lowGoalAccuracy > .5 && $highGoalAccuracy <= .75)
+			elseif($lowGoalAccuracy > .5 && $lowGoalAccuracy <= .75)
 				$multiplier = 1.0;
-			elseif($lowGoalAccuracy >.25 && $highGoalAccuracy <= .5)
+			elseif($lowGoalAccuracy >.25 && $lowGoalAccuracy <= .5)
 				$multiplier = 0.9;
 			else 
 				$multiplier = 0.8;
-			$lowGoalAccuracyFraction = ($lowGoalHits/$this->numberOfMatches); 
-			$lowGoalAccuracyFraction = round($lowGoalAccuracyFraction, 1, PHP_ROUND_HALF_UP);
-			$totalScore = ($lowGoalAccuracyFraction * 5) * $multiplier;
+			$totalScore = (($lowGoalHits * 2) * $multiplier);
+			$totalScore = ($totalScore / $this->numberOfMatches);
 			return $totalScore;
 		} else {
 			return 0;
 		}
 	} // [RETURNS] FLOAT
 
+	public function avg_low_goal_score(){
+		$lowGoalHits = $this->lgha['LowGoalHits'];
+		$lowGoalMisses = $this->lgma['LowGoalMisses'];
+		$totalLowGoalShots = ($lowGoalHits+$lowGoalMisses);
+		if($totalLowGoalShots > 0){ 
+			$totalScore = ($lowGoalHits / $this->numberOfMatches);
+			$totalScore = round($totalScore, 3, PHP_ROUND_HALF_UP);
+			return $totalScore;
+		} else {
+			return 0;
+		}
+	} // [RETURNS] FLOAT
+
+	public function low_goal_accuracy_num(){
+		$lowGoalHits = $this->lgha['LowGoalHits'];
+		$lowGoalMisses = $this->lgma['LowGoalMisses'];
+		$totalLowGoalShots = ($lowGoalHits+$lowGoalMisses);
+		if($totalLowGoalShots > 0){
+			$lowGoalAccuracy = ($lowGoalHits/$totalLowGoalShots);
+			$lowGoalAccuracy = round($lowGoalAccuracy,3, PHP_ROUND_HALF_UP);
+			return $lowGoalAccuracy;
+		} else {
+			return 0;
+		}
+	}
+
 	public function scale_score(){
 		$numScale = mysqli_num_rows($this->towerScaleSearch);
 		if($numScale > 0){
-			$score = $numScale * 15;
-			return $score;
+			return $numScale;
 		} else {
 			return 0;
 		}
@@ -602,50 +660,53 @@ class teamReport {
 			if($totalAutoHighGoalShots > 0){
 				$highGoalsMade = $this->autoHighGoalsMade['HGAutoMade'];
 				if($this->MHGAS['HGAutoMax'] > 1){
-					$cumulativeScore += (($highGoalsMade * 5) * 1.15);
+					$cumulativeScore += (($highGoalsMade * 10) * 1.15);
 				} else {
-					$cumulativeScore += ($highGoalsMade * 5);
+					$cumulativeScore += ($highGoalsMade * 10);
 				}
 			}  
 		}
 		if(mysqli_num_rows($this->autoReachedSearch) > 0) {
 			$cumulativeScore += (mysqli_num_rows($this->autoReachedSearch) * 2);
 		} 
+		$cumulativeScore = $cumulativeScore / $this->numberOfMatches;
+		$cumulativeScore = round($cumulativeScore, 3, PHP_ROUND_HALF_UP);
 		return $cumulativeScore;
 	} //[RETURNS] FLOAT
 
 	public function foul_score(){
-		$foulpts = $this->numFouls['FoulSum'] * 5;
+		$foulpts = ($this->numFouls['FoulSum'] * 5) / $this->numberOfMatches;
 		return $foulpts;
 	}//[RETURNS] INT
 	
 	public function tech_foul_score(){
-		$foulpts = $this->numTechFouls['TechFoulSum'] * 15;
+		$foulpts = ($this->numTechFouls['TechFoulSum'] * 15) / $this->numberOfMatches;
 		return $foulpts;
 	}//[RETURNS] INT
 
 	public function card_score(){
 		$foulpts = $this->numRedCards + $this->numYellowCards;
-		$foulpts = $foulpts * 100;
 		return $foulpts;
 	}//[RETURNS] INT
-
-	public function score_sum(){
-		$score = 0;
-		$score = ($this->portcullis_score() + $this->cheval_de_frise_score() + $this->moat_score() + $this->ramparts_score() + 
-			$this->drawbridge_score() + $this->sally_port_score() + $this->rockwall_score() + $this->rough_terrain_score() + 
-			/*$this->low_bar_score() + */$this->high_goal_score() + $this->low_goal_score() + $this->scale_score() + 
-			$this->auto_score() - $this->foul_score() - $this->tech_foul_score() - $this->card_score());
-		return $score;
-	}// [RETURNS] FLOAT
 
 	public function breach_sum(){
 		$score = 0;
 		$score = ($this->portcullis_score() + $this->cheval_de_frise_score() + $this->moat_score() + $this->ramparts_score() + 
 			$this->drawbridge_score() + $this->sally_port_score() + $this->rockwall_score() + $this->rough_terrain_score() + 
 			$this->low_bar_score());
+		$score = round($score, 3, PHP_ROUND_HALF_UP);
 		return $score;
 	}// [RETURNS] FLOAT
+
+	public function score_sum(){
+		$score = 0;
+		$score = (($this->breach_sum() * 5) + $this->high_goal_score() + $this->low_goal_score() + 
+			(($this->scale_score() * 15) / $this->numberOfMatches) + 
+			$this->auto_score() - $this->foul_score() - $this->tech_foul_score());
+		$score = round($score, 3, PHP_ROUND_HALF_UP);
+		return $score;
+	}// [RETURNS] FLOAT
+
 
 
 

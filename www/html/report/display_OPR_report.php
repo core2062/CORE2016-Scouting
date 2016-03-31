@@ -1,26 +1,44 @@
 <?php
-include 'get_from_database.php';
+//include 'get_from_database.php';
 include "paragraph_report.php";
 $reportType = trim($_POST['reportType']);
 if($reportType == 'overall'){
-	$OPRReport->rank_teams();
-	//$OPRReport->raw_OPR();
+	if(isset($_POST['csv']))
+		$OPRReport->download_opr();
+	else
+		$OPRReport->rank_teams();
 }elseif($reportType == 'breachRank'){
-	$OPRReport->rank_by_breach();
+	if(isset($_POST['csv']))
+		$OPRReport->download_breach();
+	else
+		$OPRReport->rank_by_breach();
 }elseif($reportType == 'highGoalPts'){
-	$OPRReport->rank_by_high_goal_pts();
+	if(isset($_POST['csv']))
+		$OPRReport->download_high_goal();
+	else
+		$OPRReport->rank_by_high_goal_pts();
 }elseif($reportType == 'lowGoalPts'){
-	$OPRReport->rank_by_low_goal_pts();
+	if(isset($_POST['csv']))
+		$OPRReport->download_low_goal();
+	else
+		$OPRReport->rank_by_low_goal_pts();
 }elseif($reportType == 'AutoPts'){
-	//$OPRReport->rank_cheval_de_frise_pts();
-	//$OPRReport->rank_by_auto_pts();
-	//$OPRReport->raw_low_bar();
-	//$OPRReport->low_goal_test(1675);
-	$OPRReport->download_opr();
+	if(isset($_POST['csv']))
+		$OPRReport->download_auto();
+	else 
+		$OPRReport->rank_by_auto_pts();
 }elseif($reportType == 'cards'){
-	$OPRReport->rank_by_cards();
+	
 }elseif($reportType == 'scale'){
-	$OPRReport->rank_by_scaling_pts();
+	if(isset($_POST['csv']))
+		$OPRReport->download_scale();
+	else
+		$OPRReport->rank_by_scaling_pts();
+}elseif($reportType == 'challenge'){
+	if(isset($_POST['csv']))
+		$OPRReport->download_challenge();
+	else
+		$OPRReport->rank_by_challenge();
 }
 
 

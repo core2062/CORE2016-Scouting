@@ -25,6 +25,9 @@ class advancedReport{
 	private $techFoulArray = array();
 	private $cardArray = array();
 	private $breachArray = array();
+	private $challengeArray = array();
+	private $lowGoalAccuracyArray = array();
+	private $highGoalAccuracyArray = array();
 		
 
 	 function __construct(&$array){
@@ -43,14 +46,17 @@ class advancedReport{
 			$this->rockwallArray[$x_value->team_number()] = $x_value->rockwall_score();
 			$this->roughTerrainArray[$x_value->team_number()] = $x_value->rough_terrain_score();
 			$this->lowBarArray[$x_value->team_number()] = $x_value->low_bar_score();
-			$this->highGoalArray[$x_value->team_number()] = $x_value->high_goal_score();
-			$this->lowGoalArray[$x_value->team_number()] = $x_value->low_goal_score();
+			$this->highGoalArray[$x_value->team_number()] = $x_value->avg_high_goal_score();
+			$this->lowGoalArray[$x_value->team_number()] = $x_value->avg_low_goal_score();
 			$this->scaleArray[$x_value->team_number()] = $x_value->scale_score();
 			$this->autoArray[$x_value->team_number()] = $x_value->auto_score();
 			$this->foulArray[$x_value->team_number()] = $x_value->foul_score();
 			$this->techFoulArray[$x_value->team_number()] = $x_value->tech_foul_score();
 			$this->cardArray[$x_value->team_number()] = $x_value->card_score();
 			$this->breachArray[$x_value->team_number()] = $x_value->breach_sum();
+			$this->challengeArray[$x_value->team_number()] = $x_value->challenge_precentage();
+			$this->highGoalAccuracyArray[$x_value->team_number()] = $x_value->high_goal_accuracy_num();
+			$this->lowGoalAccuracyArray[$x_value->team_number()] = $x_value->low_goal_accuracy_num();
 		}
 		arsort($this->teamData);
 		arsort($this->portcullisArray);
@@ -70,6 +76,18 @@ class advancedReport{
 		arsort($this->techFoulArray);
 		arsort($this->cardArray);
 		arsort($this->breachArray);
+		arsort($this->challengeArray);
+
+		$tempHGArray = array();
+		foreach($this->highGoalArray as $y => $y_value) {
+		  $tempHGArray[$y] = $this->highGoalAccuracyArray[$y];
+		}
+		$this->highGoalAccuracyArray = $tempHGArray;
+		$tempLGArray = array();
+		foreach($this->lowGoalArray as $z => $z_value) {
+		  $tempLGArray[$z] = $this->lowGoalAccuracyArray[$z];
+		}
+		$this->lowGoalAccuracyArray = $tempLGArray;
 	}
 	public function number_of_teams(){
 		return $this->numberOfTeams;
@@ -331,7 +349,7 @@ class advancedReport{
 	}
 
 	public function sally_port_precentile($team){
-		$data = "sally port" . "{$this->determine_precentile($this->sally_port_rank($team))}";
+		$data = "sally port " . "{$this->determine_precentile($this->sally_port_rank($team))}";
 		return $data;
 	}
 
@@ -397,7 +415,7 @@ class advancedReport{
 		arsort($this->highGoalArray);
 		$it = 1;
 		foreach($this->highGoalArray as $x => $x_value) {
-		    echo "Team=" . $x . ", Rank=" . $it . ", Score=" . $x_value;
+		    echo "Team=" . $x . ", Rank=" . $it . ", Score=" . $x_value . ", Accuracy=" . $this->highGoalAccuracyArray[$x];
 		    echo "<br>";
 		    $it++;
 		}
@@ -407,7 +425,7 @@ class advancedReport{
 		arsort($this->lowGoalArray);
 		$it = 1;
 		foreach($this->lowGoalArray as $x => $x_value) {
-		    echo "Team=" . $x . ", Rank=" . $it . ", Score=" . $x_value;
+		    echo "Team=" . $x . ", Rank=" . $it . ", Score=" . $x_value . ", Accuracy=" . $this->lowGoalAccuracyArray[$x];
 		    echo "<br>";
 		    $it++;
 		}
@@ -417,7 +435,7 @@ class advancedReport{
 		arsort($this->autoArray);
 		$it = 1;
 		foreach($this->autoArray as $x => $x_value) {
-		    echo "Team=" . $x . ", Broken Rank=" . $x_value;//$it;
+		    echo "Team=" . $x . ", Broken Rank=" . $it . ", Score=" . $x_value;
 		    echo "<br>";
 		    $it++;
 		}
@@ -463,41 +481,40 @@ class advancedReport{
 		}
 	} // [RETURNS] HTML Raw Report
 
-	/*public function low_goal_test($team){
-		$count = (int) 1;
-		$flag = false;
-		$score = 0;
-		foreach($this->objArray as $x => $x_value){
-		   /* if($x == $team){
-		    	$score = $x_value;
-		    	$flag = true;
-		    }
-				
-		    if(!$flag)
-		    	$count++;*/
-		    //echo $x_value->cheval_de_frise_score();
-		//}
-		//echo $score;
+	public function rank_by_challenge(){
+		$it = 1;
+		foreach($this->challengeArray as $x => $x_value) {
+		    echo "Team=" . $x . ", Rank=" . $it . ", Score=" . $x_value;
+		    echo "<br>";
+		    $it++;
+		}
+	} // [RETURNS] HTML Raw Report
 
-		
-	//}
-	private function array2csv(array &$array){
+	private function array2csv(array &$array, array &$secondArray = null){
+
+		$rank = 1;
 		$it = 0;
+		$rankArray = array();
 		$keyArray = array();
 		foreach ($array as $row => $rowVal) {
 	      $keyArray[$it] = $row;
+	      $rankArray[$it] = $rank;
 	      $it++;
-	   }
+	      $rank++;
+	   	}
 
-	   if (count($array) == 0) {
+	   	if (count($array) == 0) {
 	     return null;
-	   }
-	   ob_start();
-	   $df = fopen("php://output", 'w');
-	   fputcsv($df, $keyArray);
-	   fputcsv($df, $array);
-	   fclose($df);
-	   return ob_get_clean();
+	   	}
+	   	ob_start();
+	   	$df = fopen("php://output", 'w');
+	   	fputcsv($df, $rankArray);
+	   	fputcsv($df, $keyArray);
+	   	fputcsv($df, $array);
+	   	if($secondArray != null)
+	   		fputcsv($df, $secondArray);
+		fclose($df);
+	   	return ob_get_clean();
 	}
 
 	private function download_send_headers($filename) {
@@ -518,16 +535,47 @@ class advancedReport{
 	}
 
 	public function download_opr(){
-		$this->download_send_headers("data_export_" . date("Y-m-d") . ".csv");
+		$this->download_send_headers("Overall_report_" . date("Y-m-d") . ".csv");
 		echo $this->array2csv($this->teamData);
 		die();
 	}
 
+	public function download_breach(){
+		$this->download_send_headers("Breach_report_" . date("Y-m-d") . ".csv");
+		echo $this->array2csv($this->breachArray);
+		die();
+	}
 
+	public function download_high_goal(){
+		$this->download_send_headers("high_goal_report_" . date("Y-m-d") . ".csv");
+		echo $this->array2csv($this->highGoalArray, $this->highGoalAccuracyArray);
+		die();
+	}
 
+	public function download_low_goal(){
+		$this->download_send_headers("low_goal_report_" . date("Y-m-d") . ".csv");
+		echo $this->array2csv($this->lowGoalArray, $this->lowGoalAccuracyArray);
+		die();
+	}
 
+	public function download_auto(){
+		$this->download_send_headers("auto_report_" . date("Y-m-d") . ".csv");
+		echo $this->array2csv($this->autoArray);
+		die();
+	}
+
+	public function download_scale(){
+		$this->download_send_headers("scale_report_" . date("Y-m-d") . ".csv");
+		echo $this->array2csv($this->scaleArray);
+		die();
+	}
+
+	public function download_challenge(){
+		$this->download_send_headers("challenge_report_" . date("Y-m-d") . ".csv");
+		echo $this->array2csv($this->challengeArray);
+		die();
+	}
 
 }
 	
-
 ?>
