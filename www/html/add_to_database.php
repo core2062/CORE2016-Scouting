@@ -6,7 +6,11 @@ $matchNum = mysql_real_escape_string(trim($_POST['MatchNumber']));
 $team = mysql_real_escape_string(trim($_POST['TeamNumber']));
 $scout = mysql_real_escape_string(trim($_POST['ScoutName']));
 $autoDefence = mysql_real_escape_string(trim($_POST['DefenseInteractionType'])); // Reached, Breached, No Interaction
-$breachDefence = mysql_real_escape_string(trim($_POST['DefenseInteractionAuto']));
+if($autoDefence == 'Breached'){
+    $breachDefence = mysql_real_escape_string(trim($_POST['DefenseInteractionAuto']));
+} else {
+    $breachDefence = 'N/A';
+}
 $highGoalAutoShotsMade = mysql_real_escape_string(trim($_POST['HighGoalAuto']));
 $highGoalAutoMisses = mysql_real_escape_string(trim($_POST['HighGoalAutoMisses']));
 $lowGoalAutoShotsMade = mysql_real_escape_string(trim($_POST['LowGoalAuto']));
@@ -31,6 +35,7 @@ if(isset($_POST['ChallengedTower'])){
 }
 if(isset($_POST['ScaledTower'])){
     $scaleTower = 'Yes';
+    $challengeTower = 'No';
 } else {
     $scaleTower = 'No';
 }

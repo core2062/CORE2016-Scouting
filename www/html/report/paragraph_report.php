@@ -1,5 +1,5 @@
 <?php
-include 'get_from_database.php';
+//include 'get_from_database.php';
 include "OPR.php";
 
 $objArray = array();

@@ -99,7 +99,7 @@ class teamReport {
 		$lowGoalHitsQuery = "SELECT SUM(lowGoalShots) AS LowGoalHits FROM `match` WHERE `team` = {$this->team}";
 		$lowGoalMissesQuery = "SELECT SUM(missedLowGoalShots) AS LowGoalMisses FROM `match` WHERE `team` = {$this->team}";
 		$highGoalHitsQuery = "SELECT SUM(highGoalShots) AS HighGoalHits FROM `match` WHERE `team` = {$this->team}";
-		$highGoalMissesQuery = "SELECT SUM(highGoalShots) AS HighGoalMisses FROM `match` WHERE `team` = {$this->team}";
+		$highGoalMissesQuery = "SELECT SUM(missedHighGoalShots) AS HighGoalMisses FROM `match` WHERE `team` = {$this->team}";
 		$numMatchesQuery = "SELECT team FROM `match` WHERE `team` = {$this->team}";
 		$towerScaleQuery = "SELECT scaleTower FROM `match` WHERE `team` = {$this->team} AND `scaleTower` = 'Yes'";
 		$towerChallengeQuery = "SELECT challengeTower FROM `match` WHERE `team` = {$this->team} AND `challengeTower` = 'Yes'";
@@ -524,6 +524,13 @@ class teamReport {
 		return $score;
 	} // [RETURNS] FLOAT
 
+	public function challenge_and_scale_score(){
+		$numChallenge = mysqli_num_rows($this->towerChallengeSearch);
+		$numScale = mysqli_num_rows($this->towerScaleSearch);
+		$score = (($numChallenge + $numScale) / $this->numberOfMatches);
+		$score = round($score, 3, PHP_ROUND_HALF_UP);
+		return $score;
+	} // [RETURNS] FLOATs
 
 	public function avg_high_goal_score(){
 		$highGoalHits = $this->hgha['HighGoalHits'];
@@ -567,9 +574,9 @@ class teamReport {
 		$highGoalMisses = $this->hgma['HighGoalMisses'];
 		$totalHighGoalShots = ($highGoalHits+$highGoalMisses);
 		if($totalHighGoalShots > 0){
-			$highGoalAccuracy = ($highGoalHits/$totalHighGoalShots); 
-			$highGoalAccuracy = round($highGoalAccuracy, 3, PHP_ROUND_HALF_UP);
-			return $highGoalAccuracy;
+			$totalScore = ($highGoalHits/$totalHighGoalShots); 
+			$totalScore = round($totalScore, 3, PHP_ROUND_HALF_UP);
+			return $totalScore;
 		} else {
 			return 0;
 		}
@@ -636,7 +643,7 @@ class teamReport {
 	public function scale_score(){
 		$numScale = mysqli_num_rows($this->towerScaleSearch);
 		if($numScale > 0){
-			return $numScale;
+			return $numScale / $this->numberOfMatches;
 		} else {
 			return 0;
 		}
@@ -701,7 +708,7 @@ class teamReport {
 	public function score_sum(){
 		$score = 0;
 		$score = (($this->breach_sum() * 5) + $this->high_goal_score() + $this->low_goal_score() + 
-			(($this->scale_score() * 15) / $this->numberOfMatches) + 
+			($this->scale_score() * 15) + 
 			$this->auto_score() - $this->foul_score() - $this->tech_foul_score());
 		$score = round($score, 3, PHP_ROUND_HALF_UP);
 		return $score;

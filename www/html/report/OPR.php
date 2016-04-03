@@ -28,6 +28,7 @@ class advancedReport{
 	private $challengeArray = array();
 	private $lowGoalAccuracyArray = array();
 	private $highGoalAccuracyArray = array();
+	private $challengeAndScaleArray = array();
 		
 
 	 function __construct(&$array){
@@ -57,6 +58,7 @@ class advancedReport{
 			$this->challengeArray[$x_value->team_number()] = $x_value->challenge_precentage();
 			$this->highGoalAccuracyArray[$x_value->team_number()] = $x_value->high_goal_accuracy_num();
 			$this->lowGoalAccuracyArray[$x_value->team_number()] = $x_value->low_goal_accuracy_num();
+			$this->challengeAndScaleArray[$x_value->team_number()] = $x_value->challenge_and_scale_score();
 		}
 		arsort($this->teamData);
 		arsort($this->portcullisArray);
@@ -77,6 +79,7 @@ class advancedReport{
 		arsort($this->cardArray);
 		arsort($this->breachArray);
 		arsort($this->challengeArray);
+		arsort($this->challengeAndScaleArray);
 
 		$tempHGArray = array();
 		foreach($this->highGoalArray as $y => $y_value) {
@@ -490,6 +493,16 @@ class advancedReport{
 		}
 	} // [RETURNS] HTML Raw Report
 
+	public function rank_by_challenge_and_scale(){
+		$it = 1;
+		foreach($this->challengeAndScaleArray as $x => $x_value) {
+		    echo "Team=" . $x . ", Rank=" . $it . ", Score=" . $x_value;
+		    echo "<br>";
+		    $it++;
+		}
+	} // [RETURNS] Rank report of team based on precentage of challenge / scale
+
+
 	private function array2csv(array &$array, array &$secondArray = null){
 
 		$rank = 1;
@@ -573,6 +586,12 @@ class advancedReport{
 	public function download_challenge(){
 		$this->download_send_headers("challenge_report_" . date("Y-m-d") . ".csv");
 		echo $this->array2csv($this->challengeArray);
+		die();
+	}
+
+	public function download_challenge_and_scale(){
+		$this->download_send_headers("challenge_and_scale_report_" . date("Y-m-d") . ".csv");
+		echo $this->array2csv($this->challengeAndScaleArray);
 		die();
 	}
 

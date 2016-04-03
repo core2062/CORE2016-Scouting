@@ -1,5 +1,5 @@
 <?php
-//include 'get_from_database.php';
+include 'get_from_database.php';
 include "paragraph_report.php";
 $reportType = trim($_POST['reportType']);
 if($reportType == 'overall'){
@@ -39,6 +39,11 @@ if($reportType == 'overall'){
 		$OPRReport->download_challenge();
 	else
 		$OPRReport->rank_by_challenge();
+}elseif($reportType == 'challengeAndScale'){
+	if(isset($_POST['csv']))
+		$OPRReport->download_challenge_and_scale();
+	else
+		$OPRReport->rank_by_challenge_and_scale();
 }
 
 
